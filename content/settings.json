@@ -1,0 +1,28 @@
+{
+  "brandName": "Kanchan Marble Arts",
+  "tagline": "Trust, Set in Stone",
+  "subhead": "Custom mandirs & murtis, crafted with care for 20+ years",
+  "phone": "+91 98765 43210",
+  "whatsapp": "+91 98765 43210",
+  "email": "info@kanchanmarblearts.com",
+  "address": "123 Marble Street, Artisan Quarter, Jaipur, Rajasthan 302001",
+  "businessHours": {
+    "weekdays": "Mon - Sat: 9:00 AM - 7:00 PM",
+    "weekend": "Sunday: 10:00 AM - 5:00 PM"
+  },
+  "socialMedia": {
+    "facebook": "https://www.facebook.com/kanchanmarblearts",
+    "instagram": "https://www.instagram.com/kanchanmarblearts",
+    "whatsappMessage": "Hello! I'm interested in your marble products and would like to discuss my requirements."
+  },
+  "heroImages": ["/images/hero-mandir.jpg", "/images/hero-murti.jpg", "/images/hero-workshop.jpg"],
+  "trustStats": {
+    "yearsExperience": "20+",
+    "ordersCompleted": "50,000+",
+    "deliverySuccess": "99%"
+  },
+  "theme": {
+    "darkMode": false,
+    "heroLayout": "centered"
+  }
+}

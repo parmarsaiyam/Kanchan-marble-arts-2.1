@@ -1,0 +1,357 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  /* Marble arts brand colors - ivory base, charcoal text, deep gold accent */
+  --background: #f6f4f1; /* Marble/ivory base */
+  --foreground: #2f2f2f; /* Charcoal text */
+  --card: #ffffff; /* Pure white for cards */
+  --card-foreground: #2f2f2f; /* Charcoal on cards */
+  --popover: #ffffff;
+  --popover-foreground: #2f2f2f;
+  --primary: #9a7206; /* Deep gold accent */
+  --primary-foreground: #ffffff;
+  --secondary: #f6f4f1; /* Marble base for secondary */
+  --secondary-foreground: #2f2f2f;
+  --muted: #e7e2da; /* Soft divider color */
+  --muted-foreground: #6b7280;
+  --accent: #9a7206; /* Deep gold for accents */
+  --accent-foreground: #ffffff;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: #ffffff;
+  --border: #e7e2da; /* Soft divider */
+  --input: #ffffff;
+  --ring: rgba(200, 169, 81, 0.3); /* Gold ring with opacity */
+  --chart-1: #9a7206;
+  --chart-2: #f6f4f1;
+  --chart-3: #2f2f2f;
+  --chart-4: #e7e2da;
+  --chart-5: #ffffff;
+  --radius: 0.75rem; /* Rounded-xl */
+  --sidebar: #f6f4f1;
+  --sidebar-foreground: #2f2f2f;
+  --sidebar-primary: #9a7206;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e7e2da;
+  --sidebar-accent-foreground: #2f2f2f;
+  --sidebar-border: #e7e2da;
+  --sidebar-ring: rgba(200, 169, 81, 0.3);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem; /* Account for fixed header */
+  }
+
+  /* Improve scroll behavior for better centering */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  /* Ensure sections have proper spacing for centering */
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  /* Additional scroll behavior improvements */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Ensure proper spacing for navigation dots */
+  .section-with-nav {
+    scroll-margin-top: 5rem;
+  }
+
+  /* Page transition animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out;
+  }
+
+  /* Keyframe animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Staggered animation delays for page elements */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+
+  /* Smooth page transitions */
+  .page-transition {
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Loading states */
+  .loading {
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+
+  /* Enhanced scroll behavior */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  /* Ensure animations work on all elements */
+  * {
+    animation-fill-mode: both;
+  }
+
+  /* Page transition animations */
+  .page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .page-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .page-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+  }
+
+  /* Enhanced image quality */
+  .image-high-quality {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+  }
+
+  /* Smooth page navigation */
+  .page-navigation {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    body {
+      scroll-behavior: auto;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Enhanced marble texture with subtle patterns */
+  .marble-texture {
+    background-image: radial-gradient(circle at 20% 50%, rgba(200, 169, 81, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(200, 169, 81, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(200, 169, 81, 0.04) 0%, transparent 50%),
+      linear-gradient(135deg, rgba(246, 244, 241, 0.9) 0%, rgba(231, 226, 218, 0.3) 100%);
+  }
+
+  /* Added subtle marble vein texture */
+  .marble-veins {
+    background-image: linear-gradient(45deg, transparent 40%, rgba(200, 169, 81, 0.08) 50%, transparent 60%),
+      linear-gradient(-45deg, transparent 40%, rgba(200, 169, 81, 0.05) 50%, transparent 60%),
+      linear-gradient(90deg, transparent 45%, rgba(200, 169, 81, 0.03) 50%, transparent 55%);
+  }
+
+  .gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+  }
+
+  /* Enhanced animations for smooth loading */
+  .fade-in {
+    animation: fadeIn 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slide-up {
+    animation: slideUp 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slide-in-left {
+    animation: slideInLeft 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slide-in-right {
+    animation: slideInRight 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+  }
+
+  /* Enhanced glass morphism effect for modern look */
+  .glass-effect {
+    backdrop-filter: blur(16px) saturate(180%);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* Added gradient utilities for modern backgrounds */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  /* Enhanced hover effects for interactive elements */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+}

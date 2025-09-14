@@ -1,0 +1,52 @@
+{
+  "testimonials": [
+    {
+      "name": "Rajesh Sharma",
+      "location": "Mumbai",
+      "review": "The marble mandir they created for our home is absolutely divine. The craftsmanship is exceptional and the installation was seamless.",
+      "rating": 5,
+      "product": "Mandir",
+      "image": "/placeholder.svg?height=80&width=80"
+    },
+    {
+      "name": "Priya Patel",
+      "location": "Ahmedabad",
+      "review": "Twenty years of trust well placed. The murti they crafted captures every detail with such precision and devotion.",
+      "rating": 5,
+      "product": "Murti",
+      "image": "/placeholder.svg?height=80&width=80"
+    },
+    {
+      "name": "Amit Jain",
+      "location": "Delhi",
+      "review": "Professional service from start to finish. The Jain temple design exceeded our expectations in every way.",
+      "rating": 5,
+      "product": "Jain Design",
+      "image": "/placeholder.svg?height=80&width=80"
+    },
+    {
+      "name": "Sunita Gupta",
+      "location": "Jaipur",
+      "review": "Beautiful marble work with attention to every detail. The team was professional and delivered exactly what we envisioned.",
+      "rating": 5,
+      "product": "Articles",
+      "image": "/placeholder.svg?height=80&width=80"
+    },
+    {
+      "name": "Vikram Singh",
+      "location": "Udaipur",
+      "review": "Exceptional quality and timely delivery. The marble mandir has become the centerpiece of our home temple.",
+      "rating": 5,
+      "product": "Mandir",
+      "image": "/placeholder.svg?height=80&width=80"
+    },
+    {
+      "name": "Meera Joshi",
+      "location": "Pune",
+      "review": "Outstanding craftsmanship and customer service. They understood our requirements perfectly and delivered beyond expectations.",
+      "rating": 5,
+      "product": "Murti",
+      "image": "/placeholder.svg?height=80&width=80"
+    }
+  ]
+}

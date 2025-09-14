@@ -1,0 +1,134 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+# Uncomment below to enable drafts
+# publish_mode: editorial_workflow
+
+media_folder: "public/images/uploads" # Media files will be stored in the repo under public/images/uploads
+public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "content/settings.json"
+        fields:
+          - { label: "Brand Name", name: "brandName", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Phone", name: "phone", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Address", name: "address", widget: "text" }
+              - { label: "WhatsApp", name: "whatsapp", widget: "string" }
+          - label: "Social Media"
+            name: "social"
+            widget: "object"
+            fields:
+              - { label: "Facebook", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "YouTube", name: "youtube", widget: "string", required: false }
+          - label: "Trust Stats"
+            name: "trustStats"
+            widget: "object"
+            fields:
+              - { label: "Years Experience", name: "yearsExperience", widget: "number" }
+              - { label: "Orders Completed", name: "ordersCompleted", widget: "number" }
+              - { label: "Happy Customers", name: "happyCustomers", widget: "number" }
+          - label: "Theme Settings"
+            name: "theme"
+            widget: "object"
+            fields:
+              - { label: "Dark Mode", name: "darkMode", widget: "boolean", default: false }
+              - { label: "Hero Layout", name: "heroLayout", widget: "select", options: ["centered", "split"], default: "centered" }
+
+  - name: "products"
+    label: "Products"
+    files:
+      - label: "Product Categories"
+        name: "categories"
+        file: "content/products.json"
+        fields:
+          - label: "Categories"
+            name: "categories"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+              - label: "Features"
+                name: "features"
+                widget: "list"
+                field: { label: "Feature", name: "feature", widget: "string" }
+
+  - name: "process"
+    label: "Process Steps"
+    files:
+      - label: "Process"
+        name: "steps"
+        file: "content/process.json"
+        fields:
+          - label: "Steps"
+            name: "steps"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Icon", name: "icon", widget: "string", hint: "Lucide icon name" }
+
+  - name: "testimonials"
+    label: "Testimonials"
+    files:
+      - label: "Customer Reviews"
+        name: "reviews"
+        file: "content/testimonials.json"
+        fields:
+          - label: "Testimonials"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Review", name: "review", widget: "text" }
+              - { label: "Rating", name: "rating", widget: "number", min: 1, max: 5 }
+              - { label: "Product", name: "product", widget: "string" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+
+  - name: "gallery"
+    label: "Gallery"
+    files:
+      - label: "Gallery Images"
+        name: "images"
+        file: "content/gallery.json"
+        fields:
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            fields:
+              - { label: "Source", name: "src", widget: "image" }
+              - { label: "Alt Text", name: "alt", widget: "string" }
+              - { label: "Category", name: "category", widget: "select", options: ["mandirs", "murtis", "articles", "jain"] }
+              - { label: "Width", name: "width", widget: "number" }
+              - { label: "Height", name: "height", widget: "number" }
+              - { label: "Caption", name: "caption", widget: "string", required: false }
+
+  - name: "stats"
+    label: "Statistics"
+    files:
+      - label: "Business Stats"
+        name: "business"
+        file: "content/stats.json"
+        fields:
+          - label: "Statistics"
+            name: "stats"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }
+              - { label: "Description", name: "description", widget: "string" }

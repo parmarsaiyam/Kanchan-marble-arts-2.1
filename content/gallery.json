@@ -1,0 +1,162 @@
+{
+  "images": [
+    {
+      "src": "/gallery/mandir/M-1.webp",
+      "w": 800,
+      "h": 1200,
+      "category": "Mandirs",
+      "caption": "Elegant australian marble mandir with intricate jain carvings"
+    },
+    {
+      "src": "/gallery/murti/ganpati-2.webp",
+      "w": 600,
+      "h": 900,
+      "category": "Murtis",
+      "caption": "Hand-carved Lord Ganesha murti in premium Italian marble"
+    },
+    {
+      "src": "/gallery/mandir/M-2.webp",
+      "w": 400,
+      "h": 1000,
+      "category": "Mandirs",
+      "caption": "Modern Corian mandir design for contemporary homes"
+    },
+    {
+      "src": "/gallery/murti/Rk.webp",
+      "w": 900,
+      "h": 600,
+      "category": "Murtis",
+      "caption": "Radha Krishna murti with fine hand-carved detailing"
+    },
+    {
+      "src": "/gallery/mandir/M-3.webp",
+      "w": 1000,
+      "h": 800,
+      "category": "Mandirs",
+      "caption": "Traditional marble temple with red and gold accents"
+    },
+    {
+      "src": "/gallery/murti/hanuman-1.webp",
+      "w": 500,
+      "h": 700,
+      "category": "Murtis",
+      "caption": "Lord Hanuman, hand-carved in premium Italian marble"
+    },
+    {
+      "src": "/gallery/murti/devi-1.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Murtis",
+      "caption": "Ambe mata marble murti with detailed craftsmanship"
+    },
+    {
+      "src": "/gallery/murti/ganpati-1.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Murtis",
+      "caption": "Hand-carved Lord Ganesha murti in premium Italian marble"
+    },
+    {
+      "src": "/gallery/murti/ganpati-4.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Murtis",
+      "caption": "Lord Ganesha murti with red and gold accents"
+    },
+    {
+      "src": "/gallery/jain/J-3.webp",
+      "w": 700,
+      "h": 900,
+      "category": "Jain",
+      "caption": "Elegant white marble mandir with intricate Jain carvings"
+    },
+    {
+      "src": "/gallery/jain/J-2.webp",
+      "w": 700,
+      "h": 900,
+      "category": "Jain",
+      "caption": "Elegant Jain shrine with polished marble finish"
+    },
+   
+    
+    {
+      "src": "/gallery/mandir/M-5.webp",
+      "w": 700,
+      "h": 900,
+      "category": "Mandirs",
+      "caption": "Only white marble mandir with intricate carvings and hathi ghumat"
+    },
+    
+    {
+      "src": "/gallery/jain/J-4.webp",
+      "w": 700,
+      "h": 900,
+      "category": "Jain",
+      "caption": "Elegant white marble mandir with intricate Jain carvings"
+    },
+    {
+      "src": "/gallery/jain/J-5.webp",
+      "w": 700,
+      "h": 900,
+      "category": "Jain",
+      "caption": "Traditional design mandir showcasing 14 swapnas carvings"
+    },
+    {
+      "src": "/gallery/mandir/M-7.webp",
+      "w": 700,
+      "h": 900,
+      "category": "Mandirs",
+      "caption": "Corian mandir with lighting"
+    },
+    {
+      "src": "/gallery/murti/tirthanker-3.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Murtis",
+      "caption": "Jain Tirthankar sculpture with detailed craftsmanship"
+    },
+    {
+      "src": "/gallery/murti/combo-1.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Murtis",
+      "caption": "Jain Tirthankar sculpture with detailed craftsmanship"
+    },
+    
+    {
+      "src": "/gallery/TS-1.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Tulsi Stand",
+      "caption": "Marble tulsi stand with floral engravings"
+    },
+    {
+      "src": "/gallery/TS-2.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Tulsi Stand",
+      "caption": "Marble tulsi stand with floral engravings"
+    },
+    {
+      "src": "/gallery/A-2.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Articles",
+      "caption": "Handcrafted marble railing pillar with elegant finish"
+    },
+    {
+      "src": "/gallery/A-3.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Articles",
+      "caption": "Decorative marble pillar with traditional motifs"
+    },
+    {
+      "src": "/gallery/murti/tirthanker-1.webp",
+      "w": 600,
+      "h": 800,
+      "category": "Murtis",
+      "caption": "Jain Tirthankar sculpture with detailed craftsmanship in premium italian marble"
+    }
+  ]
+}
