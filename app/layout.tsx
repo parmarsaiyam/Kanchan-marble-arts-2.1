@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/json-ld"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { MobileCTA } from "@/components/mobile-cta"
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 import "./globals.css"
 
@@ -107,6 +108,7 @@ export default function RootLayout({
         <main className="pt-16 animate-fade-in">{children}</main>
         <Footer />
         <MobileCTA />
+        <ScrollToTop />
       </body>
     </html>
   )

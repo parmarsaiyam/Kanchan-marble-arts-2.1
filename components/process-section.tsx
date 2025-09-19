@@ -1,5 +1,7 @@
-import { MessageSquare, Palette, Hammer, Truck } from "lucide-react"
+import { MessageSquare, Palette, Hammer, Truck, ArrowRight } from "lucide-react"
 import { ScrollObserver } from "@/components/scroll-observer"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export function ProcessSection() {
   const steps = [
@@ -43,7 +45,7 @@ export function ProcessSection() {
             </p>
           </div>
         </ScrollObserver>
-
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
           {steps.map((step, index) => (
             <ScrollObserver key={index} animation="slide-up" delay={index * 200}>
@@ -68,6 +70,18 @@ export function ProcessSection() {
             </ScrollObserver>
           ))}
         </div>
+
+        {/* View Full Process Button */}
+        <ScrollObserver animation="fade-in" delay={800}>
+        <div className="flex justify-center mt-12">
+            <Button asChild size="lg" className="group">
+            <Link href="/process">
+                View Full Process
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+          </div>
+        </ScrollObserver>
       </div>
     </section>
   )

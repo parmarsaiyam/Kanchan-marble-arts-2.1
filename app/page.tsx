@@ -10,7 +10,6 @@ import { GalleryPreview } from "@/components/gallery-preview"
 import { ContactSection } from "@/components/contact-section"
 import { ScrollNavigation } from "@/components/scroll-navigation"
 import { MobileCTA } from "@/components/mobile-cta"
-import { ScrollToTop } from "@/components/scroll-to-top"
 
 export default function HomePage() {
   // Ensure page always starts at top
@@ -62,7 +61,6 @@ export default function HomePage() {
       </main>
       <MobileCTA />
       <ScrollNavigation sections={scrollSections} />
-      <ScrollToTop />
     </div>
   )
 }
