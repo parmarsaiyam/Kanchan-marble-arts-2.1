@@ -6,14 +6,14 @@ export function JsonLd() {
     description:
       "Premium marble mandirs, murtis, and artistic pieces crafted with care for over 20 years. Custom designs, expert fitting, and nationwide delivery.",
     url: "https://kanchanmarblearts.com",
-    telephone: "+919876543210",
+    telephone: "+919",
     email: "info@kanchanmarblearts.com",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "123 Marble Street, Artisan Quarter",
-      addressLocality: "Jaipur",
-      addressRegion: "Rajasthan",
-      postalCode: "302001",
+      streetAddress: "Kanchan Marble arts, near akurli metro station , opposite times of india, Kandivali east",
+      addressLocality: "Mumbai",
+      addressRegion: "Maharashtra",
+      postalCode: "400101",
       addressCountry: "IN",
     },
     geo: {
