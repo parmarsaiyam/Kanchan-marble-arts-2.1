@@ -8,22 +8,28 @@ export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Show button when user scrolls down significantly (works for all pages)
-      const scrollPosition = window.scrollY
-      const windowHeight = window.innerHeight
-      
-      // Show button when user has scrolled down more than 2 screen heights
-      if (scrollPosition > windowHeight * 1.5) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
-      }
-    }
+    const footer = document.querySelector("footer") // 👈 assumes your footer tag exists
+    if (!footer) return
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Show the button when footer is visible
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+          } else {
+            setIsVisible(false)
+          }
+        })
+      },
+      { threshold: 0.1 } // 0.1 = button shows when 10% of footer is visible
+    )
+
+    observer.observe(footer)
+
+    return () => observer.disconnect()
   }, [])
+
 
   const scrollToTop = () => {
     window.scrollTo({

@@ -1,0 +1,11 @@
+# Cache all images in /images/ for 1 year
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache all images in /gallery/ and its subfolders for 1 year
+/gallery/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Default rule for everything else (HTML, CSS, JS) – no long cache
+/*
+  Cache-Control: public, max-age=0, must-revalidate
