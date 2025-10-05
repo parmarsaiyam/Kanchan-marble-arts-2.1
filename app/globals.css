@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-:root {
+ :root {
   /* Marble arts brand colors - ivory base, charcoal text, deeper gold accent */
   --background: #f6f4f1; /* Marble/ivory base */
   --foreground: #2f2f2f; /* Charcoal text */
