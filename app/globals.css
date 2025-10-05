@@ -2,27 +2,27 @@
 @import "tw-animate-css";
 
 :root {
-  /* Marble arts brand colors - ivory base, charcoal text, deep gold accent */
+  /* Marble arts brand colors - ivory base, charcoal text, deeper gold accent */
   --background: #f6f4f1; /* Marble/ivory base */
   --foreground: #2f2f2f; /* Charcoal text */
   --card: #ffffff; /* Pure white for cards */
   --card-foreground: #2f2f2f; /* Charcoal on cards */
   --popover: #ffffff;
   --popover-foreground: #2f2f2f;
-  --primary: #9a7206; /* Deep gold accent */
+  --primary: #7a5a05; /* Darker deep gold accent */
   --primary-foreground: #ffffff;
   --secondary: #f6f4f1; /* Marble base for secondary */
   --secondary-foreground: #2f2f2f;
   --muted: #e7e2da; /* Soft divider color */
   --muted-foreground: #6b7280;
-  --accent: #9a7206; /* Deep gold for accents */
+  --accent: #7a5a05; /* Darker deep gold for accents */
   --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #ffffff;
   --border: #e7e2da; /* Soft divider */
   --input: #ffffff;
-  --ring: rgba(200, 169, 81, 0.3); /* Gold ring with opacity */
-  --chart-1: #9a7206;
+  --ring: rgba(170, 140, 60, 0.35); /* Darker gold ring with slightly higher opacity */
+  --chart-1: #7a5a05;
   --chart-2: #f6f4f1;
   --chart-3: #2f2f2f;
   --chart-4: #e7e2da;
@@ -30,12 +30,12 @@
   --radius: 0.75rem; /* Rounded-xl */
   --sidebar: #f6f4f1;
   --sidebar-foreground: #2f2f2f;
-  --sidebar-primary: #9a7206;
+  --sidebar-primary: #7a5a05;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #e7e2da;
   --sidebar-accent-foreground: #2f2f2f;
   --sidebar-border: #e7e2da;
-  --sidebar-ring: rgba(200, 169, 81, 0.3);
+  --sidebar-ring: rgba(170, 140, 60, 0.35);
 }
 
 @theme inline {
@@ -252,17 +252,17 @@
 
   /* Enhanced marble texture with subtle patterns */
   .marble-texture {
-    background-image: radial-gradient(circle at 20% 50%, rgba(200, 169, 81, 0.06) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(200, 169, 81, 0.04) 0%, transparent 50%),
-      radial-gradient(circle at 40% 80%, rgba(200, 169, 81, 0.04) 0%, transparent 50%),
+    background-image: radial-gradient(circle at 20% 50%, rgba(170, 140, 60, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(170, 140, 60, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(170, 140, 60, 0.06) 0%, transparent 50%),
       linear-gradient(135deg, rgba(246, 244, 241, 0.9) 0%, rgba(231, 226, 218, 0.3) 100%);
   }
 
   /* Added subtle marble vein texture */
   .marble-veins {
-    background-image: linear-gradient(45deg, transparent 40%, rgba(200, 169, 81, 0.08) 50%, transparent 60%),
-      linear-gradient(-45deg, transparent 40%, rgba(200, 169, 81, 0.05) 50%, transparent 60%),
-      linear-gradient(90deg, transparent 45%, rgba(200, 169, 81, 0.03) 50%, transparent 55%);
+    background-image: linear-gradient(45deg, transparent 40%, rgba(170, 140, 60, 0.1) 50%, transparent 60%),
+      linear-gradient(-45deg, transparent 40%, rgba(170, 140, 60, 0.07) 50%, transparent 60%),
+      linear-gradient(90deg, transparent 45%, rgba(170, 140, 60, 0.05) 50%, transparent 55%);
   }
 
   .gold-divider {

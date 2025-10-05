@@ -72,10 +72,11 @@ export function Hero({ layout = "centered" }: HeroProps) {
             >
               <a
                 href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                  "Hello, I’d like to request a quote for a marble mandir/murti. Please share pricing and timelines."
+                  "Hello! I’d like a quote for a marble mandir/murti. Please share price and timeline / नमस्ते! मैं मार्बल मंदिर/मूर्ति का कोटेशन चाहता हूँ। कृपया कीमत और समय बताएं।"
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => window.gtag?.("event", "click", { event_category: "cta", event_label: "Request_a_Quote" })}
               >
                 Request a Quote
               </a>
@@ -92,6 +93,7 @@ export function Hero({ layout = "centered" }: HeroProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center"
+                onClick={() => window.gtag?.("event", "click", { event_category: "cta", event_label: "whatsapp_hero" })}
               >
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
@@ -108,6 +110,7 @@ export function Hero({ layout = "centered" }: HeroProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center"
+                onClick={() => window.gtag?.("event", "click", { event_category: "cta", event_label: "Map_hero" })}
               >
                 <MapPin className=" h-5 w-5" />
                 Shop Location

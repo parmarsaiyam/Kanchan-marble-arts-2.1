@@ -6,8 +6,10 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { MobileCTA } from "@/components/mobile-cta"
 import { ScrollToTop } from "@/components/scroll-to-top"
+import GAListener from "@/components/ga-listener"
 
 import "./globals.css"
+import Script from "next/script"
 
 
 const playfair = Playfair_Display({
@@ -95,7 +97,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
@@ -103,13 +105,33 @@ export default function RootLayout({
         <JsonLd />
         <link rel="canonical" href="https://kanchanmarblearts.com" />
       </head>
+
       <body className="antialiased marble-texture">
+        {/* ✅ Google Analytics base scripts */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = window.gtag || gtag;
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { page_path: window.location.pathname });
+          `}
+        </Script>
+
+        {/* ✅ Header + Page structure */}
         <Header />
         <main className="pt-16 animate-fade-in">{children}</main>
         <Footer />
         <MobileCTA />
         <ScrollToTop />
+
+        {/* ✅ GA route change tracking */}
+        <GAListener />
       </body>
     </html>
-  )
+  );
 }

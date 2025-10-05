@@ -3,9 +3,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Phone, MessageCircle, MapPin, Clock, Mail } from "lucide-react"
 
 export const whatsappNumber = "+919819460441";
-export const phoneNumber = "+919833010441";
+export const phoneNumber = "+919819460441";
 export const whatsappMessage = encodeURIComponent(
-  "Hello! I'm interested in your marble products and would like to discuss my requirements."
+  "Hello! I'm interested in your marble products and want to discuss my needs / नमस्ते! मुझे आपके मार्बल प्रोडक्ट्स में रुचि है और मैं अपनी ज़रूरतों पर बात करना चाहता हूँ।"
 );
 
 interface ContactInfoProps {
@@ -15,9 +15,9 @@ interface ContactInfoProps {
 
 export function ContactInfo({ variant = "all", className = "" }: ContactInfoProps) {
   const whatsappNumber = "+919819460441"
-  const phoneNumber = "+919833010441"
+  const phoneNumber = "+919819460441"
   const whatsappMessage = encodeURIComponent(
-    "Hello! I'm interested in your marble products and would like to discuss my requirements.",
+    "Hello! I'm interested in your marble products and want to discuss my needs / नमस्ते! मुझे आपके मार्बल प्रोडक्ट्स में रुचि है और मैं अपनी ज़रूरतों पर बात करना चाहता हूँ।",
   )
 
   const InfoCards = (
@@ -57,7 +57,7 @@ export function ContactInfo({ variant = "all", className = "" }: ContactInfoProp
               <Phone className="w-5 h-5 text-accent mt-0.5 mr-3 flex-shrink-0" />
               <div>
                 <p className="font-medium">Phone</p>
-                <p className="text-muted-foreground text-sm">+919833010441</p>
+                <p className="text-muted-foreground text-sm">+919819460441</p>
               </div>
             </div>
 
