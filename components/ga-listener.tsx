@@ -1,11 +1,11 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+const searchParams = useSearchParams();
 
 export default function GAListener() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-
+  
   useEffect(() => {
     const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : "");
     // send a page_view on client-side navigation
