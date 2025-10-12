@@ -1,9 +1,9 @@
 // components/ga-listener.tsx
 "use client"
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 
-export default function GAListener() {
+function GAListenerContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -15,4 +15,12 @@ export default function GAListener() {
   }, [pathname, searchParams]);
 
   return null;
+}
+
+export default function GAListener() {
+  return (
+    <Suspense fallback={null}>
+      <GAListenerContent />
+    </Suspense>
+  );
 }

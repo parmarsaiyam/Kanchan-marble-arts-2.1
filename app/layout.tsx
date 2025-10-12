@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Playfair_Display, Inter } from "next/font/google"
+import localFont from "next/font/local"
 import { JsonLd } from "@/components/json-ld"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -12,16 +12,38 @@ import "./globals.css"
 import Script from "next/script"
 
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  display: "swap",
+const playfair = localFont({
+  src: [
+    {
+      path: "../public/fonts/Playfair_Display/PlayfairDisplay-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Playfair_Display/PlayfairDisplay-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-serif",
+  display: "swap",
 })
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
+const inter = localFont({
+  src: [
+    {
+      path: "../public/fonts/Inter/Inter-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Inter/Inter-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-sans",
+  display: "swap",
 })
 
 export const viewport = {
