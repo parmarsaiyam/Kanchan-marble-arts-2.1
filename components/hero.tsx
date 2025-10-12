@@ -76,7 +76,9 @@ export function Hero({ layout = "centered" }: HeroProps) {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => window.gtag?.("event", "click", { event_category: "cta", event_label: "Request_a_Quote" })}
+                onClick={() => {
+                  window.gtag?.("event", "click", { event_category: "cta", event_label: "Request_a_Quote_hero" });
+                }}
               >
                 Request a Quote
               </a>
@@ -93,7 +95,9 @@ export function Hero({ layout = "centered" }: HeroProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center"
-                onClick={() => window.gtag?.("event", "click", { event_category: "cta", event_label: "whatsapp_hero" })}
+                onClick={() => {
+                  window.gtag?.("event", "click", { event_category: "cta", event_label: "Whatsapp_hero" });
+                }}
               >
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp
@@ -110,7 +114,9 @@ export function Hero({ layout = "centered" }: HeroProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center"
-                onClick={() => window.gtag?.("event", "click", { event_category: "cta", event_label: "Map_hero" })}
+                onClick={() => {
+                  window.gtag?.("event", "click", { event_category: "cta", event_label: "Map_Location_hero" });
+                }}
               >
                 <MapPin className=" h-5 w-5" />
                 Shop Location

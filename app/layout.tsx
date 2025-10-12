@@ -6,7 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { MobileCTA } from "@/components/mobile-cta"
 import { ScrollToTop } from "@/components/scroll-to-top"
-// import GAListener from "@/components/ga-listener"
+import GAListener from "@/components/ga-listener"
 
 import "./globals.css"
 import Script from "next/script"
@@ -104,10 +104,8 @@ export default function RootLayout({
       <head>
         <JsonLd />
         <link rel="canonical" href="https://kanchanmarblearts.com" />
-      </head>
-      <body className="antialiased marble-texture">
-        {/* ✅ Google Analytics base scripts */}
-        {/* <Script
+        {/* GA base script - loads after interactive so it won't run in SSR */}
+        <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
           strategy="afterInteractive"
         />
@@ -119,17 +117,15 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { page_path: window.location.pathname });
           `}
-        </Script> */}
-
-        {/* ✅ Header + Page structure */}
+        </Script>
+      </head>
+      <body className="antialiased marble-texture">
         <Header />
         <main className="pt-16 animate-fade-in">{children}</main>
         <Footer />
         <MobileCTA />
         <ScrollToTop />
-
-        {/* ✅ GA route change tracking */}
-        {/* <GAListener /> */}
+        <GAListener />
       </body>
     </html>
   );

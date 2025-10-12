@@ -1,0 +1,33 @@
+import localFont from "next/font/local";
+
+export const playfair = localFont({
+  src: [
+    {
+      path: "../public/fonts/PlayfairDisplay/PlayfairDisplay-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/PlayfairDisplay/PlayfairDisplay-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-playfair",
+});
+
+export const inter = localFont({
+  src: [
+    {
+      path: "../public/fonts/Inter/Inter-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Inter/Inter-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-inter",
+});
