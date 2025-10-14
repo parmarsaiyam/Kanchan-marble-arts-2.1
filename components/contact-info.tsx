@@ -73,7 +73,7 @@ export function ContactInfo({ variant = "all", className = "" }: ContactInfoProp
               <Mail className="w-5 h-5 text-accent mt-0.5 mr-3 flex-shrink-0" />
               <div>
                 <p className="font-medium">Email</p>
-                <p className="text-muted-foreground text-sm">info@kanchanmarblearts.com</p>
+                <p className="text-muted-foreground text-sm">kanchanmarblearts@gmail.com</p>
               </div>
             </div>
 

@@ -27,8 +27,8 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-3 w-3 text-accent" />
-                <a href="mailto:info@kanchanmarblearts.com" className="text-xs hover:text-accent transition-colors">
-                  info@kanchanmarblearts.com
+                <a href="mailto:kanchanmarblearts@gmail.com" className="text-xs hover:text-accent transition-colors">
+                  kanchanmarblearts@gmail.com
                 </a>
               </div>
               <div className="flex items-start gap-2">
@@ -46,11 +46,12 @@ export function Footer() {
           <div className="space-y-3">
             <h3 className="text-base font-semibold text-accent">Business Hours</h3>
             <div className="space-y-1">
-              <div className="flex items-center gap-2">
+              <div className="flex items-top gap-2">
                 <Clock className="h-3 w-3 text-accent" />
                 <div className="text-xs">
-                  <p>Mon - Sat: 9:00 AM - 7:00 PM</p>
-                  <p>Sunday: 10:00 AM - 5:00 PM</p>
+                  <p>Mon - Sun: 9:00 AM - 9:00 PM</p>
+                  <p>( Please note: Timings may vary during festive seasons.<br />
+                   We recommend contacting us before your visit.)</p>
                 </div>
               </div>
             </div>

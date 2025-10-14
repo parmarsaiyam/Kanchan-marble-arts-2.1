@@ -1,188 +1,184 @@
-"use client"
+// components/Hero.tsx
+"use client";
+import { Button } from "@/components/ui/button";
+import { MapPin, MessageCircle, Phone } from "lucide-react";
+import { useState, useEffect } from "react";
+import { whatsappNumber, whatsappMessage } from "@/components/contact-info";
+import HeroCarousel from "./HeroCarouselBackup";
+import MobileCarousel from "./MobileCarousel";
+import { useMediaQuery } from "./useMedia";
 
-import { Button } from "@/components/ui/button"
-import { MapPin, MessageCircle } from "lucide-react"
-import Image from "next/image"
-import { useState, useEffect } from "react"
-import { whatsappNumber, whatsappMessage } from "@/components/contact-info"; 
-
-interface HeroProps {
-  layout?: "centered" | "split"
-}
+interface HeroProps { layout?: "centered" | "split"; }
 
 export function Hero({ layout = "centered" }: HeroProps) {
-  const [settings, setSettings] = useState<any>(null)
+  // breakpoint: treat widths <= 1023.98px as "mobile/tablet stacked" (you can adjust)
+  const isMobile = useMediaQuery("(max-width: 1023.98px)");
+  const [settings, setSettings] = useState<any>(null);
 
   useEffect(() => {
     fetch("/api/settings")
       .then((res) => res.json())
       .then((data) => setSettings(data))
-      .catch(() => {
-        // Fallback settings
-        setSettings({
-          theme: { heroLayout: layout },
-          trustStats: { yearsExperience: "20+" },
-        })
-      })
-  }, [layout])
+      .catch(() =>
+        setSettings({ theme: { heroLayout: layout }, trustStats: { yearsExperience: "20+" } })
+      );
+  }, [layout]);
 
-  if (!settings) return null
+  if (!settings) return null;
 
-  const heroLayout = settings.theme?.heroLayout || layout
+  const heroLayout = settings.theme?.heroLayout || layout;
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent( "Hello! I'm interested in your marble products and want to discuss my needs / नमस्ते! मुझे आपके मार्बल प्रोडक्ट्स में रुचि है और मैं अपनी ज़रूरतों पर बात करना चाहता हूँ।")}`;
+  const quoteLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello! I’d like a quote for a marble mandir/murti. Please share price and timeline / नमस्ते! मैं एक मार्बल मंदिर/मूर्ति का कोटेशन लेना चाहता हूँ। कृपया कीमत और समय सीमा साझा करें।")}`;
 
-  if (heroLayout === "centered") {
+  if (heroLayout !== "centered") return null;
+
+  // ---------- MOBILE-FIRST VERSION ----------
+  if (isMobile) {
     return (
-      <section className="relative py-16 md:py-20 lg:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5"></div>
-        <div className="absolute inset-0 marble-veins opacity-30"></div>
+      <section
+        className="relative bg-[linear-gradient(180deg,#fbf8f6,rgba(246,243,239,1))] overflow-hidden py-8 sm:py-10"
+        aria-label="Hero"
+      >
+        <div className="absolute inset-0 marble-veins opacity-30 pointer-events-none" />
 
-        <div className="absolute top-20 left-10 w-32 h-32 bg-accent/5 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-accent/3 rounded-full blur-3xl animate-pulse delay-1000"></div>
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6 leading-tight fade-in">
-              Carving Legacy in <span className="text-accent">Marble</span>
+        <div className="container mx-auto px-5">
+          {/* Add some breathing room above H1 (mobile friendly) */}
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="font-serif text-5xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-3 pt-4">
+              Carving Legacy in{" "}
+              <span className="text-accent text-amber-700">Marble</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto slide-up">
-              Custom mandirs and murtis crafted for your home, delivered and fitted with care. Each piece tells a story of devotion, artistry, and timeless beauty.
+
+            <p className="text-base text-muted-foreground max-w-xl mx-auto mb-6 leading-relaxed">
+              Custom mandirs and murtis crafted for your home, delivered and fitted with care.
+              Each piece tells a story of devotion, artistry, and timeless beauty.
             </p>
-            <div className="relative max-w-7xl mb-15 mx-auto slide-up">
-              <div className="aspect-[16/12] relative rounded-2xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-t from-accent/20 via-transparent to-transparent z-10"></div>
-                <Image
-                  src="/images/Home.webp"
-                  alt="Exquisite marble mandir showcasing intricate craftsmanship"
-                  fill
-                  className="object-cover image-high-quality"
-                  priority
-                  quality={95}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 90vw"
-                />
-              </div>
-              <div className="absolute -inset-4 bg-gradient-to-r from-accent/10 via-transparent to-accent/10 rounded-3xl -z-10"></div>
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-accent/10 rounded-full blur-2xl"></div>
-              <div className="absolute -bottom-2 -left-6 w-40 h-40 bg-accent/5 rounded-full blur-3xl"></div>
+          </div>
+
+          {/* MOBILE carousel centered and full-width within container */}
+          <div className="mb-6">
+            <div className="mx-auto w-full max-w-[720px] px-4">
+              <MobileCarousel />
             </div>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center slide-up">
-            <Button
-              asChild
-              size="lg"
-              className="px-8 py-4 bg-accent text-accent-foreground font-medium shadow-lg hover:shadow-xl transition-all duration-300 hover:text-black"
-            >
-              <a
-                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                  "Hello! I’d like a quote for a marble mandir/murti. Please share price and timeline / नमस्ते! मैं मार्बल मंदिर/मूर्ति का कोटेशन चाहता हूँ। कृपया कीमत और समय बताएं।"
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  window.gtag?.("event", "click", { event_category: "cta", event_label: "Request_a_Quote_hero" });
-                }}
-              >
-                Request a Quote
-              </a>
+          </div>
+
+          {/* Buttons: stacked, full-width on mobile with proper gaps */}
+          <div className="flex flex-col gap-3 max-w-xs mx-auto mb-6">
+            <Button asChild size="lg" className="w-full bg-accent text-white py-3">
+              <a href={quoteLink} target="_blank" rel="noopener noreferrer">Request a Quote</a>
             </Button>
 
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="px-8 py-4 border-accent text-accent hover:bg-accent hover:text-black bg-transparent shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <a
-                href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center"
-                onClick={() => {
-                  window.gtag?.("event", "click", { event_category: "cta", event_label: "Whatsapp_hero" });
-                }}
-              >
-                <MessageCircle className="h-5 w-5" />
+            <Button asChild size="lg" variant="outline" className="w-full py-3 border-accent text-accent">
+              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                 WhatsApp
               </a>
             </Button>
 
-            {/* Premium Map Button */}
-            <Button
-              asChild
-              size="lg"
-              className="px-8 py-4 bg-accent text-white font-medium shadow-lg hover:shadow-xl hover:bg-accent/90 transition-all duration-300"
-            >
-              <a href="https://maps.app.goo.gl/jY8ge3FjHQsRXSDr7" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center"
-                onClick={() => {
-                  window.gtag?.("event", "click", { event_category: "cta", event_label: "Map_Location_hero" });
-                }}
-              >
-                <MapPin className=" h-5 w-5" />
-                Shop Location
-              </a>
+            <Button asChild size="lg" className="w-full bg-accent text-white py-3">
+              <a href="https://maps.app.goo.gl/jY8ge3FjHQsRXSDr7" target="_blank" rel="noopener noreferrer">Shop Location</a>
             </Button>
           </div>
-          </div>
-          </div>
-      </section>
-    )
-  }
 
-  // Split layout with enhanced marble textures
-  return (
-    <section className="relative py-16 md:py-10 lg:py-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5"></div>
-      <div className="absolute inset-0 marble-veins opacity-30"></div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="text-center lg:text-left slide-in-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6 leading-tight">
-              Trust, Set in <span className="text-accent">Stone</span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-              Custom mandirs & murtis, crafted with care for {settings.trustStats?.yearsExperience || "20+"} years. Each
-              piece tells a story of devotion, artistry, and timeless beauty.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button
-                size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                Request a Quote
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-accent text-accent hover:bg-accent hover:text-accent-foreground bg-transparent shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                WhatsApp
-              </Button>
+          {/* Contact info */}
+          <div className="flex flex-col items-center gap-3 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-amber-700" />
+              <span>Mumbai, India</span>
             </div>
-          </div>
-
-          {/* Hero Image */}
-          <div className="relative slide-in-right">
-            <div className="aspect-[5/4] relative rounded-2xl overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-t from-accent/20 via-transparent to-transparent z-10"></div>
-              <Image
-                src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop&crop=center"
-                alt="Exquisite marble mandir showcasing intricate craftsmanship"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-              />
+            <div className="flex items-center gap-2">
+              <Phone className="w-4 h-4 text-amber-700" />
+              <span>9137677723</span>
             </div>
-            <div className="absolute -inset-4 bg-gradient-to-r from-accent/10 via-transparent to-accent/10 rounded-3xl -z-10"></div>
-            <div className="absolute -top-6 -right-6 w-32 h-32 bg-accent/10 rounded-full blur-2xl"></div>
-            <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-accent/5 rounded-full blur-3xl"></div>
           </div>
         </div>
-      </div>
+      </section>
+    );
+  }
+
+  // ---------- DESKTOP / TABLET (>= breakpoint) — preserve existing layout ----------
+  return (
+    <section
+      className="relative bg-[linear-gradient(180deg,#fbf8f6,rgba(246,243,239,1))] overflow-hidden "
+      aria-label="Hero"
+    >
+      <div className="absolute inset-0 marble-veins opacity-30 pointer-events-none" />
+
+      <div className="container mx-auto px-5 md:px-8 lg:px-10">
+        <div className="min-h-[70vh] md:min-h-[80vh] lg:min-h-[88vh] flex items-center">
+          <div className="w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              {/* Left text area (desktop) */}
+              <div className="lg:col-span-5 order-1 flex flex-col justify-center text-left">
+                <h1 className="font-serif text-[1.9rem] md:text-[2.8rem] lg:text-[3.4rem] xl:text-[3.9rem] font-bold text-foreground leading-snug mb-3">
+                  Carving Legacy in{" "}
+                  <span className="text-accent text-amber-700">Marble</span>
+                </h1>
+
+                <p className="text-[0.95rem] md:text-base lg:text-[1.05rem] text-muted-foreground max-w-lg mb-6 leading-relaxed">
+                  Custom mandirs and murtis crafted for your home, delivered and fitted with care.
+                  Each piece tells a story of devotion, artistry, and timeless beauty.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-3 mb-6">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="px-5 py-3 bg-accent text-white shadow-md hover:shadow-lg text-[0.9rem]"
+                  >
+                    <a href={quoteLink} target="_blank" rel="noopener noreferrer">
+                      Request a Quote
+                    </a>
+                  </Button>
+
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="px-5 py-3 border-accent text-accent hover:bg-accent/10 text-[0.9rem]"
+                  >
+                    <a
+                      href={whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      WhatsApp
+                    </a>
+                  </Button>
+
+                  <Button
+                    asChild
+                    size="lg"
+                    className="px-5 py-3 bg-accent text-white text-[0.9rem]"
+                  >
+                    <a
+                      href="https://maps.app.goo.gl/jY8ge3FjHQsRXSDr7"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Shop Location
+                    </a>
+                  </Button>
+                </div>
+
+                <div className="flex items-center gap-5 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-amber-700"/>Mumbai, India</div>
+                  <div className="flex items-center gap-2"><MessageCircle className="h-4 w-4 text-amber-700"/>9967245250</div>
+                </div>
+              </div>
+
+              {/* Right: catalogue / carousel (desktop) */}
+              <div className="lg:col-span-3 order-2 flex justify-start lg:pl-8 xl:pl-12 mt-8 lg:mt-0">
+                <div className="relative w-full max-w-[680px] mx-0">
+                  <div className="relative rounded-2xl overflow-visible">
+                    <HeroCarousel />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
     </section>
-  )
+  );
 }

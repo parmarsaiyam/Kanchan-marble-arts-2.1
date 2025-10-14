@@ -7,7 +7,7 @@ export function JsonLd() {
       "Premium marble mandirs, murtis, and artistic pieces crafted with care for over 20 years. Custom designs, expert fitting, and nationwide delivery.",
     url: "https://kanchanmarblearts.com",
     telephone: "+919",
-    email: "info@kanchanmarblearts.com",
+    email: "kanchanmarblearts@gmail.com",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Kanchan Marble arts, near akurli metro station , opposite times of india, Kandivali east",
