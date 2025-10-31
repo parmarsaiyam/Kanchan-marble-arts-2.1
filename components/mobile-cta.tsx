@@ -4,6 +4,19 @@ import { Button } from "@/components/ui/button"
 import { Phone } from "lucide-react"
 import { whatsappNumber, whatsappMessage, phoneNumber } from "@/components/contact-info"
 import { useEffect, useState } from "react";
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
+
+function trackGA(action: string, label: string, extra: Record<string, any> = {}) {
+  if (typeof window === "undefined") return;
+  const g = (window as any).gtag;
+  if (typeof g === "function") {
+    g("event", action, {
+      event_label: label,
+      send_to: GA_ID,
+      ...extra,
+    });
+  }
+}
 
 
 export function MobileCTA() {
@@ -32,8 +45,9 @@ export function MobileCTA() {
           <a
             href={`tel:${phoneNumber}`}
             aria-label="Call Kanchan Marble Arts"
+            onClick={() => trackGA("cta_click", "call_phone", { platform: "mobile" })}
           >
-            <Phone className="h-7 w-7" />
+            <Phone className="h-7 w-7 scale-120" />
           </a>
         </Button>
       </div>
@@ -51,12 +65,13 @@ export function MobileCTA() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat on WhatsApp"
+            onClick={() => trackGA("cta_click", "whatsapp_chat", { platform: "mobile" })}
           >
             {/* Updated WhatsApp logo SVG */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              className="h-7 w-7 mx-auto fill-current"
+              className="h-7 w-7 mx-auto fill-current scale-150"
               aria-hidden="true"
             >
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.1-.472-.149-.67.15-.197.297-.767.966-.94 1.164-.173.198-.347.223-.644.074-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.173.198-.298.298-.497.1-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.209-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.289.173-1.412-.074-.124-.272-.198-.57-.347z"/>
@@ -78,12 +93,13 @@ export function MobileCTA() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat on WhatsApp"
+            onClick={() => trackGA("cta_click", "whatsapp_chat", { platform: "desktop" })}
           >
             {/* Updated WhatsApp logo SVG */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              className="h-8 w-8 mx-auto fill-current"
+              className="h-8 w-8 mx-auto fill-current scale-150"
               aria-hidden="true"
             >
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.031-.967-.273-.1-.472-.149-.67.15-.197.297-.767.966-.94 1.164-.173.198-.347.223-.644.074-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.173.198-.298.298-.497.1-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.209-.242-.579-.487-.5-.67-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.718 2.006-1.412.248-.694.248-1.289.173-1.412-.074-.124-.272-.198-.57-.347z"/>
@@ -95,3 +111,4 @@ export function MobileCTA() {
     </>
   )
 }
+

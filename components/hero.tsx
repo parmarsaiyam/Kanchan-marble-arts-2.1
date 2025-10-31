@@ -8,7 +8,22 @@ import HeroCarousel from "./HeroCarouselBackup";
 import MobileCarousel from "./MobileCarousel";
 import { useMediaQuery } from "./useMedia";
 
+
 interface HeroProps { layout?: "centered" | "split"; }
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
+
+function trackGA(action: string, label: string, extra: Record<string, any> = {}) {
+  if (typeof window === "undefined") return;
+  const g = (window as any).gtag;
+  if (typeof g === "function") {
+    g("event", action, {
+      event_label: label,
+      send_to: GA_ID,
+      ...extra,
+    });
+  }
+}
 
 export function Hero({ layout = "centered" }: HeroProps) {
   // breakpoint: treat widths <= 1023.98px as "mobile/tablet stacked" (you can adjust)
@@ -44,11 +59,11 @@ export function Hero({ layout = "centered" }: HeroProps) {
         <div className="container mx-auto px-5">
           {/* Add some breathing room above H1 (mobile friendly) */}
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="font-serif text-5xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight mb-3 pt-4">
+            <h1 className="font-serif text-4xl sm:text-4xl md:text-4xl font-bold text-foreground leading-tight mb-3 pt-4">
               Carving Legacy in{" "}
               <span className="text-accent text-amber-700">Marble</span>
             </h1>
-
+ 
             <p className="text-base text-muted-foreground max-w-xl mx-auto mb-6 leading-relaxed">
               Custom mandirs and murtis crafted for your home, delivered and fitted with care.
               Each piece tells a story of devotion, artistry, and timeless beauty.
@@ -65,17 +80,20 @@ export function Hero({ layout = "centered" }: HeroProps) {
           {/* Buttons: stacked, full-width on mobile with proper gaps */}
           <div className="flex flex-col gap-3 max-w-xs mx-auto mb-6">
             <Button asChild size="lg" className="w-full bg-accent text-white py-3">
-              <a href={quoteLink} target="_blank" rel="noopener noreferrer">Request a Quote</a>
+              <a href={quoteLink} target="_blank" rel="noopener noreferrer"
+                onClick={() => trackGA("cta_click", "hero_request_quote", { platform: "mobile" })}>Request a Quote</a>
             </Button>
 
             <Button asChild size="lg" variant="outline" className="w-full py-3 border-accent text-accent">
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2"
+                onClick={() => trackGA("cta_click", "hero_whatsapp", { platform: "mobile" })}>
                 WhatsApp
               </a>
             </Button>
 
             <Button asChild size="lg" className="w-full bg-accent text-white py-3">
-              <a href="https://maps.app.goo.gl/jY8ge3FjHQsRXSDr7" target="_blank" rel="noopener noreferrer">Shop Location</a>
+              <a href="https://maps.app.goo.gl/jY8ge3FjHQsRXSDr7" target="_blank" rel="noopener noreferrer"
+                onClick={() => trackGA("cta_click", "hero_shop_location", { platform: "mobile" })}>Shop Location</a>
             </Button>
           </div>
 
@@ -125,7 +143,8 @@ export function Hero({ layout = "centered" }: HeroProps) {
                     size="lg"
                     className="px-5 py-3 bg-accent text-white shadow-md hover:shadow-lg text-[0.9rem]"
                   >
-                    <a href={quoteLink} target="_blank" rel="noopener noreferrer">
+                    <a href={quoteLink} target="_blank" rel="noopener noreferrer"
+                      onClick={() => trackGA("cta_click", "hero_request_quote", { platform: "desktop" })}>
                       Request a Quote
                     </a>
                   </Button>
@@ -141,6 +160,7 @@ export function Hero({ layout = "centered" }: HeroProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2"
+                      onClick={() => trackGA("cta_click", "hero_whatsapp", { platform: "desktop" })}
                     >
                       WhatsApp
                     </a>
@@ -155,6 +175,7 @@ export function Hero({ layout = "centered" }: HeroProps) {
                       href="https://maps.app.goo.gl/jY8ge3FjHQsRXSDr7"
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackGA("cta_click", "hero_shop_location", { platform: "desktop" })}
                     >
                       Shop Location
                     </a>
