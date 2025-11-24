@@ -126,6 +126,7 @@ export default function RootLayout({
       <head>
         <JsonLd />
         <link rel="canonical" href="https://kanchanmarblearts.com" />
+        <meta name="google-site-verification" content="RiZ6RRTorHjfEMOSfhC_pHUkPQTlW4uk_6dFswGIzBg" />
         {/* GA base script - loads after interactive so it won't run in SSR */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
