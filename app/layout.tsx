@@ -55,19 +55,37 @@ export const viewport = {
 }
 
 export const metadata: Metadata = {
-  title: "Kanchan Marble Arts - Custom Mandirs & Murtis | 20+ Years of Trust",
+  title: "Kanchan Marble Arts | Marble Mandir & Murti Manufacturer in Mumbai",
   description:
-    "Premium marble mandirs, murtis, and artistic pieces crafted with care for over 20 years. Custom designs, expert fitting, and nationwide delivery.",
-  keywords:
-    "marble mandir, marble murti, custom marble work, marble art, marble temple, marble sculpture, jain marble, marble craftsmanship",
-  authors: [{ name: "Kanchan Marble Arts" }],
+    "Kanchan Marble Arts is a trusted marble mandir and murti manufacturer in Mumbai with 20+ years of craftsmanship. Specializing in custom marble mandirs, Jain temples, murtis, and marble articles made from Italian, Indian and Australian marble.",
+
+  keywords: [
+    "marble mandir manufacturer in Mumbai",
+    "custom marble mandir",
+    "jain marble mandir",
+    "marble murti maker in India",
+    "white marble temple",
+    "italian marble mandir",
+    "marble temple for home",
+    "marble articles Mumbai",
+    "best marble shop in Mumbai",
+    "custom marble work in India",
+    "marble ghumat",
+    "tulsi stand marble",
+    "jain mandir design marble",
+    "handcrafted marble mandir",
+  ],
+
+  authors: [{ name: "Kanchan Marble Arts", url: "https://kanchanmarblearts.com" }],
   creator: "Kanchan Marble Arts",
   publisher: "Kanchan Marble Arts",
+
   openGraph: {
-    title: "Kanchan Marble Arts - Custom Mandirs & Murtis",
-    description: "Premium marble mandirs, murtis, and artistic pieces crafted with care for over 20 years.",
+    title: "Kanchan Marble Arts | Custom Marble Mandirs & Jain Temples",
+    description:
+      "Premium custom marble mandirs, Jain temples, murtis and decorative marble articles handcrafted in Mumbai. 20+ years of legacy, trusted across India.",
     type: "website",
-    locale: "en_US",
+    locale: "en_IN",
     siteName: "Kanchan Marble Arts",
     url: "https://kanchanmarblearts.com",
     images: [
@@ -75,28 +93,33 @@ export const metadata: Metadata = {
         url: "https://kanchanmarblearts.com/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Kanchan Marble Arts - Premium Marble Craftsmanship",
+        alt: "Custom white marble mandir handcrafted by Kanchan Marble Arts in Mumbai",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Kanchan Marble Arts - Custom Mandirs & Murtis",
-    description: "Premium marble mandirs, murtis, and artistic pieces crafted with care for over 20 years.",
+    title: "Kanchan Marble Arts | Custom Marble Mandirs in Mumbai",
+    description:
+      "Explore handcrafted marble mandirs, Jain temples, murtis and marble décor created with 20+ years of devotion and craftsmanship.",
     images: ["https://kanchanmarblearts.com/images/og-image.jpg"],
   },
+
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
       "max-image-preview": "large",
+      "max-video-preview": -1,
       "max-snippet": -1,
     },
   },
+
   manifest: "/manifest.json",
+
   icons: {
     icon: [
       { url: "/icons/icon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -104,17 +127,20 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/icons/icon-180x180.png", sizes: "180x180", type: "image/png" }],
   },
+
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: "Kanchan Marble Arts",
   },
+
   formatDetection: {
     telephone: false,
   },
-  category: "business",
-    generator: 'v0.app'
+
+  category: "Marble Manufacturer & Religious Art",
 }
+
 
 export default function RootLayout({
   children,

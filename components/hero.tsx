@@ -184,7 +184,7 @@ export function Hero({ layout = "centered" }: HeroProps) {
 
                 <div className="flex items-center gap-5 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-amber-700"/>Mumbai, India</div>
-                  <div className="flex items-center gap-2"><MessageCircle className="h-4 w-4 text-amber-700"/>9967245250</div>
+                  <div className="flex items-center gap-2"><MessageCircle className="h-4 w-4 text-amber-700"/>9819460441</div>
                 </div>
               </div>
 
