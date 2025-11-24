@@ -28,7 +28,7 @@ export function GalleryPreview() {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">Our Craftsmanship</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Witness the beauty and precision of our marble artistry through our gallery of completed works.
+            Witness the beauty and precision of our marble artistry through our gallery of completed marble mandirs, Jain temples and murtis installed in homes across Mumbai and India.
           </p>
         </div>
 
