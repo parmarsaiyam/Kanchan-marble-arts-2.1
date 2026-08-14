@@ -1,108 +1,56 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
-import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react"
+import { navLinks, phoneDisplay, whatsappHref, telHref, email } from "@/lib/site"
+import { useT } from "@/lib/i18n/context"
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
-  
+  const d = useT()
+
   return (
-    <footer className="bg-foreground text-background mt-0">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Contact Information */}
-          <div className="space-y-3">
-            <h3 className="text-base font-semibold text-accent">Contact Us</h3>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <Phone className="h-3 w-3 text-accent" />
-                <a href="tel:+919819460441" className="text-xs hover:text-accent transition-colors">
-                  +91 9819460441
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <MessageCircle className="h-3 w-3 text-accent" />
-                <a href="https://wa.me/919819460441" className="text-xs hover:text-accent transition-colors">
-                  WhatsApp
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="h-3 w-3 text-accent" />
-                <a href="mailto:kanchanmarblearts@gmail.com" className="text-xs hover:text-accent transition-colors">
-                  kanchanmarblearts@gmail.com
-                </a>
-              </div>
-              <div className="flex items-start gap-2">
-                <MapPin className="h-3 w-3 text-accent mt-1" />
-                <p className="text-xs">
-                Kanchan marble arts, Ashok Nagar,<br />
-                Near Akurli Metro Station<br />
-                 Kandivali east, Mumbai - 400101<br />
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Business Hours */}
-          <div className="space-y-3">
-            <h3 className="text-base font-semibold text-accent">Business Hours</h3>
-            <div className="space-y-1">
-              <div className="flex items-top gap-2">
-                <Clock className="h-3 w-3 text-accent" />
-                <div className="text-xs">
-                  <p>Mon - Sun: 9:00 AM - 9:00 PM</p>
-                  <p>( Please note: Timings may vary during festive seasons.<br />
-                   We recommend contacting us before your visit.)</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="space-y-3">
-            <h3 className="text-base font-semibold text-accent">Quick Links</h3>
-            <div className="space-y-1">
-              <Link href="/privacy" className="block text-xs hover:text-accent transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="block text-xs hover:text-accent transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="/about" className="block text-xs hover:text-accent transition-colors">
-                About Us
-              </Link>
-              <Link href="/contact" className="block text-xs hover:text-accent transition-colors">
-                Contact
-              </Link>
-            </div>
-          </div>
-
-          {/* Map Embed */}
-          <div className="space-y-3">
-            <h3 className="text-base font-semibold text-accent">Find Us</h3>
-            <div className="w-full h-24 bg-muted/20 rounded-lg overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.9669769932425!2d72.85760827466812!3d19.196644648175074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b718f4306427%3A0xddb9c4ca3b53e836!2sKanchan%20Marble%20Arts.!5e0!3m2!1sen!2sin!4v1756016808996!5m2!1sen!2sin"
-                width="100%"
-                height="120%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full"
-                title="Kanchan Marble Arts Location"
-              />
-            </div>
+    <footer className="kma-dk bg-[var(--kma-ink-3)] text-[rgba(247,244,239,0.72)]">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-6 pt-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-12 lg:px-14">
+        <div>
+          <Image
+            src="/images/kma-logo.png"
+            alt={d.ui.nav.logoAlt}
+            width={210}
+            height={58}
+            className="mb-4 h-[58px] w-auto object-contain brightness-[20.0] saturate-[0.0]"
+          />
+          <p className="max-w-[280px] text-[13px] leading-relaxed">{d.ui.footer.blurb}</p>
+        </div>
+        <div>
+          <div className="kicker mb-3.5 !text-[var(--kma-gold-light)]">{d.ui.footer.explore}</div>
+          <div className="flex flex-col gap-2 text-[13px]">
+            {navLinks
+              .filter((link) => link.href !== "/")
+              .map((link) => (
+                <Link key={link.href} href={link.href} className="hover:text-[var(--kma-ivory)]">
+                  {d.ui.nav[link.key]}
+                </Link>
+              ))}
           </div>
         </div>
-
-        {/* Bottom Bar */}
-        <div className="border-t border-muted/20 mt-6 pt-4">
-          <div className="text-center">
-            <p className="text-xs opacity-90">
-              © {currentYear} Kanchan Marble Arts. All rights reserved.
-            </p>
+        <div>
+          <div className="kicker mb-3.5 !text-[var(--kma-gold-light)]">{d.ui.footer.contact}</div>
+          <div className="flex flex-col gap-2 text-[13px]">
+            <a href={telHref} className="hover:text-[var(--kma-ivory)]">
+              {phoneDisplay}
+            </a>
+            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--kma-ivory)]">
+              {d.ui.footer.whatsapp}
+            </a>
+            <a href={`mailto:${email}`} className="break-all hover:text-[var(--kma-ivory)]">
+              {email}
+            </a>
           </div>
         </div>
+      </div>
+      <div className="mx-auto max-w-[1280px] px-6 pb-9 lg:px-14">
+        <hr className="mb-5 mt-10 h-px border-0 bg-[rgba(247,244,239,0.14)]" />
+        <div className="text-xs opacity-60">{d.ui.footer.rights(new Date().getFullYear())}</div>
       </div>
     </footer>
   )

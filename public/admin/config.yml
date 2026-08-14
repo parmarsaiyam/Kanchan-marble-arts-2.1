@@ -9,6 +9,93 @@ media_folder: "public/images/uploads" # Media files will be stored in the repo u
 public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
 
 collections:
+  # ── Notification banner ────────────────────────────────────────────────
+  # Edits the same content/settings.json as "Site Settings" below, but shows
+  # only the announcement fields so the banner can be changed in seconds.
+  # Decap rewrites the whole file on save, so every other field is repeated
+  # here as a hidden widget to preserve it.
+  - name: "announcement"
+    label: "Notification Banner"
+    files:
+      - label: "Notification Banner"
+        name: "banner"
+        file: "content/settings.json"
+        fields:
+          - label: "Notification"
+            name: "announcement"
+            widget: "object"
+            fields:
+              - {
+                  label: "Show the banner",
+                  name: "enabled",
+                  widget: "boolean",
+                  default: true,
+                  hint: "Turn off to hide the notification everywhere.",
+                }
+              - {
+                  label: "Message (desktop)",
+                  name: "text",
+                  widget: "text",
+                  hint: "Shown in the bar at the top of the page on large screens.",
+                }
+              - {
+                  label: "Message (mobile)",
+                  name: "mobileText",
+                  widget: "text",
+                  required: false,
+                  hint: "Shorter version for the floating pill on phones. Falls back to the desktop message.",
+                }
+              - { label: "Link text", name: "linkText", widget: "string", required: false, default: "See details" }
+              # Translations — leave blank and visitors on that language see the English text.
+              - {
+                  label: "Message — हिन्दी (desktop)",
+                  name: "text_hi",
+                  widget: "text",
+                  required: false,
+                  hint: "Hindi version. Leave blank to show the English message.",
+                }
+              - {
+                  label: "Message — हिन्दी (mobile)",
+                  name: "mobileText_hi",
+                  widget: "text",
+                  required: false,
+                }
+              - { label: "Link text — हिन्दी", name: "linkText_hi", widget: "string", required: false }
+              - {
+                  label: "Message — ગુજરાતી (desktop)",
+                  name: "text_gu",
+                  widget: "text",
+                  required: false,
+                  hint: "Gujarati version. Leave blank to show the English message.",
+                }
+              - {
+                  label: "Message — ગુજરાતી (mobile)",
+                  name: "mobileText_gu",
+                  widget: "text",
+                  required: false,
+                }
+              - { label: "Link text — ગુજરાતી", name: "linkText_gu", widget: "string", required: false }
+              - {
+                  label: "Link target",
+                  name: "href",
+                  widget: "string",
+                  required: false,
+                  default: "/contact",
+                  hint: "e.g. /contact, /products, or a full https:// URL",
+                }
+          # Preserved as-is — edit these under "Site Settings".
+          - { label: "Brand Name", name: "brandName", widget: "hidden" }
+          - { label: "Tagline", name: "tagline", widget: "hidden" }
+          - { label: "Subhead", name: "subhead", widget: "hidden" }
+          - { label: "Phone", name: "phone", widget: "hidden" }
+          - { label: "WhatsApp", name: "whatsapp", widget: "hidden" }
+          - { label: "Email", name: "email", widget: "hidden" }
+          - { label: "Business Hours", name: "businessHours", widget: "hidden" }
+          - { label: "Social Media", name: "socialMedia", widget: "hidden" }
+          - { label: "Hero Images", name: "heroImages", widget: "hidden" }
+          - { label: "Trust Stats", name: "trustStats", widget: "hidden" }
+          - { label: "Theme", name: "theme", widget: "hidden" }
+
   - name: "settings"
     label: "Site Settings"
     files:
@@ -18,35 +105,43 @@ collections:
         fields:
           - { label: "Brand Name", name: "brandName", widget: "string" }
           - { label: "Tagline", name: "tagline", widget: "string" }
-          - { label: "Description", name: "description", widget: "text" }
-          - label: "Contact"
-            name: "contact"
+          - { label: "Subhead", name: "subhead", widget: "text" }
+          - { label: "Phone", name: "phone", widget: "string" }
+          - { label: "WhatsApp", name: "whatsapp", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - label: "Business Hours"
+            name: "businessHours"
             widget: "object"
             fields:
-              - { label: "Phone", name: "phone", widget: "string" }
-              - { label: "Email", name: "email", widget: "string" }
-              - { label: "Address", name: "address", widget: "text" }
-              - { label: "WhatsApp", name: "whatsapp", widget: "string" }
+              - { label: "Weekdays", name: "weekdays", widget: "string" }
+              - { label: "Weekend", name: "weekend", widget: "string" }
           - label: "Social Media"
-            name: "social"
+            name: "socialMedia"
             widget: "object"
             fields:
               - { label: "Facebook", name: "facebook", widget: "string", required: false }
               - { label: "Instagram", name: "instagram", widget: "string", required: false }
-              - { label: "YouTube", name: "youtube", widget: "string", required: false }
+              - { label: "WhatsApp Message", name: "whatsappMessage", widget: "text", required: false }
+          - label: "Hero Images"
+            name: "heroImages"
+            widget: "list"
+            required: false
+            field: { label: "Image", name: "image", widget: "image" }
           - label: "Trust Stats"
             name: "trustStats"
             widget: "object"
             fields:
-              - { label: "Years Experience", name: "yearsExperience", widget: "number" }
-              - { label: "Orders Completed", name: "ordersCompleted", widget: "number" }
-              - { label: "Happy Customers", name: "happyCustomers", widget: "number" }
+              - { label: "Years Experience", name: "yearsExperience", widget: "string" }
+              - { label: "Orders Completed", name: "ordersCompleted", widget: "string" }
+              - { label: "Delivery Success", name: "deliverySuccess", widget: "string" }
           - label: "Theme Settings"
             name: "theme"
             widget: "object"
             fields:
               - { label: "Dark Mode", name: "darkMode", widget: "boolean", default: false }
               - { label: "Hero Layout", name: "heroLayout", widget: "select", options: ["centered", "split"], default: "centered" }
+          # Edited under "Notification Banner".
+          - { label: "Announcement", name: "announcement", widget: "hidden" }
 
   - name: "products"
     label: "Products"

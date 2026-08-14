@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronUp } from "lucide-react"
+import { useT } from "@/lib/i18n/context"
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false)
+  const d = useT()
 
   useEffect(() => {
     const footer = document.querySelector("footer") // 👈 assumes your footer tag exists
@@ -46,10 +48,10 @@ export function ScrollToTop() {
         onClick={scrollToTop}
         size="lg"
         className="px-6 py-3 bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-full flex items-center gap-2"
-        aria-label="Scroll to top"
+        aria-label={d.ui.common.scrollToTop}
       >
         <ChevronUp className="h-5 w-5" />
-        <span className="text-sm font-medium">Scroll to top</span>
+        <span className="text-sm font-medium">{d.ui.common.scrollToTop}</span>
       </Button>
     </div>
   )

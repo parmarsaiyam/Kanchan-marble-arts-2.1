@@ -2,31 +2,50 @@
 @import "tw-animate-css";
 
  :root {
-  /* Marble arts brand colors - ivory base, charcoal text, deeper gold accent */
-  --background: #f6f4f1; /* Marble/ivory base */
-  --foreground: #2f2f2f; /* Charcoal text */
+  /* Marble arts brand colors - warm ivory base, deep ink text, gold accent */
+  --background: #f7f4ef; /* Warm ivory ground */
+  --foreground: #241f1a; /* Deep ink text */
   --card: #ffffff; /* Pure white for cards */
-  --card-foreground: #2f2f2f; /* Charcoal on cards */
+  --card-foreground: #241f1a;
   --popover: #ffffff;
-  --popover-foreground: #2f2f2f;
-  --primary: #7a5a05; /* Darker deep gold accent */
-  --primary-foreground: #ffffff;
-  --secondary: #f6f4f1; /* Marble base for secondary */
-  --secondary-foreground: #2f2f2f;
-  --muted: #e7e2da; /* Soft divider color */
-  --muted-foreground: #6b7280;
-  --accent: #7a5a05; /* Darker deep gold for accents */
-  --accent-foreground: #ffffff;
+  --popover-foreground: #241f1a;
+  --primary: #9a7b2f; /* Gold accent */
+  --primary-foreground: #f7f4ef;
+  --secondary: #efe9de; /* Surface tint */
+  --secondary-foreground: #241f1a;
+  --muted: #efe9de; /* Surface tint */
+  --muted-foreground: #6f6559;
+  --accent: #9a7b2f; /* Gold accent */
+  --accent-foreground: #f7f4ef;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: #ffffff;
-  --border: #e7e2da; /* Soft divider */
+  --border: rgba(36, 31, 26, 0.14); /* Hairline */
   --input: #ffffff;
-  --ring: rgba(170, 140, 60, 0.35); /* Darker gold ring with slightly higher opacity */
-  --chart-1: #7a5a05;
-  --chart-2: #f6f4f1;
-  --chart-3: #2f2f2f;
-  --chart-4: #e7e2da;
+  --ring: rgba(154, 123, 47, 0.35); /* Gold ring */
+  --chart-1: #9a7b2f;
+  --chart-2: #f7f4ef;
+  --chart-3: #241f1a;
+  --chart-4: #efe9de;
   --chart-5: #ffffff;
+
+  /* KMA redesign palette */
+  --kma-ink: #241f1a;
+  --kma-ink-2: #2b2621;
+  --kma-ink-3: #1c1815;
+  --kma-gold: #9a7b2f;
+  --kma-gold-deep: #7d6626;
+  --kma-gold-light: #c9ab5f;
+  --kma-muted: #6f6559;
+  --kma-muted-2: #8a8073;
+  --kma-body: #4a423a;
+  --kma-surface: #efe9de;
+  --kma-ivory: #f7f4ef;
+  --kma-cream: #f2ead6;
+  --kma-hairline: rgba(36, 31, 26, 0.14);
+  --kma-whatsapp: #25d366;
+  /* Height of the pinned announcement + header block. Measured at runtime by
+     components/layout/header.tsx; this is the pre-hydration fallback. */
+  --kma-stack-h: 66px;
   --radius: 0.75rem; /* Rounded-xl */
   --sidebar: #f6f4f1;
   --sidebar-foreground: #2f2f2f;
@@ -36,7 +55,7 @@
   --sidebar-accent-foreground: #2f2f2f;
   --sidebar-border: #e7e2da;
   --sidebar-ring: rgba(170, 140, 60, 0.35);
-
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -85,19 +104,17 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem; /* Account for fixed header */
   }
 
-  /* Improve scroll behavior for better centering */
+  /* Pinned announcement + header clear anchored scroll targets */
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: calc(var(--kma-stack-h) + 1.5rem);
   }
 
   /* Ensure sections have proper spacing for centering */
   section[id] {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: calc(var(--kma-stack-h) + 1.5rem);
   }
 
   /* Additional scroll behavior improvements */
@@ -127,51 +144,6 @@
     animation: slideInRight 0.8s ease-out;
   }
 
-  /* Keyframe animations */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
   /* Staggered animation delays for page elements */
   .stagger-1 { animation-delay: 0.1s; }
   .stagger-2 { animation-delay: 0.2s; }
@@ -188,17 +160,6 @@
   .loading {
     opacity: 0.7;
     transform: scale(0.98);
-  }
-
-  /* Enhanced scroll behavior */
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
-  }
-
-  /* Ensure animations work on all elements */
-  * {
-    animation-fill-mode: both;
   }
 
   /* Page transition animations */
@@ -354,4 +315,286 @@
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
-}}
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   KMA premium-minimal redesign — shared type, motion and utilities
+   ══════════════════════════════════════════════════════════════════ */
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--kma-muted-2);
+}
+
+.rule {
+  height: 1px;
+  background: var(--kma-hairline);
+  border: 0;
+}
+
+/* Washed photography — images sit back into the warm page */
+.wash {
+  filter: saturate(0.88) contrast(0.96) brightness(1.03);
+}
+
+/* Gold underline highlight inside headlines */
+.hl {
+  background: linear-gradient(transparent 62%, rgba(201, 171, 95, 0.4) 62%);
+}
+
+/* Pressable elements: hover lift, active press */
+.press {
+  transition:
+    transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 0.3s,
+    color 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
+  cursor: pointer;
+}
+.press:hover {
+  transform: translateY(-2px);
+}
+.press:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Primary CTA sheen sweep */
+.cta {
+  position: relative;
+  overflow: hidden;
+}
+.cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 38%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.32), transparent);
+  animation: kmaSheen 5.4s ease-in-out infinite;
+}
+
+/* Image tiles ease under the cursor */
+.tile img {
+  transition: transform 1.15s cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+.tile:hover img {
+  transform: scale(1.05);
+}
+
+/* Nav link underline grow */
+.navlink {
+  position: relative;
+}
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 1.5px;
+  background: var(--kma-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.navlink:hover::after {
+  transform: scaleX(1);
+}
+.navlink.navon::after {
+  transform: scaleX(1);
+  animation: kmaHair 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Scroll reveal — .rv gains .in via IntersectionObserver */
+.rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 0.84, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+.rv.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger children of a revealed block so grids cascade in. Put `rv-stagger`
+   on the Reveal itself or on any descendant of one. */
+.rv-stagger > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 0.84, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+.rv-stagger.in > *,
+.rv.in .rv-stagger > * {
+  opacity: 1;
+  transform: none;
+}
+.rv-stagger > *:nth-child(1) { transition-delay: 0.05s; }
+.rv-stagger > *:nth-child(2) { transition-delay: 0.12s; }
+.rv-stagger > *:nth-child(3) { transition-delay: 0.19s; }
+.rv-stagger > *:nth-child(4) { transition-delay: 0.26s; }
+.rv-stagger > *:nth-child(5) { transition-delay: 0.33s; }
+.rv-stagger > *:nth-child(6) { transition-delay: 0.4s; }
+.rv-stagger > *:nth-child(7) { transition-delay: 0.45s; }
+.rv-stagger > *:nth-child(8) { transition-delay: 0.5s; }
+.rv-stagger > *:nth-child(n + 9) { transition-delay: 0.55s; }
+
+/* Entry animation for grids that re-render (filters, load-more) where an
+   IntersectionObserver reveal would leave freshly mounted items hidden. */
+.kma-fade-up > * {
+  animation: kmaFadeUp 0.65s cubic-bezier(0.16, 0.84, 0.3, 1) both;
+}
+.kma-fade-up > *:nth-child(1) { animation-delay: 0.02s; }
+.kma-fade-up > *:nth-child(2) { animation-delay: 0.06s; }
+.kma-fade-up > *:nth-child(3) { animation-delay: 0.1s; }
+.kma-fade-up > *:nth-child(4) { animation-delay: 0.14s; }
+.kma-fade-up > *:nth-child(5) { animation-delay: 0.18s; }
+.kma-fade-up > *:nth-child(6) { animation-delay: 0.22s; }
+.kma-fade-up > *:nth-child(7) { animation-delay: 0.26s; }
+.kma-fade-up > *:nth-child(8) { animation-delay: 0.3s; }
+.kma-fade-up > *:nth-child(n + 9) { animation-delay: 0.34s; }
+
+@keyframes kmaFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Drifting gold-vein field behind the light parts of the page.
+   The layer is FIXED to the viewport, not stretched over the whole document:
+   an absolute layer on a 6000px-tall page scales its orbs to the document, so
+   the drift reads as motionless while the viewport-sized dark bands visibly
+   move — that mismatch is what made the effect look inconsistent. Fixed keeps
+   the orbs viewport-scaled, so the same motion is present on every page and at
+   every scroll position.
+   z-index -1 inside an isolated stacking context keeps it behind content
+   without forcing `position` onto children — a sticky header must stay sticky. */
+.kma-frame {
+  position: relative;
+  isolation: isolate;
+}
+.kma-frame::before {
+  content: "";
+  position: fixed;
+  inset: -14vmax;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(154, 123, 47, 0.2), transparent 60%),
+    radial-gradient(circle at 78% 38%, rgba(201, 171, 95, 0.19), transparent 58%),
+    radial-gradient(circle at 40% 82%, rgba(122, 138, 94, 0.14), transparent 58%),
+    radial-gradient(circle at 88% 88%, rgba(154, 123, 47, 0.12), transparent 58%);
+  background-size:
+    72vmax 68vmax,
+    58vmax 54vmax,
+    50vmax 48vmax,
+    44vmax 42vmax;
+  background-position:
+    0% 0%,
+    100% 20%,
+    20% 100%,
+    100% 100%;
+  will-change: transform;
+  animation: kmaOrbs 42s ease-in-out infinite;
+}
+
+/* Dark bands carry their own drifting layer, scaled to the band itself */
+.kma-dk {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.kma-dk::before {
+  content: "";
+  position: absolute;
+  inset: -14vmax;
+  z-index: -1;
+  pointer-events: none;
+  will-change: transform;
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(circle at 16% 26%, rgba(201, 171, 95, 0.22), transparent 62%),
+    radial-gradient(circle at 82% 68%, rgba(201, 171, 95, 0.15), transparent 62%);
+  background-size:
+    70vmax 60vmax,
+    54vmax 48vmax;
+  background-position:
+    0% 0%,
+    100% 100%;
+  animation: kmaOrbsDark 38s ease-in-out infinite;
+}
+
+/* Announcement ribbon */
+.anno-dot {
+  animation: kmaPulse 2.6s ease-in-out infinite;
+}
+.anno-link {
+  position: relative;
+}
+.anno-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.anno-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Transform-based so the drift is GPU-composited and reads at the same speed
+   on every page, rather than depending on how tall the document happens to be. */
+@keyframes kmaOrbs {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  25%  { transform: translate3d(3.5vmax, -2.5vmax, 0) scale(1.06); }
+  50%  { transform: translate3d(-2vmax, -4.5vmax, 0) scale(1.1); }
+  75%  { transform: translate3d(-4vmax, 2vmax, 0) scale(1.05); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes kmaOrbsDark {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(3vmax, -2vmax, 0) scale(1.07); }
+  66%  { transform: translate3d(-2.5vmax, 1.5vmax, 0) scale(1.04); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes kmaSheen {
+  0%, 45% { transform: translateX(-130%); }
+  100%    { transform: translateX(240%); }
+}
+@keyframes kmaHair {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes kmaPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.5); opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kma-frame::before,
+  .kma-dk::before,
+  .cta::after,
+  .anno-dot {
+    animation: none !important;
+  }
+  .rv,
+  .rv-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .kma-fade-up > * {
+    animation: none !important;
+  }
+}

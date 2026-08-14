@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useMemo, useState } from "react"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Lightbox } from "@/components/lightbox"
+import { Lightbox } from "@/components/sections/lightbox"
 import galleryData from "@/content/gallery.json"
+import { useLanguage } from "@/lib/i18n/context"
 
 type GalleryImage = {
   src: string
@@ -14,77 +14,107 @@ type GalleryImage = {
   caption: string
 }
 
-const categories = ["All", "Mandirs", "Murtis","Jain","Tulsi Stand","Articles", ]
+const images = galleryData.images as GalleryImage[]
+const INITIAL_COUNT = 12
 
 export function Gallery() {
-  const [selectedCategory, setSelectedCategory] = useState("All")
+  const { d, tc, tcat } = useLanguage()
+  const categories = useMemo(() => {
+    const seen = new Map<string, number>()
+    images.forEach((img) => seen.set(img.category, (seen.get(img.category) ?? 0) + 1))
+    return Array.from(seen.entries())
+  }, [])
+
+  const [filter, setFilter] = useState<string>("All")
+  const [showAll, setShowAll] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-  const [filteredImages, setFilteredImages] = useState<GalleryImage[]>(galleryData.images)
 
-  useEffect(() => {
-    if (selectedCategory === "All") {
-      setFilteredImages(galleryData.images)
-    } else {
-      setFilteredImages(galleryData.images.filter((img) => img.category === selectedCategory))
-    }
-  }, [selectedCategory])
+  const filtered = filter === "All" ? images : images.filter((img) => img.category === filter)
+  const visible = showAll ? filtered : filtered.slice(0, INITIAL_COUNT)
+  const remaining = filtered.length - visible.length
 
-  const openLightbox = (index: number) => {
-    setLightboxIndex(index)
-  }
-
-  const closeLightbox = () => {
-    setLightboxIndex(null)
+  const selectFilter = (next: string) => {
+    setFilter(next)
+    setShowAll(false)
   }
 
   return (
     <>
-      {/* Category Filters */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
-        {categories.map((category) => (
-          <Button
-            key={category}
-            variant={selectedCategory === category ? "default" : "outline"}
-            size="sm"
-            onClick={() => setSelectedCategory(category)}
-            className="transition-all duration-200"
+      {/* Filter rail */}
+      <div className="sticky top-[var(--kma-stack-h)] z-30 -mx-5 border-b border-[rgba(36,31,26,0.12)] bg-[var(--kma-ivory)] px-5 pb-3.5 pt-5 lg:static lg:mx-0 lg:border-[rgba(36,31,26,0.14)] lg:bg-transparent lg:px-0 lg:pb-[22px] lg:pt-0">
+        <div className="flex gap-2 overflow-x-auto lg:gap-[9px]">
+          <button
+            onClick={() => selectFilter("All")}
+            className={`press flex-none rounded-full px-5 py-2.5 text-[13px] font-semibold ${
+              filter === "All"
+                ? "bg-[var(--kma-ink)] text-[var(--kma-ivory)]"
+                : "border border-[rgba(36,31,26,0.2)]"
+            }`}
           >
-            {category}
-          </Button>
-        ))}
+            {d.ui.common.all}{" "}
+            <span className={filter === "All" ? "opacity-50" : "text-[var(--kma-muted-2)]"}>{images.length}</span>
+          </button>
+          {categories.map(([category, n]) => (
+            <button
+              key={category}
+              onClick={() => selectFilter(category)}
+              className={`press flex-none rounded-full px-5 py-2.5 text-[13px] font-semibold ${
+                filter === category
+                  ? "bg-[var(--kma-ink)] text-[var(--kma-ivory)]"
+                  : "border border-[rgba(36,31,26,0.2)]"
+              }`}
+            >
+              {tcat(category)}{" "}
+              <span className={filter === category ? "opacity-50" : "text-[var(--kma-muted-2)]"}>{n}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Masonry Grid */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
-        {filteredImages.map((image, index) => (
-          <div
-            key={`${image.src}-${index}`}
-            className="break-inside-avoid cursor-pointer group"
-            onClick={() => openLightbox(index)}
-          >
-            <div className="relative overflow-hidden rounded-lg bg-muted">
+      {/* Masonry */}
+      <div
+        key={`${filter}-${showAll}`}
+        className="kma-fade-up columns-2 gap-2.5 pt-5 lg:columns-3 lg:gap-5 lg:pt-9"
+      >
+        {visible.map((img, i) => (
+          <figure key={img.src} className="mb-2.5 break-inside-avoid lg:mb-5">
+            <button
+              onClick={() => setLightboxIndex(i)}
+              className="tile block w-full overflow-hidden rounded-[14px] bg-[var(--kma-surface)] lg:rounded-2xl"
+              aria-label={d.ui.gallery.viewImage(tc(img.caption))}
+            >
               <Image
-                src={image.src || "/placeholder.svg"}
-                alt={image.caption}
-                width={image.w}
-                height={image.h}
-                className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                src={img.src}
+                alt={tc(img.caption)}
+                width={img.w}
+                height={img.h}
+                className="h-auto w-full"
+                loading={i < 6 ? "eager" : "lazy"}
               />
-              {/* <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" /> */}
-            </div>
-          </div>
+            </button>
+            <figcaption className="mt-2 hidden text-[13px] leading-normal text-[var(--kma-muted)] lg:mt-2.5 lg:block">
+              {tc(img.caption)}
+            </figcaption>
+          </figure>
         ))}
       </div>
 
-      {/* Lightbox */}
+      {remaining > 0 && (
+        <div className="flex justify-center pt-5">
+          <button
+            onClick={() => setShowAll(true)}
+            className="press rounded-full border border-[rgba(36,31,26,0.22)] px-8 py-3.5 text-sm font-semibold"
+          >
+            {d.ui.gallery.loadRemaining(remaining)}
+          </button>
+        </div>
+      )}
+
       {lightboxIndex !== null && (
         <Lightbox
-          images={filteredImages}
+          images={visible}
           currentIndex={lightboxIndex}
-          onClose={closeLightbox}
+          onClose={() => setLightboxIndex(null)}
           onNavigate={setLightboxIndex}
         />
       )}

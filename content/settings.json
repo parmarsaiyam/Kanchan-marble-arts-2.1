@@ -2,27 +2,43 @@
   "brandName": "Kanchan Marble Arts",
   "tagline": "Trust, Set in Stone",
   "subhead": "Custom mandirs & murtis, crafted with care for 20+ years",
-  "phone": "+91 98765 43210",
-  "whatsapp": "+91 98765 43210",
+  "phone": "+91 9819460441",
+  "whatsapp": "+91 9819460441",
   "email": "kanchanmarblearts@gmail.com",
-  "address": "123 Marble Street, Artisan Quarter, Jaipur, Rajasthan 302001",
   "businessHours": {
-    "weekdays": "Mon - Sat: 9:00 AM - 7:00 PM",
-    "weekend": "Sunday: 10:00 AM - 5:00 PM"
+    "weekdays": "Mon - Sat: 9:00 AM - 9:00 PM",
+    "weekend": "Sunday: 9:00 AM - 9:00 PM"
   },
   "socialMedia": {
     "facebook": "https://www.facebook.com/kanchanmarblearts",
     "instagram": "https://www.instagram.com/kanchanmarblearts",
     "whatsappMessage": "Hello! I'm interested in your marble products and want to discuss my needs / नमस्ते! मुझे आपके मार्बल प्रोडक्ट्स में रुचि है और मैं अपनी ज़रूरतों पर बात करना चाहता हूँ।"
   },
-  "heroImages": ["/images/hero-mandir.jpg", "/images/hero-murti.jpg", "/images/hero-workshop.jpg"],
+  "heroImages": [
+    "/images/hero-mandir.jpg",
+    "/images/hero-murti.jpg",
+    "/images/hero-workshop.jpg"
+  ],
   "trustStats": {
     "yearsExperience": "20+",
-    "ordersCompleted": "50,000+",
-    "deliverySuccess": "99%"
+    "ordersCompleted": "100,000+",
+    "deliverySuccess": "100%"
   },
   "theme": {
     "darkMode": false,
     "heroLayout": "centered"
+  },
+  "announcement": {
+    "enabled": true,
+    "text": "Ganesh Chaturthi bookings are open — murtis ordered before 5 September are delivered and fitted free.",
+    "mobileText": "Ganesh Chaturthi bookings open — free fitting till 5 Sept.",
+    "linkText": "See details",
+    "href": "/contact",
+    "text_hi": "गणेश चतुर्थी की बुकिंग शुरू — 5 सितंबर से पहले ऑर्डर की गई मूर्तियों की डिलीवरी और स्थापना निःशुल्क।",
+    "mobileText_hi": "गणेश चतुर्थी बुकिंग शुरू — 5 सितंबर तक फ्री फिटिंग।",
+    "linkText_hi": "जानकारी देखें",
+    "text_gu": "ગણેશ ચતુર્થીનું બુકિંગ ખુલ્લું — 5 સપ્ટેમ્બર પહેલાં ઓર્ડર કરેલી મૂર્તિઓની ડિલિવરી અને સ્થાપના મફત.",
+    "mobileText_gu": "ગણેશ ચતુર્થી બુકિંગ ખુલ્લું — 5 સપ્ટે. સુધી ફ્રી ફિટિંગ.",
+    "linkText_gu": "વિગતો જુઓ"
   }
 }

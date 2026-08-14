@@ -1,12 +1,13 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import localFont from "next/font/local"
-import { JsonLd } from "@/components/json-ld"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { MobileCTA } from "@/components/mobile-cta"
-import { ScrollToTop } from "@/components/scroll-to-top"
-import GAListener from "@/components/ga-listener"
+import { JsonLd } from "@/components/layout/json-ld"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
+import { MobileCTA } from "@/components/layout/mobile-cta"
+import { ScrollToTop } from "@/components/layout/scroll-to-top"
+import GAListener from "@/components/layout/ga-listener"
+import { LanguageProvider } from "@/lib/i18n/context"
 
 import "./globals.css"
 import Script from "next/script"
@@ -46,15 +47,16 @@ const inter = localFont({
   display: "swap",
 })
 
-export const viewport = {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-    viewportFit: "cover",
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kanchanmarblearts.com"),
   title: "Kanchan Marble Arts | Marble Mandir & Murti Manufacturer in Mumbai",
   description:
     "Kanchan Marble Arts is a trusted marble mandir and murti manufacturer in Mumbai with 20+ years of craftsmanship. Specializing in custom marble mandirs, Jain temples, murtis, and marble articles made from Italian, Indian and Australian marble.",
@@ -151,7 +153,6 @@ export default function RootLayout({
     <html lang="en" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <JsonLd />
-        <link rel="canonical" href="https://kanchanmarblearts.com" />
         <meta name="google-site-verification" content="RiZ6RRTorHjfEMOSfhC_pHUkPQTlW4uk_6dFswGIzBg" />
         {/* GA base script - loads after interactive so it won't run in SSR */}
         <Script
@@ -168,12 +169,18 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="antialiased marble-texture">
-        <Header />
-        <main className="pt-16 animate-fade-in">{children}</main>
-        <Footer />
-        <MobileCTA />
-        <ScrollToTop />
+      <body className="antialiased">
+        {/* LanguageProvider drives every translated string on the site (EN / हिन्दी / ગુજરાતી) */}
+        <LanguageProvider>
+          {/* kma-frame carries the drifting gold-vein background behind the whole page */}
+          <div className="kma-frame min-h-screen">
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </div>
+          <MobileCTA />
+          <ScrollToTop />
+        </LanguageProvider>
         <GAListener />
       </body>
     </html>

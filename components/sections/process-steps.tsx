@@ -1,96 +1,110 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { MessageCircle, Palette, Hammer, Home } from "lucide-react"
+"use client"
 
-const processSteps = [
-  {
-    step: 1,
-    title: "Consultation & Design",
-    description:
-      "We begin with understanding your vision, space requirements, and spiritual preferences. Our designers have in-depth discussions with you and create detailed sketches for your approval.",
-    icon: MessageCircle,
-    highlights: ["Free consultation", "3D visualization", "Custom sizing", "Material selection"],
+import Image from "next/image"
+import { Reveal } from "@/components/layout/reveal"
+import { useLanguage } from "@/lib/i18n/context"
+
+type StepKey = "consultation" | "planning" | "crafting" | "installation"
+
+/** Media per step. The copy itself lives in the dictionary under `process.steps`. */
+const stepMedia: Record<StepKey, { src: string; alt: string; aspect: string; washed?: boolean }> = {
+  consultation: {
+    src: "/images/abouttop.webp",
+    alt: "Consultation and design at the workshop",
+    aspect: "aspect-[3/2]",
+    washed: true,
   },
-  {
-    step: 2,
-    title: "Artistic Planning",
-    description:
-      "Our master craftsmen plan every detail, from marble selection to carving techniques. We source premium materials and prepare detailed work schedules.",
-    icon: Palette,
-    highlights: ["Premium marble sourcing", "Detailed blueprints", "Quality assurance", "Timeline planning"],
+  planning: {
+    src: "/images/italian.webp",
+    alt: "Marble selection and planning",
+    aspect: "aspect-square",
+    washed: true,
   },
-  {
-    step: 3,
-    title: "Precision Crafting",
-    description:
-      "Using traditional techniques passed down through generations, our artisans hand-carve each piece with meticulous attention to detail and spiritual significance.",
-    icon: Hammer,
-    highlights: ["Hand-carved details", "Traditional techniques", "Quality checkpoints", "Progress updates"],
+  crafting: {
+    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/tirthanker-1.webp",
+    alt: "Hand-carving in progress",
+    aspect: "aspect-[4/3]",
   },
-  {
-    step: 4,
-    title: "Expert Installation",
-    description:
-      "Our experienced team handles delivery and professional installation, ensuring your sacred space is perfectly positioned and ready for worship.",
-    icon: Home,
-    highlights: ["Safe delivery", "Professional installation", "Final inspection", "Care instructions"],
+  installation: {
+    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/M-7.webp",
+    alt: "Installed mandir with lighting",
+    aspect: "aspect-[4/3]",
   },
-]
+}
+
+const stepKeys: StepKey[] = ["consultation", "planning", "crafting", "installation"]
 
 export function ProcessSteps() {
-  return (
-    <div className="space-y-12">
-      {/* Process Steps */}
-      <div className="space-y-8">
-        {processSteps.map((step) => (
-          <Card key={step.step} className="hover:shadow-lg transition-shadow duration-300">
-            <CardContent className="p-8">
-              <div className="flex items-start justify-between mb-6 gap-6">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-4 mb-4">
-                    {/* Large Step Number */}
-                    <div className="w-14 h-14 bg-accent rounded-full flex items-center justify-center text-white font-bold text-2xl md:text-3xl shadow-lg flex-shrink-0">
-                      {step.step}
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-serif font-bold text-foreground">{step.title}</h3>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    {step.description}
-                  </p>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-3">Key Highlights:</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {step.highlights.map((highlight, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-muted-foreground">
-                          <span className="w-1.5 h-1.5 bg-accent rounded-full mr-2 flex-shrink-0" />
-                          {highlight}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+  const { d, tc } = useLanguage()
 
-                {/* Icon in top right corner - hide on mobile */}
-                <div className="ml-6 flex-shrink-0 hidden md:block">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
-                    <step.icon className="w-8 h-8 text-accent" />
-                  </div>
+  return (
+    <>
+      <div>
+        {stepKeys.map((key, i) => {
+          const step = d.ui.process.steps[key]
+          const media = stepMedia[key]
+          return (
+            <Reveal
+              key={key}
+              className={`grid grid-cols-1 gap-4 py-9 lg:grid-cols-[120px_1fr_1fr] lg:gap-14 lg:py-14 ${
+                i > 0 ? "border-t border-[rgba(36,31,26,0.14)]" : "lg:pt-0"
+              } ${i === 0 ? "pt-0" : ""}`}
+            >
+              <div className="font-serif text-[34px] leading-none text-[var(--kma-gold)] lg:text-[56px]">
+                {String(i + 1).padStart(2, "0")}
+              </div>
+              <div>
+                <h2 className="m-0 mb-3.5 font-serif text-[26px] font-bold leading-[1.12] lg:mb-[18px] lg:text-[34px] lg:leading-[1.1]">
+                  {step.title}
+                </h2>
+                <div className={`tile mb-4 overflow-hidden rounded-2xl bg-[var(--kma-surface)] lg:hidden ${media.aspect}`}>
+                  <Image
+                    src={media.src}
+                    alt={tc(media.alt)}
+                    width={800}
+                    height={600}
+                    className={`h-full w-full object-cover ${media.washed ? "wash" : ""}`}
+                  />
+                </div>
+                <p className="m-0 mb-[18px] text-base leading-[1.75] text-[var(--kma-body)] lg:mb-[26px] lg:text-[17px] lg:leading-[1.8]">
+                  {step.description}
+                </p>
+                <div className="flex flex-col gap-2 text-sm text-[var(--kma-muted)] lg:grid lg:grid-cols-2 lg:gap-2.5">
+                  {step.highlights.map((highlight) => (
+                    <div key={highlight} className="flex items-center gap-2.5">
+                      <span className="h-[5px] w-[5px] flex-none rounded-full bg-[var(--kma-gold)]" />
+                      {highlight}
+                    </div>
+                  ))}
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        ))}
+              <div
+                className={`tile hidden overflow-hidden rounded-[20px] bg-[var(--kma-surface)] lg:block ${media.aspect}`}
+              >
+                <Image
+                  src={media.src}
+                  alt={tc(media.alt)}
+                  width={800}
+                  height={600}
+                  className={`h-full w-full object-cover ${media.washed ? "wash" : ""}`}
+                />
+              </div>
+            </Reveal>
+          )
+        })}
       </div>
 
-      {/* Quality Assurance */}
-      <div className="bg-muted/30 rounded-lg p-8 text-center">
-        <h2 className="text-2xl font-serif font-bold text-foreground mb-4">Quality Assurance</h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Throughout every step, our quality control team ensures that each piece meets our exacting standards. We
-          believe that sacred art deserves nothing less than perfection, and we stand behind every creation with our
-          lifetime craftsmanship guarantee.
-        </p>
-      </div>
-    </div>
+      {/* Quality assurance */}
+      <Reveal className="mt-6 rounded-3xl bg-[var(--kma-surface)] p-7 lg:mt-14 lg:rounded-[28px] lg:px-[72px] lg:py-16">
+        <div className="grid grid-cols-1 items-start gap-3.5 lg:grid-cols-[280px_1fr] lg:gap-16">
+          <h2 className="m-0 font-serif text-2xl font-bold leading-[1.12] lg:text-[34px] lg:leading-[1.1]">
+            {d.ui.process.quality.title}
+          </h2>
+          <p className="m-0 text-[15px] leading-[1.75] text-[var(--kma-body)] lg:text-lg lg:leading-[1.8]">
+            {d.ui.process.quality.body}
+          </p>
+        </div>
+      </Reveal>
+    </>
   )
 }
