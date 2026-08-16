@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X, Phone, MapPin } from "lucide-react"
-import { navLinks, whatsappHref, telHref, phoneDisplay } from "@/lib/site"
+import { navLinks, whatsappHref, telHref, phoneDisplay } from "@/lib/config/site"
 import { useT } from "@/lib/i18n/context"
 import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { AnnouncementBar } from "@/components/layout/announcement-bar"
@@ -60,14 +60,14 @@ export function Header() {
         <AnnouncementBar />
         <header className="border-b border-[var(--kma-hairline)] bg-[rgba(247,244,239,0.93)] backdrop-blur-xl">
           <div className="mx-auto flex h-[66px] max-w-[1280px] items-center justify-between px-5 lg:h-[86px] lg:px-14">
-            <Link href="/" aria-label={d.ui.nav.homeAria}>
+            <Link href="/" aria-label={d.ui.nav.homeAria} className="min-w-0 shrink">
               <Image
                 src="/images/kma-logo.png"
                 alt={d.ui.nav.logoAlt}
                 width={220}
                 height={62}
                 priority
-                className="h-[46px] w-auto object-contain lg:h-[62px]"
+                className="h-[40px] w-auto max-w-[34vw] object-contain object-left sm:h-[46px] sm:max-w-none lg:h-[62px]"
               />
             </Link>
 
@@ -99,16 +99,16 @@ export function Header() {
             </div>
 
             {/* Mobile: language switcher sits right beside the hamburger */}
-            <div className="flex items-center gap-2 lg:hidden">
-              <LanguageSwitcher variant="menu" />
+            <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:hidden">
+              <LanguageSwitcher />
               <button
                 onClick={() => setMenuOpen(true)}
                 aria-label={d.ui.nav.openMenu}
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
-                className="press flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[rgba(36,31,26,0.14)]"
+                className="press flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full border border-[rgba(36,31,26,0.14)] sm:h-[42px] sm:w-[42px]"
               >
-                <Menu className="h-5 w-5" />
+                <Menu className="h-[18px] w-[18px] sm:h-5 sm:w-5" />
               </button>
             </div>
           </div>

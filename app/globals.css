@@ -41,6 +41,9 @@
   --kma-surface: #efe9de;
   --kma-ivory: #f7f4ef;
   --kma-cream: #f2ead6;
+  /* Alternating section tint. A translucent overlay, not a solid colour, so
+     the animated gold field behind the page still shows through the band. */
+  --kma-band-tint: rgba(36, 31, 26, 0.042);
   --kma-hairline: rgba(36, 31, 26, 0.14);
   --kma-whatsapp: #25d366;
   /* Height of the pinned announcement + header block. Measured at runtime by
@@ -318,7 +321,7 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   KMA premium-minimal redesign — shared type, motion and utilities
+   KMA premium-minimal redesign: shared type, motion and utilities
    ══════════════════════════════════════════════════════════════════ */
 
 .kicker {
@@ -334,7 +337,7 @@
   border: 0;
 }
 
-/* Washed photography — images sit back into the warm page */
+/* Washed photography: images sit back into the warm page */
 .wash {
   filter: saturate(0.88) contrast(0.96) brightness(1.03);
 }
@@ -371,9 +374,15 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 38%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.32), transparent);
-  animation: kmaSheen 5.4s ease-in-out infinite;
+  /* `left` was unset, so the band's origin fell wherever static flow put it.
+     Anchoring it makes the sweep start off the left edge every cycle. */
+  left: 0;
+  width: 42%;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+  /* Linear, not ease-in-out: easing across the hold made the glint decelerate
+     mid-button and read as though it had stopped halfway. */
+  animation: kmaSheen 3.6s linear infinite;
 }
 
 /* Image tiles ease under the cursor */
@@ -408,7 +417,7 @@
   animation: kmaHair 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-/* Scroll reveal — .rv gains .in via IntersectionObserver */
+/* Scroll reveal: .rv gains .in via IntersectionObserver */
 .rv {
   opacity: 0;
   transform: translateY(24px);
@@ -465,43 +474,96 @@
   to { opacity: 1; transform: none; }
 }
 
-/* Drifting gold-vein field behind the light parts of the page.
-   The layer is FIXED to the viewport, not stretched over the whole document:
-   an absolute layer on a 6000px-tall page scales its orbs to the document, so
-   the drift reads as motionless while the viewport-sized dark bands visibly
-   move — that mismatch is what made the effect look inconsistent. Fixed keeps
-   the orbs viewport-scaled, so the same motion is present on every page and at
-   every scroll position.
-   z-index -1 inside an isolated stacking context keeps it behind content
-   without forcing `position` onto children — a sticky header must stay sticky. */
-.kma-frame {
-  position: relative;
-  isolation: isolate;
-}
-.kma-frame::before {
-  content: "";
+/* ===========================================================================
+   ANIMATED BACKGROUND FIELD
+   Rendered by components/layout/background-field.tsx. Three fixed layers that
+   drift on their own and shift with the scroll position.
+
+   Intensity note: gold at high alpha over ivory turns the page yellow, so
+   these are deliberately restrained, roughly half the strength of the first
+   pass. Motion, not saturation, is what makes them read.
+   =========================================================================== */
+
+/* Full-viewport wrapper. Sits behind everything and swallows no clicks. */
+.kma-bg {
   position: fixed;
-  inset: -14vmax;
+  inset: 0;
   z-index: -1;
+  overflow: hidden;
   pointer-events: none;
-  background-repeat: no-repeat;
-  background-image:
-    radial-gradient(circle at 18% 22%, rgba(154, 123, 47, 0.2), transparent 60%),
-    radial-gradient(circle at 78% 38%, rgba(201, 171, 95, 0.19), transparent 58%),
-    radial-gradient(circle at 40% 82%, rgba(122, 138, 94, 0.14), transparent 58%),
-    radial-gradient(circle at 88% 88%, rgba(154, 123, 47, 0.12), transparent 58%);
-  background-size:
-    72vmax 68vmax,
-    58vmax 54vmax,
-    50vmax 48vmax,
-    44vmax 42vmax;
-  background-position:
-    0% 0%,
-    100% 20%,
-    20% 100%,
-    100% 100%;
+  /* Updated from JS on scroll; the fallbacks keep it sane before hydration. */
+  --kma-sy: 0;
+  --kma-sp: 0;
+}
+
+/* Parallax carrier: one per layer, each with its own --depth. */
+.kma-bg-scroll {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(0, calc(var(--kma-sy) * var(--depth, 0.05) * -1px), 0);
   will-change: transform;
-  animation: kmaOrbs 42s ease-in-out infinite;
+}
+
+/* Shared geometry for the three painted layers. The generous negative inset
+   gives each one room to drift without exposing an edge. */
+.kma-bg-a,
+.kma-bg-b,
+.kma-bg-c {
+  position: absolute;
+  inset: -20vmax;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+/* A: wide, slow pools */
+.kma-bg-a {
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(154, 123, 47, 0.26), transparent 64%),
+    radial-gradient(circle at 82% 36%, rgba(184, 148, 62, 0.22), transparent 62%),
+    radial-gradient(circle at 38% 84%, rgba(122, 138, 94, 0.16), transparent 62%);
+  background-size: 82vmax 76vmax, 64vmax 60vmax, 56vmax 54vmax;
+  background-position: 0% 0%, 100% 18%, 16% 100%;
+  animation: kmaOrbs 26s ease-in-out infinite;
+}
+
+/* B: smaller highlights, drifting against A */
+.kma-bg-b {
+  background-image:
+    radial-gradient(circle at 70% 12%, rgba(184, 148, 62, 0.2), transparent 58%),
+    radial-gradient(circle at 12% 62%, rgba(154, 123, 47, 0.17), transparent 58%),
+    radial-gradient(circle at 92% 86%, rgba(201, 171, 95, 0.15), transparent 58%);
+  background-size: 46vmax 44vmax, 40vmax 38vmax, 36vmax 34vmax;
+  background-position: 64% 0%, 0% 58%, 100% 100%;
+  animation: kmaOrbsAlt 19s ease-in-out infinite;
+}
+
+/* C: directional veining. Soft banding reads on a light ground where a
+   diffuse blob does not, which is what makes the motion visible at all. */
+.kma-bg-c {
+  opacity: 0.6;
+  background-image: repeating-linear-gradient(
+    116deg,
+    rgba(154, 123, 47, 0) 0px,
+    rgba(154, 123, 47, 0.07) 70px,
+    rgba(184, 148, 62, 0.09) 110px,
+    rgba(122, 138, 94, 0.055) 150px,
+    rgba(154, 123, 47, 0) 230px,
+    rgba(154, 123, 47, 0) 400px
+  );
+  animation: kmaVeins 21s ease-in-out infinite;
+}
+
+/* Eases out and back rather than looping, so the banding never seams. */
+@keyframes kmaVeins {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate3d(-9vmax, 6vmax, 0) rotate(2deg) scale(1.08);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
 }
 
 /* Dark bands carry their own drifting layer, scaled to the band itself */
@@ -513,21 +575,94 @@
 .kma-dk::before {
   content: "";
   position: absolute;
-  inset: -14vmax;
+  inset: -16vmax;
+  z-index: -2;
+  pointer-events: none;
+  will-change: transform;
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(circle at 16% 26%, rgba(201, 171, 95, 0.2), transparent 62%),
+    radial-gradient(circle at 84% 70%, rgba(201, 171, 95, 0.14), transparent 62%);
+  background-size:
+    76vmax 66vmax,
+    58vmax 52vmax;
+  background-position:
+    0% 0%,
+    100% 100%;
+  animation: kmaOrbs 19s ease-in-out infinite;
+}
+.kma-dk::after {
+  content: "";
+  position: absolute;
+  inset: -16vmax;
   z-index: -1;
   pointer-events: none;
   will-change: transform;
   background-repeat: no-repeat;
   background-image:
-    radial-gradient(circle at 16% 26%, rgba(201, 171, 95, 0.22), transparent 62%),
-    radial-gradient(circle at 82% 68%, rgba(201, 171, 95, 0.15), transparent 62%);
+    radial-gradient(circle at 74% 18%, rgba(201, 171, 95, 0.12), transparent 56%),
+    radial-gradient(circle at 22% 88%, rgba(154, 123, 47, 0.1), transparent 56%);
   background-size:
-    70vmax 60vmax,
-    54vmax 48vmax;
+    44vmax 40vmax,
+    38vmax 36vmax;
   background-position:
-    0% 0%,
-    100% 100%;
-  animation: kmaOrbsDark 38s ease-in-out infinite;
+    68% 0%,
+    10% 100%;
+  animation: kmaOrbsAlt 14s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   SECTION BANDS
+   Alternating sections carry a faint tint so the eye can tell where one ends
+   and the next begins. About a 4% value step, visible as a change of surface,
+   not as a coloured block.
+
+   Apply to a FULL-WIDTH element and keep the max-width container inside it,
+   otherwise the tint stops at the content edge instead of spanning the screen.
+   --------------------------------------------------------------------------- */
+.kma-band {
+  position: relative;
+  background: var(--kma-band-tint);
+  border-top: 1px solid rgba(36, 31, 26, 0.06);
+  border-bottom: 1px solid rgba(36, 31, 26, 0.06);
+}
+
+/* Closing call-to-action. Light rather than dark: it sits directly above the
+   near-black footer, and two dark blocks in a row read as one long slab. */
+.kma-cta-band {
+  position: relative;
+  background: rgba(36, 31, 26, 0.055);
+  border-top: 1px solid rgba(154, 123, 47, 0.35);
+  border-bottom: 1px solid rgba(36, 31, 26, 0.08);
+}
+
+/* Hairline seams where one band meets the next */
+.kma-seam-top {
+  border-top: 1px solid rgba(36, 31, 26, 0.09);
+}
+.kma-seam-bottom {
+  border-bottom: 1px solid rgba(36, 31, 26, 0.09);
+}
+
+/* Gentle push-in on whichever carousel slide is highlighted. The image is
+   clipped by its frame, so this zooms the photo without resizing the card. */
+.kma-zoom {
+  animation: kmaKenBurns 6s ease-out forwards;
+  transform-origin: 50% 45%;
+}
+
+/* FAQ accordion using native <details>, so answers stay in the HTML when closed */
+.kma-faq > summary::-webkit-details-marker {
+  display: none;
+}
+.kma-faq > summary::marker {
+  content: "";
+}
+.kma-faq > summary:hover h3 {
+  color: var(--kma-gold-deep);
+}
+.kma-faq[open] > p {
+  animation: kmaFadeUp 0.4s cubic-bezier(0.16, 0.84, 0.3, 1) both;
 }
 
 /* Announcement ribbon */
@@ -557,20 +692,28 @@
    on every page, rather than depending on how tall the document happens to be. */
 @keyframes kmaOrbs {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
-  25%  { transform: translate3d(3.5vmax, -2.5vmax, 0) scale(1.06); }
-  50%  { transform: translate3d(-2vmax, -4.5vmax, 0) scale(1.1); }
-  75%  { transform: translate3d(-4vmax, 2vmax, 0) scale(1.05); }
+  25%  { transform: translate3d(8vmax, -6vmax, 0) scale(1.14); }
+  50%  { transform: translate3d(-5vmax, -10vmax, 0) scale(1.22); }
+  75%  { transform: translate3d(-9vmax, 5vmax, 0) scale(1.12); }
   100% { transform: translate3d(0, 0, 0) scale(1); }
 }
-@keyframes kmaOrbsDark {
-  0%   { transform: translate3d(0, 0, 0) scale(1); }
-  33%  { transform: translate3d(3vmax, -2vmax, 0) scale(1.07); }
-  66%  { transform: translate3d(-2.5vmax, 1.5vmax, 0) scale(1.04); }
-  100% { transform: translate3d(0, 0, 0) scale(1); }
+@keyframes kmaOrbsAlt {
+  0%   { transform: translate3d(0, 0, 0) scale(1.08); }
+  30%  { transform: translate3d(-9vmax, 7vmax, 0) scale(1); }
+  60%  { transform: translate3d(6vmax, 10vmax, 0) scale(1.2); }
+  100% { transform: translate3d(0, 0, 0) scale(1.08); }
+}
+
+/* Slow zoom on the highlighted carousel slide */
+@keyframes kmaKenBurns {
+  0%   { transform: scale(1.005); }
+  100% { transform: scale(1.1); }
 }
 @keyframes kmaSheen {
-  0%, 45% { transform: translateX(-130%); }
-  100%    { transform: translateX(240%); }
+  0%       { transform: translateX(-140%); }
+  38%      { transform: translateX(260%); }
+  /* Rests off-screen for the rest of the cycle, then glints again. */
+  100%     { transform: translateX(260%); }
 }
 @keyframes kmaHair {
   from { transform: scaleX(0); }
@@ -582,11 +725,19 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kma-frame::before,
+  .kma-bg-a,
+  .kma-bg-b,
+  .kma-bg-c,
   .kma-dk::before,
+  .kma-dk::after,
+  .kma-zoom,
   .cta::after,
   .anno-dot {
     animation: none !important;
+  }
+  /* No parallax either. The layers stay exactly where they are. */
+  .kma-bg-scroll {
+    transform: none !important;
   }
   .rv,
   .rv-stagger > * {

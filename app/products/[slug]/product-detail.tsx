@@ -3,17 +3,26 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Check, Phone } from "lucide-react"
-import { getProduct, relatedProducts } from "@/lib/products"
-import { ProductGallery } from "@/components/sections/product-gallery"
+import { getProduct, relatedProducts } from "@/lib/content/products"
+import { ProductGallery } from "@/components/catalog/product-gallery"
 import { Reveal } from "@/components/layout/reveal"
-import { whatsappHref, telHref } from "@/lib/site"
+import { whatsappHref, telHref } from "@/lib/config/site"
+import { useEffect } from "react"
 import { useLanguage } from "@/lib/i18n/context"
+import { trackCall, trackProductView, trackWhatsApp } from "@/lib/analytics"
 
 const detailStepKeys = ["consult", "design", "craft", "fit"] as const
 
 export function ProductDetail({ slug }: { slug: string }) {
   const { d, tf, tcat, tstone, tprice } = useLanguage()
   const product = getProduct(slug)
+
+  // Records which pieces get looked at. Runs before the early return guard
+  // below so the hook order stays stable across renders.
+  useEffect(() => {
+    if (product) trackProductView(product.slug, product.category)
+  }, [product])
+
   if (!product) return null
 
   const related = relatedProducts(product)
@@ -94,6 +103,7 @@ export function ProductDetail({ slug }: { slug: string }) {
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsApp("product_detail")}
               className="cta press rounded-full bg-[var(--kma-gold)] py-4 text-center text-[15px] font-semibold text-[var(--kma-ivory)]"
             >
               {d.ui.common.enquireAboutPiece}
@@ -196,6 +206,7 @@ export function ProductDetail({ slug }: { slug: string }) {
           </a>
           <a
             href={telHref}
+            onClick={() => trackCall("product_detail")}
             aria-label={d.ui.common.callAria}
             className="press flex h-[52px] w-[54px] items-center justify-center rounded-full border border-[rgba(36,31,26,0.2)]"
           >

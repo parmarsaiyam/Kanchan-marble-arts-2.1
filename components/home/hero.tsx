@@ -1,10 +1,10 @@
 "use client"
 
-import Link from "next/link"
 import { MapPin, Phone } from "lucide-react"
-import { whatsappHref, phoneDisplay, telHref } from "@/lib/site"
-import { HeroCoverflow, HeroMobileCarousel } from "@/components/sections/hero-carousel"
+import { whatsappHref, phoneDisplay, telHref, mapsUrl } from "@/lib/config/site"
+import { HeroCoverflow, HeroMobileCarousel } from "@/components/home/hero-carousel"
 import { useT } from "@/lib/i18n/context"
+import { trackDirections, trackWhatsApp } from "@/lib/analytics"
 
 function Kicker() {
   const d = useT()
@@ -35,16 +35,23 @@ function Ctas() {
   const d = useT()
   return (
     <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-      <Link
-        href="/contact"
-        className="cta press shrink-0 whitespace-nowrap rounded-full bg-[var(--kma-gold)] px-[30px] py-[15px] text-center text-sm font-semibold text-[var(--kma-ivory)] max-lg:w-full max-lg:px-4 max-lg:py-4 max-lg:text-[15px]"
+      {/* Location rather than an enquiry CTA, because the WhatsApp button beside it
+          already covers "get in touch". */}
+      <a
+        href={mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => trackDirections("hero")}
+        className="cta press inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[var(--kma-gold)] px-[30px] py-[15px] text-center text-sm font-semibold text-[var(--kma-ivory)] max-lg:w-full max-lg:px-4 max-lg:py-4 max-lg:text-[15px]"
       >
-        {d.ui.common.requestQuote}
-      </Link>
+        <MapPin className="h-4 w-4" strokeWidth={2} />
+        {d.ui.common.getDirections}
+      </a>
       <a
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackWhatsApp("hero")}
         className="press shrink-0 whitespace-nowrap rounded-full border border-[rgba(36,31,26,0.22)] px-[30px] py-[15px] text-center text-sm font-semibold max-lg:w-full max-lg:px-4 max-lg:py-4 max-lg:text-[15px]"
       >
         {d.ui.common.whatsappUs}

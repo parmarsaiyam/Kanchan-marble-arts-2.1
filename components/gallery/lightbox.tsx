@@ -5,7 +5,7 @@ import type React from "react"
 import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
-import { whatsappHref } from "@/lib/site"
+import { whatsappHref } from "@/lib/config/site"
 import { useLanguage } from "@/lib/i18n/context"
 
 type LightboxImage = {

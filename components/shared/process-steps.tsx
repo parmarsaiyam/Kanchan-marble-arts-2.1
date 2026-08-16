@@ -23,12 +23,12 @@ const stepMedia: Record<StepKey, { src: string; alt: string; aspect: string; was
   crafting: {
     src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/tirthanker-1.webp",
     alt: "Hand-carving in progress",
-    aspect: "aspect-[4/3]",
+    aspect: "aspect-[3/4]",
   },
   installation: {
     src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/M-7.webp",
     alt: "Installed mandir with lighting",
-    aspect: "aspect-[4/3]",
+    aspect: "aspect-[3/4]",
   },
 }
 

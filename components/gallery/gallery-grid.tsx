@@ -1,10 +1,11 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import Image from "next/image"
-import { Lightbox } from "@/components/sections/lightbox"
+import { Lightbox } from "@/components/gallery/lightbox"
 import galleryData from "@/content/gallery.json"
 import { useLanguage } from "@/lib/i18n/context"
+import { trackFilter, trackGalleryImage } from "@/lib/analytics"
 
 type GalleryImage = {
   src: string
@@ -15,7 +16,10 @@ type GalleryImage = {
 }
 
 const images = galleryData.images as GalleryImage[]
-const INITIAL_COUNT = 12
+
+/** How many thumbnails render immediately, and how many more each scroll adds. */
+const FIRST_BATCH = 12
+const BATCH_SIZE = 9
 
 export function Gallery() {
   const { d, tc, tcat } = useLanguage()
@@ -26,17 +30,40 @@ export function Gallery() {
   }, [])
 
   const [filter, setFilter] = useState<string>("All")
-  const [showAll, setShowAll] = useState(false)
+  const [shown, setShown] = useState(FIRST_BATCH)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const sentinelRef = useRef<HTMLDivElement>(null)
 
   const filtered = filter === "All" ? images : images.filter((img) => img.category === filter)
-  const visible = showAll ? filtered : filtered.slice(0, INITIAL_COUNT)
-  const remaining = filtered.length - visible.length
+  const visible = filtered.slice(0, shown)
+  const hasMore = shown < filtered.length
 
   const selectFilter = (next: string) => {
     setFilter(next)
-    setShowAll(false)
+    trackFilter("gallery", next)
+    setShown(FIRST_BATCH)
   }
+
+  /**
+   * Infinite scroll. A sentinel sits below the grid; when it comes near the
+   * viewport we reveal the next batch. `rootMargin` starts the load before the
+   * sentinel is actually visible, so images are usually decoded by the time
+   * they scroll into view and the grid never appears to stall.
+   */
+  useEffect(() => {
+    const node = sentinelRef.current
+    if (!node || !hasMore) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShown((n) => Math.min(n + BATCH_SIZE, filtered.length))
+        }
+      },
+      { rootMargin: "600px 0px" },
+    )
+    io.observe(node)
+    return () => io.disconnect()
+  }, [hasMore, filtered.length])
 
   return (
     <>
@@ -73,13 +100,16 @@ export function Gallery() {
 
       {/* Masonry */}
       <div
-        key={`${filter}-${showAll}`}
+        key={filter}
         className="kma-fade-up columns-2 gap-2.5 pt-5 lg:columns-3 lg:gap-5 lg:pt-9"
       >
         {visible.map((img, i) => (
           <figure key={img.src} className="mb-2.5 break-inside-avoid lg:mb-5">
             <button
-              onClick={() => setLightboxIndex(i)}
+              onClick={() => {
+                setLightboxIndex(i)
+                trackGalleryImage(img.caption)
+              }}
               className="tile block w-full overflow-hidden rounded-[14px] bg-[var(--kma-surface)] lg:rounded-2xl"
               aria-label={d.ui.gallery.viewImage(tc(img.caption))}
             >
@@ -89,7 +119,8 @@ export function Gallery() {
                 width={img.w}
                 height={img.h}
                 className="h-auto w-full"
-                loading={i < 6 ? "eager" : "lazy"}
+                loading={i < 4 ? "eager" : "lazy"}
+                decoding="async"
               />
             </button>
             <figcaption className="mt-2 hidden text-[13px] leading-normal text-[var(--kma-muted)] lg:mt-2.5 lg:block">
@@ -99,16 +130,12 @@ export function Gallery() {
         ))}
       </div>
 
-      {remaining > 0 && (
-        <div className="flex justify-center pt-5">
-          <button
-            onClick={() => setShowAll(true)}
-            className="press rounded-full border border-[rgba(36,31,26,0.22)] px-8 py-3.5 text-sm font-semibold"
-          >
-            {d.ui.gallery.loadRemaining(remaining)}
-          </button>
-        </div>
-      )}
+      {/* Watched by the observer above; also a quiet loading hint. */}
+      <div ref={sentinelRef} className="flex justify-center py-8" aria-hidden>
+        {hasMore && (
+          <span className="h-6 w-6 animate-spin rounded-full border-2 border-[rgba(36,31,26,0.18)] border-t-[var(--kma-gold)]" />
+        )}
+      </div>
 
       {lightboxIndex !== null && (
         <Lightbox

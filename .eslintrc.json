@@ -1,7 +1,4 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
-  "rules": {
-    "@next/next/no-img-element": "off",
-    "react/no-unescaped-entities": "off"
-  }
+  "extends": ["next/core-web-vitals"],
+  "ignorePatterns": [".next/**", "node_modules/**"]
 }

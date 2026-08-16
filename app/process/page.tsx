@@ -1,16 +1,30 @@
 import type { Metadata } from "next"
 import { ProcessContent } from "./process-content"
+import { BreadcrumbJsonLd } from "@/components/layout/breadcrumb-json-ld"
 
 export const metadata: Metadata = {
-  title: "Our Process - Kanchan Marble Arts | From Design to Installation",
+  title: "How We Make a Customized Marble Mandir | Design to Installation",
   description:
-    "Discover our meticulous 4-step process for creating custom marble mandirs and murtis. From consultation to installation, we ensure perfection at every stage.",
+    "The four steps behind every handmade marble mandir we build: consultation and measurement, approved design sketches, hand-carving by our artisans, then delivery and fitting. Most customized marble mandirs take four to eight weeks.",
+  alternates: { canonical: "/process" },
+  keywords: [
+    "customized Jain mandir",
+    "custom marble mandir Mumbai",
+    "handmade marble mandir",
+    "marble temple manufacturers in Mumbai",
+  ],
   openGraph: {
-    title: "Our Process - Kanchan Marble Arts",
-    description: "Discover our meticulous process for creating custom marble mandirs and murtis.",
+    title: "How We Make a Customized Marble Mandir | Kanchan Marble Arts",
+    description: "Consultation, approved sketches, hand-carving, then delivery and fitting, usually four to eight weeks.",
+    url: "https://kanchanmarblearts.com/process",
   },
 }
 
 export default function ProcessPage() {
-  return <ProcessContent />
+  return (
+    <>
+      <BreadcrumbJsonLd name="Craft" path="/process" />
+      <ProcessContent />
+    </>
+  )
 }

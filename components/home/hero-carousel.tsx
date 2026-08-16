@@ -40,7 +40,7 @@ function ArrowIcon({ dir }: { dir: "prev" | "next" }) {
   )
 }
 
-/** Desktop: stacked coverflow — the focused card centred, neighbours tilted behind it. */
+/** Desktop: stacked coverflow, with the focused card centred and neighbours tilted behind it. */
 export function HeroCoverflow() {
   const { d, tc } = useLanguage()
   const [index, setIndex] = useState(1)
@@ -102,15 +102,21 @@ export function HeroCoverflow() {
               onClick={() => pos !== 0 && setIndex(i)}
               aria-hidden={pos !== 0}
             >
+              {/* Card stays overflow-visible so the arrows can sit outside it… */}
               <div className="relative h-full w-full overflow-visible rounded-2xl bg-white shadow-[0_26px_60px_rgba(36,31,26,0.28)]">
-                <Image
-                  src={slide.src}
-                  alt={tc(slide.alt)}
-                  fill
-                  className="wash rounded-2xl object-cover"
-                  sizes="(max-width: 1024px) 92vw, 480px"
-                  priority={i === 1}
-                />
+                {/* …while the photo is clipped to its own fixed frame, so the zoom
+                    happens inside the card instead of enlarging the card itself. */}
+                <div className="absolute inset-0 overflow-hidden rounded-2xl">
+                  <Image
+                    key={`${slide.src}-${pos === 0 ? index : "off"}`}
+                    src={slide.src}
+                    alt={tc(slide.alt)}
+                    fill
+                    className={`wash object-cover ${pos === 0 ? "kma-zoom" : ""}`}
+                    sizes="(max-width: 1024px) 92vw, 480px"
+                    priority={i === 1}
+                  />
+                </div>
                 <div className="pointer-events-none absolute inset-0 rounded-2xl shadow-[inset_0_0_0_1px_rgba(247,244,239,0.3)]" />
 
                 {pos === 0 && (
@@ -204,10 +210,11 @@ export function HeroMobileCarousel() {
               aria-hidden={offset !== 0}
             >
               <Image
+                key={`${slide.src}-${offset === 0 ? index : "off"}`}
                 src={slide.src}
                 alt={tc(slide.alt)}
                 fill
-                className="wash object-cover"
+                className={`wash object-cover ${offset === 0 ? "kma-zoom" : ""}`}
                 sizes="100vw"
                 priority={i === 0}
               />

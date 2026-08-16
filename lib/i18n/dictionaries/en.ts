@@ -4,9 +4,9 @@
  * This object defines the shape every other locale must satisfy (see `Dictionary`
  * in ../types). Two kinds of entries live here:
  *
- *  - `ui`      — structural strings, checked at compile time so a missing key in
+ *  - `ui`      : structural strings, checked at compile time so a missing key in
  *                Hindi or Gujarati is a type error, not a blank spot on the page.
- *  - `content` — lookup maps keyed by the English source string (image alt text,
+ *  - `content`: lookup maps keyed by the English source string (image alt text,
  *                gallery captions, product features…). These fall back to the
  *                English key when a translation is missing, so CMS-authored
  *                content added later still renders.
@@ -20,10 +20,10 @@ export const en = {
       process: "Craft",
       about: "Studio",
       contact: "Visit",
-      enquire: "Enquire",
+      enquire: "Contact us",
       openMenu: "Open menu",
       closeMenu: "Close menu",
-      homeAria: "Kanchan Marble Arts — home",
+      homeAria: "Kanchan Marble Arts home page",
       logoAlt: "Kanchan Marble Arts",
       chooseLanguage: "Choose language",
     },
@@ -33,6 +33,7 @@ export const en = {
       call: (phone: string) => `Call ${phone}`,
       callAria: "Call Kanchan Marble Arts",
       whatsappAria: "Chat on WhatsApp",
+      getDirections: "Get directions",
       requestQuote: "Request a quote",
       quickView: "Quick view",
       quickViewOf: (title: string) => `Quick view ${title}`,
@@ -60,7 +61,7 @@ export const en = {
       headingHighlight: "marble",
       headingAfter: ".",
       subhead:
-        "Custom mandirs and murtis crafted for your home, delivered and fitted with care. Each piece tells a story of devotion, artistry, and timeless beauty.",
+        "A custom marble mandir for your home in Mumbai, hand-carved to your measurements and fitted by our own team. Each piece tells a story of devotion, artistry and timeless beauty.",
       statYears: "Years",
       statOrders: "Orders",
       statDelivery: "Delivery & fitting",
@@ -76,10 +77,16 @@ export const en = {
         title: "Four things we make, and have made for two decades.",
         link: "All collections",
         items: {
-          mandirs: { title: "Mandirs", description: "Sacred temples crafted with devotion and precision." },
-          murtis: { title: "Murtis", description: "Divine sculptures bringing spirituality to life." },
-          articles: { title: "Articles", description: "Decorative pieces for homes and sacred spaces." },
-          jain: { title: "Jain designs", description: "Specialised creations for Jain traditions." },
+          mandirs: {
+            title: "Mandirs",
+            description: "Premium marble pooja mandirs, from a small home shrine to a full family temple.",
+          },
+          murtis: { title: "Murtis", description: "Hand-carved marble murtis of any deity, in the size and pose you choose." },
+          articles: { title: "Articles", description: "Tulsi stands, jaalis and pillars for homes and sacred spaces." },
+          jain: {
+            title: "Jain designs",
+            description: "White marble Jain mandirs with Ashtamangala, 14 Swapna and Siddhachakra carving.",
+          },
         },
       },
       workshop: {
@@ -88,7 +95,8 @@ export const en = {
         body1:
           "Founded in 2002, Kanchan Marble Arts began as a family dream to preserve and celebrate the ancient art of marble craftsmanship. What started as a small workshop has grown into a trusted name in premium marble work across India.",
         body2:
-          "Our journey is built on three fundamental pillars: unwavering trust, uncompromising quality, and a legacy that spans generations.",
+          "Every handmade marble mandir still leaves this workshop the way it did in 2002: cut, carved and finished by hand. Trust, quality and a legacy that spans generations are the three pillars the work rests on.",
+        link: "Read our story",
         stones: {
           australian: "Pure white, durable",
           indian: "Makrana & Rajasthani",
@@ -102,6 +110,7 @@ export const en = {
       steps: {
         kicker: "From vision to installation",
         title: "Four steps, unchanged since 2002.",
+        link: "See the full craft process",
         items: {
           consult: {
             title: "Consult",
@@ -121,7 +130,7 @@ export const en = {
         body1:
           "Every design is shaped with deep respect for tradition, keeping alive the timeless beauty of Jain architecture. We know the spiritual value these works hold, which is why each piece is crafted with care, balance, and purity of detail.",
         body2:
-          "From grand temple structures to serene corners for personal prayer, our Jain collection connects people to this sacred heritage.",
+          "From a full derasar to a Jain marble temple for home, our Jain work carries Ashtamangala, 14 Swapna and Siddhachakra detail carved into the stone itself.",
         cta: "Explore Jain designs",
       },
       mosaic: {
@@ -132,7 +141,7 @@ export const en = {
       contact: {
         title: "Tell us what you have in mind.",
         body:
-          "Consultation is free. Send a photo of the space, or just the measurements — we will come back with a design and a price.",
+          "Consultation is free. Send a photo of the space, or just the measurements, and we will come back with a design and a price.",
         visitStudio: "Visit the studio",
         open: "Open",
         hours: "Mon – Sun, 9:00 AM – 9:00 PM",
@@ -144,7 +153,7 @@ export const en = {
       kicker: "Nine pieces, made to order",
       title: "Every piece is cut for one home.",
       subhead:
-        "Sizes, carvings and stone are chosen with you. What you see here is what we have made before — a starting point, not a fixed catalogue.",
+        "Premium marble pooja mandirs, small marble mandirs for home, Jain mandirs and hand-carved murtis. Sizes, carving and stone are chosen with you, so treat this as a starting point rather than a fixed catalogue.",
       showing: (n: number) => `Showing ${n} ${n === 1 ? "piece" : "pieces"}`,
       closeQuickView: "Close quick view",
       cta: {
@@ -177,7 +186,8 @@ export const en = {
     gallery: {
       kicker: "Completed pieces, in the homes they were made for",
       title: "Photographed after fitting, not in a studio.",
-      aside: "Every image here is a completed commission. Tap any one to see it full-screen with its caption.",
+      aside:
+        "Every image here is a completed commission: marble mandirs, white marble Jain mandirs and murtis, in the homes they were made for. Tap any one to see it full-screen with its caption.",
       loadRemaining: (n: number) => `Load the remaining ${n}`,
       viewImage: (caption: string) => `View ${caption}`,
       lightboxLabel: "Image lightbox",
@@ -195,7 +205,8 @@ export const en = {
     process: {
       kicker: "Our crafting process",
       title: "Every masterpiece begins with a vision.",
-      subhead: "Our time-tested process ensures that your sacred space is crafted with precision, care, and devotion.",
+      subhead:
+        "The same four steps behind every handmade marble mandir we have built since 2002, so your sacred space is finished with precision, care and devotion.",
       steps: {
         consultation: {
           title: "Consultation & Design",
@@ -238,16 +249,16 @@ export const en = {
       kicker: "Our story",
       title: "For over two decades, crafting sacred spaces.",
       subhead:
-        "Kanchan Marble Arts has been crafting sacred spaces and artistic masterpieces, blending traditional techniques with contemporary aesthetics.",
+        "One of the family-run marble temple manufacturers in Mumbai, crafting sacred spaces and artistic masterpieces since 2002, blending traditional techniques with contemporary aesthetics.",
       legacy: {
         kicker: "Legacy of excellence",
-        period: "2002 — today",
+        period: "2002 to today",
         body1:
           "Founded in 2002, Kanchan Marble Arts began as a family dream to preserve and celebrate the ancient art of marble craftsmanship. What started as a small workshop has grown into a trusted name in premium marble work across India.",
         body2:
           "Our journey is built on three fundamental pillars: unwavering trust, uncompromising quality, and a legacy that spans generations. Every piece we create carries the weight of tradition and the promise of excellence.",
         body3:
-          "With over 50,000 satisfied customers and countless sacred spaces created, we continue to honor the divine through our craft, ensuring each creation becomes a cherished part of your spiritual journey.",
+          "With over 1,00,000 satisfied customers and countless sacred spaces created, we continue to honor the divine through our craft, ensuring each creation becomes a cherished part of your spiritual journey.",
       },
       stats: {
         years: { label: "Years of excellence", note: "Trusted craftsmanship since 2002." },
@@ -276,15 +287,97 @@ export const en = {
         body1:
           "Our Jain-inspired creations reflect not just art, but devotion. Every design is shaped with deep respect for tradition, keeping alive the timeless beauty of Jain architecture.",
         body2:
-          "We know the spiritual value these works hold, which is why each piece is crafted with care, balance, and purity of detail. For us, it is not only about creating marble work — it is about honoring faith and creating spaces of peace.",
+          "We know the spiritual value these works hold, which is why each piece is crafted with care, balance, and purity of detail. For us, it is not only about creating marble work. It is about honoring faith and creating spaces of peace.",
         body3:
           "From grand temple structures to serene corners for personal prayer, our Jain collection connects people to this sacred heritage, carrying forward a tradition that inspires hearts across the world.",
       },
       cta: {
         title: "Come and see the stone.",
         body:
-          "The workshop is open seven days a week in Kandivali East. No appointment needed — though a call ahead helps.",
+          "The workshop is open seven days a week in Kandivali East. No appointment needed, though a call ahead helps.",
         primary: "Get directions",
+      },
+      facts: {
+        kicker: "At a glance",
+        title: "Who we are, in plain answers.",
+        items: {
+          who: {
+            q: "Who are we?",
+            a: "Kanchan Marble Arts is a family-run marble temple manufacturer in Mumbai. We design, hand-carve, deliver and install marble mandirs, Jain temples and murtis. Every piece is made in our own workshop rather than bought in and resold.",
+          },
+          where: {
+            q: "Where are we located?",
+            a: "Our workshop and showroom are at Ashok Nagar, Kandivali East, Mumbai 400101, two minutes' walk from Akurli Metro station, beside the Mahanagar CNG pump. If you are looking for a marble mandir shop near Kandivali, you can walk in any day of the week.",
+          },
+          since: {
+            q: "How long have we been operating?",
+            a: "Since 2002. That is more than twenty years and over 1,00,000 completed orders. The same family has run the workshop throughout, and several of our carvers have been with us for more than a decade.",
+          },
+          products: {
+            q: "What products do we specialise in?",
+            a: "Custom marble mandirs for homes, white marble Jain mandirs and Jain temples, hand-carved murtis, and decorative marble articles such as tulsi stands, jaalis and pillars. Roughly half of what we make each year is a marble mandir for a home in Mumbai.",
+          },
+          marble: {
+            q: "What marble do we use?",
+            a: "Three stones. Australian white marble for its purity and hardness, Indian Makrana and Rajasthani marble (the same stone used in the Taj Mahal), and Italian Carrara for the finest sculptural work. You see the actual slab before it is cut.",
+          },
+          custom: {
+            q: "Do we customise?",
+            a: "Almost everything we make is customised. Size, carving, ghumat style, stone and finish are chosen with you, and we work from your room measurements. A customized Jain mandir with Ashtamangala or 14 Swapna panels is among our most frequent commissions.",
+          },
+          areas: {
+            q: "Which areas do we serve?",
+            a: "All of Mumbai and the MMR: Kandivali, Borivali, Malad, Goregaon, Andheri, Thane and Navi Mumbai, with delivery and fitting included free inside Mumbai. We also crate and ship across India, and have sent pieces to Gujarat, Rajasthan, Delhi and overseas.",
+          },
+          contact: {
+            q: "How can you contact us?",
+            a: (phone: string, email: string) =>
+              `WhatsApp or call ${phone}, email ${email}, or simply visit the workshop between 9 AM and 9 PM any day of the week. WhatsApp is fastest. Send a photo of the space and we usually reply within a few hours.`,
+          },
+        },
+      },
+    },
+
+    faq: {
+      kicker: "Common questions",
+      title: "Frequently asked questions",
+      subhead: "The things customers ask us most often, answered honestly. For anything else, just call or WhatsApp.",
+      stillDeciding: "Still deciding?",
+      seeProcess: "See how a mandir is made",
+      seeCollections: "Browse the collections",
+      items: {
+        homeMandir: {
+          q: "Do you make a marble mandir for home in Mumbai?",
+          a: "That is most of what we do. A marble mandir for home in Mumbai is our commonest commission, from a compact shrine in a flat to a full family temple in a bungalow. We measure your space, carve to fit it, then deliver and install anywhere in Mumbai at no extra charge.",
+        },
+        price: {
+          q: "What is the price of a marble mandir?",
+          a: "A small marble mandir for a home starts at around ₹25,000, and most family mandirs fall between ₹45,000 and ₹1,1,00,000. The final figure depends on size, the stone you choose and how much carving you want. Murtis start at about ₹5,000. Tell us the size of your space and we will send an exact quote.",
+        },
+        customJain: {
+          q: "Do you make customized Jain marble mandirs?",
+          a: "Yes, customized Jain mandirs are one of our specialities. We build both compact home shrines and full derasar installations in white marble, with the parikar, toran, ghumat and panelling carved to the design your family follows.",
+        },
+        bestMarble: {
+          q: "Which marble is best for a home temple?",
+          a: "For most homes we recommend Australian white marble: it is dense, bright white and resists staining from oil and kumkum. Makrana is the traditional choice and ages beautifully. Italian Carrara is best where fine sculptural detail matters more than everyday hardness.",
+        },
+        ashtamangala: {
+          q: "Do you make Jain mandirs with Ashtamangala?",
+          a: "Yes. We carve all eight Ashtamangala symbols by hand, and regularly make Jain mandirs with 14 Swapna panels, Siddhachakra and Chovisi. They are carved in relief in the stone itself rather than applied on top, so the detail lasts as long as the marble does.",
+        },
+        sizeDesign: {
+          q: "Can I customise the size and design?",
+          a: "Yes, that is simply how we work. Send the height, width and depth of your space, or a photo with rough measurements, and we will draw a design to fit it. Nothing is cut until you have approved the sketch.",
+        },
+        outsideMumbai: {
+          q: "Do you deliver outside Mumbai?",
+          a: "Yes. Delivery and fitting are included free within Mumbai. Outside the city we crate the piece and ship it anywhere in India at cost, and for larger installations we can send our own fitters to assemble it.",
+        },
+        howLong: {
+          q: "How long does a customized marble mandir take?",
+          a: "Four to eight weeks for most mandirs, from approved design to installation. Simple murtis take two to three weeks. Large Jain temple work can run longer. We give you a date in writing before starting, and send progress photographs as the carving advances.",
+        },
       },
     },
 
@@ -292,7 +385,7 @@ export const en = {
       kicker: "Get in touch",
       title: "Ready to create your sacred space?",
       subhead:
-        "Contact us for a free consultation and let's bring your vision to life with our expert craftsmanship.",
+        "A marble mandir shop near Kandivali you can simply walk into. Come by for a free consultation, or send your measurements and we will quote.",
       whatsappCard: { title: "WhatsApp us now", note: (phone: string) => `${phone} · fastest reply` },
       callCard: { title: "Call directly" },
       emailCard: { title: "Email" },
@@ -303,17 +396,18 @@ export const en = {
         hoursValue: "Mon – Sun: 9:00 AM – 9:00 PM",
         hoursNote: "Timings may vary during festive seasons. We recommend contacting us before your visit.",
         stationLabel: "Nearest station",
-        stationValue: "Akurli Metro — 2 minutes walking distance",
+        stationValue: "Akurli Metro, 2 minutes walking distance",
         directions: "Take me there",
         mapTitle: "Kanchan Marble Arts location",
       },
     },
 
     footer: {
-      blurb: "Marble mandir and murti manufacturer in Mumbai. Handcrafted since 2002.",
+      blurb: "Marble mandir and marble murti manufacturer in Mumbai. Hand-carved in Kandivali East since 2002.",
       explore: "Explore",
       contact: "Contact",
       whatsapp: "WhatsApp",
+      adminLogin: "Site login",
       rights: (year: number) => `© ${year} Kanchan Marble Arts. All rights reserved.`,
     },
 

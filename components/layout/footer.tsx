@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { navLinks, phoneDisplay, whatsappHref, telHref, email } from "@/lib/site"
+import { navLinks, phoneDisplay, whatsappHref, telHref, email } from "@/lib/config/site"
 import { useT } from "@/lib/i18n/context"
 
 export function Footer() {
@@ -50,7 +50,14 @@ export function Footer() {
       </div>
       <div className="mx-auto max-w-[1280px] px-6 pb-9 lg:px-14">
         <hr className="mb-5 mt-10 h-px border-0 bg-[rgba(247,244,239,0.14)]" />
-        <div className="text-xs opacity-60">{d.ui.footer.rights(new Date().getFullYear())}</div>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="text-xs opacity-60">{d.ui.footer.rights(new Date().getFullYear())}</div>
+          {/* Staff entrance. Deliberately plain and unlabelled-as-important;
+              robots.txt and a noindex tag keep /admin out of search results. */}
+          <Link href="/admin" rel="nofollow" className="text-xs opacity-45 hover:opacity-90">
+            {d.ui.footer.adminLogin}
+          </Link>
+        </div>
       </div>
     </footer>
   )

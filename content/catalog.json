@@ -1,0 +1,236 @@
+{
+  "stones": [
+    "Australian",
+    "Indian",
+    "Italian"
+  ],
+  "products": [
+    {
+      "slug": "premium-white-marble-mandir",
+      "title": "Premium White Marble Mandir",
+      "description": "Elegant home temple with intricate carvings and traditional design elements.",
+      "category": "Mandirs",
+      "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/m-10.webp",
+      "gallery": [
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/m-10.webp",
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/v1758472180/gallery/mandir/M-1.webp",
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/M-5.webp"
+      ],
+      "features": [
+        "Custom sizing",
+        "Hand-carved details",
+        "Premium white marble",
+        "Expert installation"
+      ],
+      "price": "Starting from ₹25,000",
+      "stones": [
+        "Australian",
+        "Indian",
+        "Italian"
+      ],
+      "status": "live",
+      "featured": true,
+      "showPrice": true
+    },
+    {
+      "slug": "lord-ganesha-marble-murti",
+      "title": "Lord Ganesha Marble Murti",
+      "description": "Hand-carved Lord Ganesha sculpture in premium Italian marble.",
+      "category": "Murtis",
+      "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/ganpati-3.webp",
+      "gallery": [
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/ganpati-3.webp",
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/ganpati-2.webp"
+      ],
+      "features": [
+        "Italian marble",
+        "Hand-carved",
+        "Multiple sizes",
+        "Custom poses available"
+      ],
+      "price": "Starting from ₹8,000",
+      "stones": [
+        "Australian",
+        "Indian",
+        "Italian"
+      ],
+      "status": "live",
+      "featured": true,
+      "showPrice": true
+    },
+    {
+      "slug": "jain-mandir",
+      "title": "Jain Mandir",
+      "description": "Elegant home temple in Premium White Marble with intricate carvings and traditional design elements.",
+      "category": "Mandirs",
+      "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/jain/j-3.webp",
+      "gallery": [
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/jain/j-3.webp",
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/jain/J-5.webp"
+      ],
+      "features": [
+        "Custom sizing",
+        "Hand-carved details",
+        "Premium white marble",
+        "Expert installation"
+      ],
+      "price": "Starting from ₹25,000",
+      "stones": [
+        "Australian",
+        "Indian",
+        "Italian"
+      ],
+      "status": "live",
+      "featured": false,
+      "showPrice": true
+    },
+    {
+      "slug": "radha-krishna-marble-murti",
+      "title": "Radha Krishna Marble Murti",
+      "description": "Beautiful sculpture in various poses and sizes.",
+      "category": "Murtis",
+      "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/Rk.webp",
+      "gallery": [
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/Rk.webp"
+      ],
+      "features": [
+        "Multiple poses",
+        "Fine detailing",
+        "Premium marble",
+        "Custom expressions"
+      ],
+      "price": "Starting from ₹10,000",
+      "stones": [
+        "Australian",
+        "Indian",
+        "Italian"
+      ],
+      "status": "live",
+      "featured": false,
+      "showPrice": true
+    },
+    {
+      "slug": "corian-mandir",
+      "title": "Corian Mandir",
+      "description": "Modern corian mandir design for contemporary homes.",
+      "category": "Mandirs",
+      "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/C-2.webp",
+      "gallery": [
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/C-2.webp",
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/M-7.webp"
+      ],
+      "features": [
+        "Custom sizing",
+        "In-depth details",
+        "Premium material",
+        "Expert installation"
+      ],
+      "price": "Starting from ₹12,000",
+      "stones": [],
+      "status": "live",
+      "featured": false,
+      "showPrice": true
+    },
+    {
+      "slug": "jain-tirthankar-sculpture",
+      "title": "Jain Tirthankar Sculpture",
+      "description": "Sacred Jain Tirthankar murti crafted with devotion and precision.",
+      "category": "Jain",
+      "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/tirthanker-2.webp",
+      "gallery": [
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/tirthanker-2.webp",
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/tirthanker-1.webp"
+      ],
+      "features": [
+        "Sacred proportions",
+        "Hand-carved",
+        "Premium marble",
+        "Custom sizing"
+      ],
+      "price": "Starting from ₹5,000",
+      "stones": [
+        "Australian",
+        "Indian",
+        "Italian"
+      ],
+      "status": "live",
+      "featured": true,
+      "showPrice": true
+    },
+    {
+      "slug": "marble-tulsi-stand",
+      "title": "Marble Tulsi Stand",
+      "description": "Traditional tulsi plant stand with intricate base design.",
+      "category": "Articles",
+      "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/TS-1.webp",
+      "gallery": [
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/TS-1.webp"
+      ],
+      "features": [
+        "Traditional design",
+        "Drainage system",
+        "Durable marble",
+        "Easy maintenance"
+      ],
+      "price": "Starting from ₹1,500",
+      "stones": [
+        "Australian",
+        "Indian",
+        "Italian"
+      ],
+      "status": "live",
+      "featured": false,
+      "showPrice": true
+    },
+    {
+      "slug": "lord-hanuman-marble-murti",
+      "title": "Lord Hanuman Marble Murti",
+      "description": "Beautiful sculpture in various poses and sizes.",
+      "category": "Murtis",
+      "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/Hanuman-1.webp",
+      "gallery": [
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/Hanuman-1.webp"
+      ],
+      "features": [
+        "Multiple poses",
+        "Fine detailing",
+        "Premium marble",
+        "Custom expressions"
+      ],
+      "price": "Starting from ₹6,000",
+      "stones": [
+        "Australian",
+        "Indian",
+        "Italian"
+      ],
+      "status": "live",
+      "featured": false,
+      "showPrice": true
+    },
+    {
+      "slug": "swastik-marble-jaali",
+      "title": "Swastik marble jaali",
+      "description": "Ornate marble pillar with traditional motifs for architectural enhancement.",
+      "category": "Articles",
+      "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/A-2.webp",
+      "gallery": [
+        "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/A-2.webp"
+      ],
+      "features": [
+        "Traditional motifs",
+        "Custom heights",
+        "Premium marble",
+        "Architectural grade"
+      ],
+      "price": "Starting from ₹2,000",
+      "stones": [
+        "Australian",
+        "Indian",
+        "Italian"
+      ],
+      "status": "live",
+      "featured": false,
+      "showPrice": true
+    }
+  ]
+}

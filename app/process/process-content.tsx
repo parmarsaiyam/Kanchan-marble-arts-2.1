@@ -1,7 +1,7 @@
 "use client"
 
-import { ProcessSteps } from "@/components/sections/process-steps"
-import { CtaBand } from "@/components/sections/cta-band"
+import { ProcessSteps } from "@/components/shared/process-steps"
+import { CtaBand } from "@/components/shared/cta-band"
 import { Reveal } from "@/components/layout/reveal"
 import { useT } from "@/lib/i18n/context"
 

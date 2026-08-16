@@ -3,18 +3,9 @@
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Phone } from "lucide-react"
-import { whatsappHref, telHref } from "@/lib/site"
+import { whatsappHref, telHref } from "@/lib/config/site"
+import { trackCall, trackWhatsApp } from "@/lib/analytics"
 import { useT } from "@/lib/i18n/context"
-
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID || ""
-
-function trackGA(action: string, label: string, extra: Record<string, unknown> = {}) {
-  if (typeof window === "undefined") return
-  const g = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
-  if (typeof g === "function") {
-    g("event", action, { event_label: label, send_to: GA_ID, ...extra })
-  }
-}
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -45,28 +36,28 @@ export function MobileCTA() {
 
   return (
     <>
-      {/* Call — mobile only, bottom left */}
+      {/* Call: mobile only, bottom left */}
       {!hideOnMobile && (
         <a
           href={telHref}
           aria-label={d.ui.common.callAria}
-          onClick={() => trackGA("cta_click", "call_phone", { platform: "mobile" })}
-          className={`press fixed bottom-5 left-4 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-[var(--kma-gold)] text-[var(--kma-ivory)] shadow-[0_10px_26px_rgba(36,31,26,0.28)] transition-all duration-500 md:hidden ${reveal}`}
+          onClick={() => trackCall("mobile_fab")}
+          className={`press fixed bottom-5 left-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--kma-gold)] text-[var(--kma-ivory)] shadow-[0_10px_26px_rgba(36,31,26,0.28)] transition-all duration-500 md:hidden ${reveal}`}
         >
           <Phone className="h-[22px] w-[22px]" />
         </a>
       )}
 
-      {/* WhatsApp — bottom right on every screen */}
+      {/* WhatsApp: bottom right on every screen */}
       <a
         href={whatsappHref}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={d.ui.common.whatsappAria}
-        onClick={() => trackGA("cta_click", "whatsapp_chat")}
+        onClick={() => trackWhatsApp("mobile_fab")}
         className={`press fixed bottom-5 right-4 z-40 ${
           hideOnMobile ? "hidden md:flex" : "flex"
-        } h-16 w-16 items-center justify-center rounded-full bg-[var(--kma-whatsapp)] text-white shadow-[0_10px_26px_rgba(36,31,26,0.28)] transition-all duration-500 md:bottom-6 md:right-6 md:h-16 md:w-16 ${reveal}`}
+        } h-14 w-14 items-center justify-center rounded-full bg-[var(--kma-whatsapp)] text-white shadow-[0_10px_26px_rgba(36,31,26,0.28)] transition-all duration-500 md:bottom-6 md:right-6 md:h-16 md:w-16 ${reveal}`}
       >
         <WhatsAppIcon className="h-[26px] w-[26px] md:h-8 md:w-8" />
       </a>

@@ -2,11 +2,13 @@
 
 import Image from "next/image"
 import { Reveal } from "@/components/layout/reveal"
-import { CtaBand } from "@/components/sections/cta-band"
-import { mapsUrl, telHref, phoneDisplay } from "@/lib/site"
+import { CtaBand } from "@/components/shared/cta-band"
+import { Faq } from "@/components/shared/faq"
+import { mapsUrl, telHref, phoneDisplay, email } from "@/lib/config/site"
 import { useLanguage } from "@/lib/i18n/context"
+import { aboutFactKeys } from "@/lib/content/faq"
 
-const statValues = ["20+", "50,000+", "100%"] as const
+const statValues = ["20+", "100,000+", "100%"] as const
 const statKeys = ["years", "orders", "delivery"] as const
 const stoneKeys = ["australian", "indian", "italian"] as const
 const stoneImages: Record<(typeof stoneKeys)[number], string> = {
@@ -14,6 +16,7 @@ const stoneImages: Record<(typeof stoneKeys)[number], string> = {
   indian: "/images/indian.webp",
   italian: "/images/italian.webp",
 }
+
 
 export function AboutContent() {
   const { d, tc } = useLanguage()
@@ -83,6 +86,37 @@ export function AboutContent() {
         </div>
       </Reveal>
 
+      {/* At a glance: the questions customers and search engines both ask */}
+      <Reveal className="kma-band mt-12 py-14 lg:mt-[88px] lg:py-20">
+        <div className="mx-auto max-w-[1280px] px-5 lg:px-14">
+        <div className="kicker mb-3 lg:mb-[18px]">{d.ui.about.facts.kicker}</div>
+        <h2 className="m-0 mb-7 max-w-[620px] font-serif text-[28px] font-bold leading-[1.1] lg:mb-12 lg:text-[42px] lg:leading-[1.06]">
+          {d.ui.about.facts.title}
+        </h2>
+        <div className="rv-stagger grid grid-cols-1 gap-x-14 gap-y-8 md:grid-cols-2 lg:gap-y-11">
+          {aboutFactKeys.map((key) => {
+            const fact = d.ui.about.facts.items[key]
+            return (
+              <div key={key}>
+                <h3 className="m-0 mb-2.5 font-serif text-xl font-bold leading-snug lg:text-[23px]">{fact.q}</h3>
+                <p className="m-0 text-[15px] leading-[1.75] text-[var(--kma-body)] lg:text-base lg:leading-[1.8]">
+                  {fact.a}
+                </p>
+              </div>
+            )
+          })}
+          <div>
+            <h3 className="m-0 mb-2.5 font-serif text-xl font-bold leading-snug lg:text-[23px]">
+              {d.ui.about.facts.items.contact.q}
+            </h3>
+            <p className="m-0 text-[15px] leading-[1.75] text-[var(--kma-body)] lg:text-base lg:leading-[1.8]">
+              {d.ui.about.facts.items.contact.a(phoneDisplay, email)}
+            </p>
+          </div>
+        </div>
+        </div>
+      </Reveal>
+
       {/* Three stones */}
       <Reveal className="pt-11 lg:pt-24">
         <div className="mx-auto max-w-[1280px] px-5 lg:px-14">
@@ -145,14 +179,16 @@ export function AboutContent() {
         </div>
       </Reveal>
 
-      <div className="-mt-16 lg:-mt-24">
-        <CtaBand
-          title={d.ui.about.cta.title}
-          body={d.ui.about.cta.body}
-          primary={{ label: d.ui.about.cta.primary, href: mapsUrl, external: true }}
-          secondary={{ label: d.ui.common.call(phoneDisplay), href: telHref, external: true }}
-        />
-      </div>
+      <Faq />
+
+      {/* CtaBand supplies its own top margin. The old negative-margin wrapper
+          existed only to butt it against the dark Jain band above. */}
+      <CtaBand
+        title={d.ui.about.cta.title}
+        body={d.ui.about.cta.body}
+        primary={{ label: d.ui.about.cta.primary, href: mapsUrl, external: true }}
+        secondary={{ label: d.ui.common.call(phoneDisplay), href: telHref, external: true }}
+      />
     </div>
   )
 }

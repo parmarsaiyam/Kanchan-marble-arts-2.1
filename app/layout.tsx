@@ -8,6 +8,7 @@ import { MobileCTA } from "@/components/layout/mobile-cta"
 import { ScrollToTop } from "@/components/layout/scroll-to-top"
 import GAListener from "@/components/layout/ga-listener"
 import { LanguageProvider } from "@/lib/i18n/context"
+import { BackgroundField } from "@/components/layout/background-field"
 
 import "./globals.css"
 import Script from "next/script"
@@ -57,25 +58,28 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kanchanmarblearts.com"),
-  title: "Kanchan Marble Arts | Marble Mandir & Murti Manufacturer in Mumbai",
+  // No `template` here. Each page sets a full title tuned to length and to the
+  // keyword it targets, so appending branding again would only push them past
+  // what Google renders.
+  title: "Marble Mandir for Home in Mumbai | Kanchan Marble Arts",
+  alternates: { canonical: "/" },
   description:
-    "Kanchan Marble Arts is a trusted marble mandir and murti manufacturer in Mumbai with 20+ years of craftsmanship. Specializing in custom marble mandirs, Jain temples, murtis, and marble articles made from Italian, Indian and Australian marble.",
+    "Custom marble mandirs for homes in Mumbai, hand-carved since 2002. White marble Jain mandirs with Ashtamangala and 14 Swapna, premium pooja mandirs, small home temples and marble murtis, made to your size in Australian, Makrana or Italian marble, delivered and fitted free across Mumbai. Workshop in Kandivali East.",
 
   keywords: [
-    "marble mandir manufacturer in Mumbai",
-    "custom marble mandir",
-    "jain marble mandir",
-    "marble murti maker in India",
-    "white marble temple",
-    "italian marble mandir",
-    "marble temple for home",
-    "marble articles Mumbai",
-    "best marble shop in Mumbai",
-    "custom marble work in India",
-    "marble ghumat",
-    "tulsi stand marble",
-    "jain mandir design marble",
-    "handcrafted marble mandir",
+    "marble mandir for home in Mumbai",
+    "custom marble mandir Mumbai",
+    "white marble Jain mandir",
+    "Jain marble temple for home",
+    "handmade marble mandir",
+    "customized Jain mandir",
+    "marble mandir with ashtamangala",
+    "Jain mandir with 14 swapna",
+    "small marble mandir for home",
+    "premium marble pooja mandir",
+    "marble temple manufacturers in Mumbai",
+    "marble mandir shop near Kandivali",
+    "marble murti manufacturer Mumbai",
   ],
 
   authors: [{ name: "Kanchan Marble Arts", url: "https://kanchanmarblearts.com" }],
@@ -83,7 +87,7 @@ export const metadata: Metadata = {
   publisher: "Kanchan Marble Arts",
 
   openGraph: {
-    title: "Kanchan Marble Arts | Custom Marble Mandirs & Jain Temples",
+    title: "Marble Mandir for Home in Mumbai | Kanchan Marble Arts",
     description:
       "Premium custom marble mandirs, Jain temples, murtis and decorative marble articles handcrafted in Mumbai. 20+ years of legacy, trusted across India.",
     type: "website",
@@ -102,7 +106,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Kanchan Marble Arts | Custom Marble Mandirs in Mumbai",
+    title: "Custom Marble Mandir & Jain Temple Makers in Mumbai",
     description:
       "Explore handcrafted marble mandirs, Jain temples, murtis and marble décor created with 20+ years of devotion and craftsmanship.",
     images: ["https://kanchanmarblearts.com/images/og-image.jpg"],
@@ -165,14 +169,20 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             window.gtag = window.gtag || gtag;
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { page_path: window.location.pathname });
+            // send_page_view:false, because GAListener sends every page view itself,
+            // including client-side navigations. Leaving it on would double-count
+            // the first page of every visit.
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { send_page_view: false });
           `}
         </Script>
       </head>
       <body className="antialiased">
         {/* LanguageProvider drives every translated string on the site (EN / हिन्दी / ગુજરાતી) */}
         <LanguageProvider>
-          {/* kma-frame carries the drifting gold-vein background behind the whole page */}
+          {/* Animated gold field. A fixed sibling behind the page, not a layer
+              inside it, so it can react to scroll independently of the content. */}
+          <BackgroundField />
+
           <div className="kma-frame min-h-screen">
             <Header />
             <main>{children}</main>

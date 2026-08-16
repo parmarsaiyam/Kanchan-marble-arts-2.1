@@ -4,9 +4,10 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { X } from "lucide-react"
-import { products, productCategories, type Product } from "@/lib/products"
-import { whatsappHref } from "@/lib/site"
+import { products, productCategories, type Product } from "@/lib/content/products"
+import { whatsappHref } from "@/lib/config/site"
 import { useLanguage } from "@/lib/i18n/context"
+import { trackFilter, trackQuickView } from "@/lib/analytics"
 
 const filters = ["All", ...productCategories] as const
 type Filter = (typeof filters)[number]
@@ -42,6 +43,7 @@ function FilterPill({
 
 function QuickView({ product, onClose }: { product: Product; onClose: () => void }) {
   const { d, tf, tcat, tprice } = useLanguage()
+  useEffect(() => trackQuickView(product.slug), [product.slug])
   const text = d.content.products[product.slug] ?? product
 
   useEffect(() => {
@@ -140,7 +142,15 @@ export function Products() {
         <div className="flex items-center justify-between">
           <div className="flex gap-2 overflow-x-auto lg:gap-[9px]">
             {filters.map((f) => (
-              <FilterPill key={f} filter={f} active={filter === f} onClick={() => setFilter(f)} />
+              <FilterPill
+                key={f}
+                filter={f}
+                active={filter === f}
+                onClick={() => {
+                  setFilter(f)
+                  trackFilter("products", f)
+                }}
+              />
             ))}
           </div>
           <span className="hidden text-[13px] text-[var(--kma-muted-2)] lg:block">

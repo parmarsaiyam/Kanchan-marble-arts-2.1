@@ -1,0 +1,17 @@
+{
+  // Tailwind v4 is configured in CSS, so app/globals.css uses at-rules that
+  // VS Code's built-in CSS validator does not know: @theme, @apply, @layer,
+  // @import "tailwindcss". They are valid, because PostCSS compiles
+  // them at build time, so silence the "Unknown at rule" reports rather than the file.
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore",
+
+  // Use the TypeScript version installed in this project, not the one bundled
+  // with the editor. A version mismatch is a common source of errors that show
+  // in the Problems tab but never appear in `tsc` or the build.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": "explicit" }
+}

@@ -12,13 +12,13 @@ interface Testimonial {
 
 const testimonials = (testimonialsData.testimonials as Testimonial[]).slice(0, 3)
 
-/** Three testimonials above a hairline — used on Home and Visit. */
+/** Three testimonials above a hairline, used on Home and Visit. */
 export function TestimonialsRow() {
   const tt = useTestimonialText()
 
   return (
-    <Reveal className="mx-auto max-w-[1280px] px-5 pt-16 lg:px-14 lg:pt-[104px]">
-      <hr className="rule" />
+    <Reveal className="kma-band mt-16 py-14 lg:mt-[104px] lg:py-20">
+      <div className="mx-auto max-w-[1280px] px-5 lg:px-14">
       <div className="rv-stagger grid grid-cols-1 gap-9 pt-9 md:grid-cols-3 lg:gap-12 lg:pt-12">
         {testimonials.map((source) => {
           const t = tt(source)
@@ -32,6 +32,7 @@ export function TestimonialsRow() {
             </div>
           )
         })}
+      </div>
       </div>
     </Reveal>
   )

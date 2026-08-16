@@ -1,10 +1,12 @@
 "use client"
 
-import { Phone, Mail, MapPin } from "lucide-react"
+import { Phone, Mail } from "lucide-react"
 import { Reveal } from "@/components/layout/reveal"
-import { TestimonialsRow } from "@/components/sections/testimonials-row"
-import { whatsappHref, telHref, phoneDisplay, email, mapsUrl, mapsEmbedSrc } from "@/lib/site"
+import { TestimonialsRow } from "@/components/shared/testimonials-row"
+import { WorkshopVisit } from "@/components/shared/workshop-visit"
+import { whatsappHref, telHref, phoneDisplay, email } from "@/lib/config/site"
 import { useT } from "@/lib/i18n/context"
+import { trackCall, trackEmail, trackWhatsApp } from "@/lib/analytics"
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -37,6 +39,7 @@ export function ContactContent() {
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsApp("contact_page")}
             className="press flex items-center gap-4 rounded-[20px] bg-[var(--kma-whatsapp)] p-[22px] text-white lg:min-h-[200px] lg:flex-col lg:items-start lg:justify-between lg:rounded-3xl lg:p-8"
           >
             <WhatsAppIcon className="h-7 w-7 flex-none lg:h-8 lg:w-8" />
@@ -51,6 +54,7 @@ export function ContactContent() {
           </a>
           <a
             href={telHref}
+            onClick={() => trackCall("contact_page")}
             className="press flex items-center gap-4 rounded-[20px] bg-[var(--kma-surface)] p-[22px] lg:min-h-[200px] lg:flex-col lg:items-start lg:justify-between lg:rounded-3xl lg:p-8"
           >
             <Phone
@@ -64,6 +68,7 @@ export function ContactContent() {
           </a>
           <a
             href={`mailto:${email}`}
+            onClick={() => trackEmail("contact_page")}
             className="press flex items-center gap-4 rounded-[20px] bg-[var(--kma-surface)] p-[22px] lg:min-h-[200px] lg:flex-col lg:items-start lg:justify-between lg:rounded-3xl lg:p-8"
           >
             <Mail
@@ -80,60 +85,7 @@ export function ContactContent() {
         </div>
       </Reveal>
 
-      {/* Workshop + map */}
-      <Reveal className="mx-auto max-w-[1280px] px-5 pt-12 lg:px-14 lg:pt-[72px]">
-        <div className="grid grid-cols-1 items-start gap-9 lg:grid-cols-[400px_1fr] lg:gap-14">
-          <div>
-            <h2 className="m-0 mb-6 font-serif text-[26px] font-bold leading-[1.1] lg:mb-[30px] lg:text-[34px]">
-              {d.ui.contact.workshop.title}
-            </h2>
-            <div className="flex flex-col gap-[22px] lg:gap-[26px]">
-              <div>
-                <div className="kicker mb-2">{d.ui.contact.workshop.addressLabel}</div>
-                <div className="text-[15px] leading-[1.7] lg:text-base">
-                  {d.ui.common.addressLines.map((line, i) => (
-                    <div key={i}>{line}</div>
-                  ))}
-                </div>
-              </div>
-              <hr className="rule m-0" />
-              <div>
-                <div className="kicker mb-2">{d.ui.contact.workshop.hoursLabel}</div>
-                <div className="text-[15px] leading-[1.7] lg:text-base">{d.ui.contact.workshop.hoursValue}</div>
-                <p className="m-0 mt-2 text-[13px] leading-relaxed text-[var(--kma-muted-2)]">
-                  {d.ui.contact.workshop.hoursNote}
-                </p>
-              </div>
-              <hr className="rule m-0" />
-              <div>
-                <div className="kicker mb-2">{d.ui.contact.workshop.stationLabel}</div>
-                <div className="text-[15px] leading-[1.7] lg:text-base">{d.ui.contact.workshop.stationValue}</div>
-              </div>
-            </div>
-            <a
-              href={mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta press mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--kma-gold)] px-7 py-[15px] text-sm font-semibold text-[var(--kma-ivory)] max-lg:w-full lg:mt-8"
-            >
-              <MapPin className="h-4 w-4" strokeWidth={2} />
-              {d.ui.contact.workshop.directions}
-            </a>
-          </div>
-          <div className="h-[300px] overflow-hidden rounded-[20px] bg-[#e6dfd3] lg:h-[560px] lg:rounded-[28px]">
-            <iframe
-              src={mapsEmbedSrc}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title={d.ui.contact.workshop.mapTitle}
-            />
-          </div>
-        </div>
-      </Reveal>
+      <WorkshopVisit />
 
       <TestimonialsRow />
 

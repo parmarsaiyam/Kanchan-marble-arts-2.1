@@ -24,7 +24,7 @@ export const addressLines = [
 export const businessHours = "Mon – Sun: 9:00 AM – 9:00 PM"
 
 /**
- * Navigation targets. Labels are not stored here — each entry carries the
+ * Navigation targets. Labels are not stored here. Each entry carries the
  * dictionary key its label lives under (see `d.ui.nav` in lib/i18n), so the
  * menu translates with the rest of the site.
  */

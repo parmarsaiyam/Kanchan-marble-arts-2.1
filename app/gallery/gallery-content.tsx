@@ -1,9 +1,9 @@
 "use client"
 
-import { Gallery } from "@/components/sections/gallery"
-import { CtaBand } from "@/components/sections/cta-band"
+import { Gallery } from "@/components/gallery/gallery-grid"
+import { CtaBand } from "@/components/shared/cta-band"
 import { Reveal } from "@/components/layout/reveal"
-import { whatsappHref } from "@/lib/site"
+import { whatsappHref } from "@/lib/config/site"
 import { useT } from "@/lib/i18n/context"
 
 export function GalleryContent() {
