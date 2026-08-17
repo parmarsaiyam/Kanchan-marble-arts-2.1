@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import localFont from "next/font/local"
 import { JsonLd } from "@/components/layout/json-ld"
+import { socialImage } from "@/lib/config/media"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { MobileCTA } from "@/components/layout/mobile-cta"
@@ -14,38 +15,36 @@ import "./globals.css"
 import Script from "next/script"
 
 
+/**
+ * Fonts are WOFF2. They used to be TTF, which meant every first-time visitor
+ * downloaded 1.05 MB of font before any text could render in the right face.
+ * The same four faces as WOFF2 come to 352 KB.
+ *
+ * `adjustFontFallback` matches the system fallback's metrics to the real font,
+ * so the swap from fallback to webfont does not shift the layout.
+ */
 const playfair = localFont({
   src: [
-    {
-      path: "../public/fonts/Playfair_Display/PlayfairDisplay-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Playfair_Display/PlayfairDisplay-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
+    { path: "../public/fonts/Playfair_Display/PlayfairDisplay-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/Playfair_Display/PlayfairDisplay-Bold.woff2", weight: "700", style: "normal" },
   ],
   variable: "--font-serif",
   display: "swap",
+  preload: true,
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: "Times New Roman",
 })
 
 const inter = localFont({
   src: [
-    {
-      path: "../public/fonts/Inter/Inter-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Inter/Inter-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
+    { path: "../public/fonts/Inter/Inter-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/Inter/Inter-Bold.woff2", weight: "700", style: "normal" },
   ],
   variable: "--font-sans",
   display: "swap",
+  preload: true,
+  fallback: ["system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+  adjustFontFallback: "Arial",
 })
 
 export const viewport: Viewport = {
@@ -96,7 +95,7 @@ export const metadata: Metadata = {
     url: "https://kanchanmarblearts.com",
     images: [
       {
-        url: "https://kanchanmarblearts.com/images/og-image.jpg",
+        url: socialImage(),
         width: 1200,
         height: 630,
         alt: "Custom white marble mandir handcrafted by Kanchan Marble Arts in Mumbai",
@@ -109,7 +108,7 @@ export const metadata: Metadata = {
     title: "Custom Marble Mandir & Jain Temple Makers in Mumbai",
     description:
       "Explore handcrafted marble mandirs, Jain temples, murtis and marble décor created with 20+ years of devotion and craftsmanship.",
-    images: ["https://kanchanmarblearts.com/images/og-image.jpg"],
+    images: [socialImage()],
   },
 
   robots: {

@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { HomeContent } from "./home-content"
 import { products } from "@/lib/content/products"
 import { en } from "@/lib/i18n/dictionaries/en"
+import { socialImage } from "@/lib/config/media"
 
 const SITE = "https://kanchanmarblearts.com"
 
@@ -55,7 +56,7 @@ function HomeJsonLd() {
           "Custom marble mandirs, white marble Jain mandirs and hand-carved murtis, made to order in Kandivali East, Mumbai.",
         isPartOf: { "@id": `${SITE}/#website` },
         about: { "@id": `${SITE}/#business` },
-        primaryImageOfPage: `${SITE}/images/Home.webp`,
+        primaryImageOfPage: socialImage(),
         inLanguage: "en-IN",
       },
       {

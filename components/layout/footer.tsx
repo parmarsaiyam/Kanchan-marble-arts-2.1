@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { navLinks, phoneDisplay, whatsappHref, telHref, email } from "@/lib/config/site"
+import { media } from "@/lib/config/media"
 import { useT } from "@/lib/i18n/context"
 
 export function Footer() {
@@ -13,7 +14,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-6 pt-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-12 lg:px-14">
         <div>
           <Image
-            src="/images/kma-logo.png"
+            src={media.logo}
             alt={d.ui.nav.logoAlt}
             width={210}
             height={58}

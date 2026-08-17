@@ -8,29 +8,30 @@ import { TestimonialsRow } from "@/components/shared/testimonials-row"
 import { HomeSteps } from "@/components/home/home-steps"
 import { WorkshopVisit } from "@/components/shared/workshop-visit"
 import { products } from "@/lib/content/products"
+import { media, washed } from "@/lib/config/media"
 import { useLanguage } from "@/lib/i18n/context"
 
 /** Collection tiles. Copy lives in the dictionary under `home.collections.items`. */
 const collections = [
   {
     key: "mandirs",
-    image: "/images/mmandir.webp",
-    alt: "Beautiful marble mandir with intricate carvings and traditional architecture",
+    image: media.collectionMandirs,
+    alt: "Marble mandir with carved pillars and a stepped dome, in traditional temple proportions",
   },
   {
     key: "murtis",
-    image: "/images/murti.webp",
-    alt: "Elegant marble murti sculpture with detailed craftsmanship",
+    image: media.collectionMurtis,
+    alt: "Marble murti with the face and the folds of the robe carved by hand",
   },
   {
     key: "articles",
-    image: "/images/articles.webp",
-    alt: "Decorative marble articles including pillars and ornamental pieces",
+    image: media.collectionArticles,
+    alt: "Marble articles on a shelf: turned pillars, jaali panels and small ornaments",
   },
   {
     key: "jain",
-    image: "/images/jain.webp",
-    alt: "Traditional Jain marble designs with symbolic patterns",
+    image: media.collectionJain,
+    alt: "Jain marble panel carved with the symbolic patterns used in derasar work",
   },
 ] as const
 
@@ -43,42 +44,12 @@ const featured = products.filter((p) => p.featured).slice(0, 3)
  * is laid out in a masonry column flow, so every image is shown whole.
  */
 const mosaic = [
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/M-3.webp",
-    alt: "Traditional marble temple with red and gold accents",
-    w: 1000,
-    h: 800,
-  },
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/hanuman-1.webp",
-    alt: "Lord Hanuman, hand-carved in premium Italian marble",
-    w: 500,
-    h: 700,
-  },
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/Rk.webp",
-    alt: "Radha Krishna murti with fine hand-carved detailing",
-    w: 900,
-    h: 600,
-  },
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/TS-1.webp",
-    alt: "Marble tulsi stand with floral engravings",
-    w: 600,
-    h: 800,
-  },
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/A-2.webp",
-    alt: "Handcrafted marble railing pillar with elegant finish",
-    w: 600,
-    h: 800,
-  },
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/M-2.webp",
-    alt: "Modern Corian mandir design for contemporary homes",
-    w: 400,
-    h: 1000,
-  },
+  { src: media.mosaic[0], alt: "Marble temple with red and gold picked out along the carved arches and dome", w: 1000, h: 800 },
+  { src: media.mosaic[1], alt: "Hanuman murti in white Italian marble, standing with hands folded", w: 500, h: 700 },
+  { src: media.mosaic[2], alt: "Radha and Krishna standing together, carved from a single block of pale marble", w: 900, h: 600 },
+  { src: media.mosaic[3], alt: "Marble tulsi stand, flowers carved around the base and the rim", w: 600, h: 800 },
+  { src: media.mosaic[4], alt: "Turned marble railing pillar, polished smooth, with a carved capital", w: 600, h: 800 },
+  { src: media.mosaic[5], alt: "Plain modern Corian mandir in white, straight edges and no carving", w: 400, h: 1000 },
 ]
 
 const sectionShell = "mx-auto max-w-[1280px] px-5 lg:px-14"
@@ -152,11 +123,11 @@ export function HomeContent() {
         <div className={`${sectionShell} grid grid-cols-1 items-center gap-7 lg:grid-cols-2 lg:gap-20`}>
           <div className="tile aspect-[3/2] overflow-hidden rounded-[22px] lg:rounded-3xl">
             <Image
-              src="/images/abouttop.webp"
-              alt={tc("Master craftsman at work in the Kanchan Marble Arts workshop")}
+              src={washed(media.workshop)}
+              alt={tc("Craftsman at the Kanchan Marble Arts workshop, chisel in hand, shaping a marble panel")}
               width={900}
               height={600}
-              className="wash h-full w-full object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
           <div>
@@ -263,20 +234,20 @@ export function HomeContent() {
           <div className="grid grid-cols-2 gap-3 lg:gap-4">
             <div className="tile aspect-[3/4] overflow-hidden rounded-2xl">
               <Image
-                src="https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/jain/J-3.webp"
-                alt={tc("Elegant white marble mandir with intricate Jain carvings")}
+                src={washed(media.jainBandLeft)}
+                alt={tc("White marble Jain mandir, arch and side panels carved edge to edge")}
                 width={600}
                 height={800}
-                className="wash h-full w-full object-cover"
+                className="h-full w-full object-cover"
               />
             </div>
             <div className="tile mt-6 aspect-[3/4] overflow-hidden rounded-2xl lg:mt-11">
               <Image
-                src="https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/jain/J-5.webp"
-                alt={tc("Traditional design mandir showcasing 14 swapnas carvings")}
+                src={washed(media.jainBandRight)}
+                alt={tc("Mandir with the 14 Swapna carved in relief in a row across the upper panel")}
                 width={600}
                 height={800}
-                className="wash h-full w-full object-cover"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>

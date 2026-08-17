@@ -6,6 +6,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X, Phone, MapPin } from "lucide-react"
 import { navLinks, whatsappHref, telHref, phoneDisplay } from "@/lib/config/site"
+import { media } from "@/lib/config/media"
 import { useT } from "@/lib/i18n/context"
 import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { AnnouncementBar } from "@/components/layout/announcement-bar"
@@ -58,11 +59,15 @@ export function Header() {
       {/* Announcement + header travel together and stay pinned while scrolling */}
       <div ref={stackRef} className="sticky top-0 z-50">
         <AnnouncementBar />
-        <header className="border-b border-[var(--kma-hairline)] bg-[rgba(247,244,239,0.93)] backdrop-blur-xl">
+        {/* backdrop-blur-sm, not -xl. The background behind it is already 93%
+            opaque, so a 24px blur contributed almost nothing visually while
+            forcing the compositor to re-blur the strip under a sticky header on
+            every scroll frame, which is a common cause of phone scroll jank. */}
+        <header className="border-b border-[var(--kma-hairline)] bg-[rgba(247,244,239,0.93)] backdrop-blur-sm">
           <div className="mx-auto flex h-[66px] max-w-[1280px] items-center justify-between px-5 lg:h-[86px] lg:px-14">
             <Link href="/" aria-label={d.ui.nav.homeAria} className="min-w-0 shrink">
               <Image
-                src="/images/kma-logo.png"
+                src={media.logo}
                 alt={d.ui.nav.logoAlt}
                 width={220}
                 height={62}

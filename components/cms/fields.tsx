@@ -37,23 +37,29 @@ export function Toggle({
   hint?: string
 }) {
   return (
+    // `min-w-0` on the text column stops a long hint from pushing the switch
+    // off the edge of a narrow card, which is what used to happen on phones.
     <label className="flex cursor-pointer items-start gap-3 py-2">
       <button
         type="button"
         role="switch"
         aria-checked={checked}
         onClick={() => onChange(!checked)}
-        className={`relative mt-0.5 h-6 w-11 flex-none rounded-full transition-colors ${
-          checked ? "bg-[var(--kma-gold)]" : "bg-[rgba(36,31,26,0.2)]"
+        className={`relative mt-0.5 box-content h-6 w-11 flex-none overflow-hidden rounded-full p-0 transition-colors ${
+          checked ? "bg-[var(--kma-gold)]" : "bg-[rgba(36,31,26,0.22)]"
         }`}
       >
+        {/* Anchored with an explicit `left`. It used to rely on the static
+            position, which put the knob wherever the browser's default button
+            padding happened to leave it, so the checked state overflowed the
+            track. Track 44px, knob 20px, 2px inset: travel is exactly 20px. */}
         <span
-          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${
-            checked ? "translate-x-[22px]" : "translate-x-0.5"
+          className={`pointer-events-none absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-sm transition-transform duration-200 ${
+            checked ? "translate-x-5" : "translate-x-0"
           }`}
         />
       </button>
-      <span>
+      <span className="min-w-0">
         <span className="block text-sm font-semibold text-[var(--kma-ink)]">{label}</span>
         {hint && <span className="block text-[12px] leading-snug text-[var(--kma-muted-2)]">{hint}</span>}
       </span>
@@ -92,9 +98,11 @@ export function TranslatedField({
 
   return (
     <div className="mb-5">
-      <div className="mb-[7px] flex items-center justify-between gap-3">
-        <div className="kicker">{label}</div>
-        <div className="flex items-center gap-1 rounded-full border border-[var(--kma-hairline)] p-0.5">
+      {/* Wraps on a narrow screen. Before, a long label and the three language
+          pills fought for the same row and the pills spilled out of the card. */}
+      <div className="mb-[7px] flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <div className="kicker min-w-0">{label}</div>
+        <div className="flex flex-none items-center gap-1 rounded-full border border-[var(--kma-hairline)] p-0.5">
           {locales.map((code) => {
             const filled = Boolean((value[code] ?? "").trim())
             return (

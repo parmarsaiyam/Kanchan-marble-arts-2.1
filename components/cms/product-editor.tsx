@@ -278,7 +278,7 @@ function SingleProduct({
             <div className="kicker mb-2">SEO</div>
             <p className="m-0 text-[12px] leading-relaxed text-[var(--kma-muted)]">
               The address stays{" "}
-              <code className="rounded bg-[rgba(36,31,26,0.06)] px-1 py-0.5 text-[11px]">
+              <code className="break-all rounded bg-[rgba(36,31,26,0.06)] px-1 py-0.5 text-[11px]">
                 /products/{product.slug}
               </code>
               . Renaming the product does not change it, so existing links and search rankings are kept.

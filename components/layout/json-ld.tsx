@@ -1,4 +1,5 @@
 import { phoneNumber, email, mapsUrl } from "@/lib/config/site"
+import { media, socialImage } from "@/lib/config/media"
 
 const SITE = "https://kanchanmarblearts.com"
 
@@ -50,7 +51,7 @@ export function JsonLd() {
         ],
         priceRange: "₹₹",
         currenciesAccepted: "INR",
-        image: [`${SITE}/images/og-image.jpg`, `${SITE}/images/Home.webp`],
+        image: [socialImage(), socialImage(media.heroJain, 1200, 1200)],
         // Google wants the logo as an ImageObject when it is used for the
         // brand icon in search results, not a bare URL string.
         logo: {

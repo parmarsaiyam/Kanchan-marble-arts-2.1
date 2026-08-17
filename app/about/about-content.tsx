@@ -7,14 +7,15 @@ import { Faq } from "@/components/shared/faq"
 import { mapsUrl, telHref, phoneDisplay, email } from "@/lib/config/site"
 import { useLanguage } from "@/lib/i18n/context"
 import { aboutFactKeys } from "@/lib/content/faq"
+import { media, washed } from "@/lib/config/media"
 
 const statValues = ["20+", "100,000+", "100%"] as const
 const statKeys = ["years", "orders", "delivery"] as const
 const stoneKeys = ["australian", "indian", "italian"] as const
 const stoneImages: Record<(typeof stoneKeys)[number], string> = {
-  australian: "/images/australian.webp",
-  indian: "/images/indian.webp",
-  italian: "/images/italian.webp",
+  australian: media.stoneAustralian,
+  indian: media.stoneIndian,
+  italian: media.stoneItalian,
 }
 
 
@@ -37,12 +38,12 @@ export function AboutContent() {
       {/* Full-bleed image */}
       <Reveal className="mt-9 h-[300px] overflow-hidden lg:mt-[72px] lg:h-[520px]">
         <Image
-          src="/images/abouttop.webp"
-          alt={tc("Master craftsman at work")}
+          src={washed(media.workshop)}
+          alt={tc("Craftsman shaping marble by hand with a chisel")}
           width={1600}
           height={800}
           priority
-          className="wash h-full w-full object-cover object-[center_40%]"
+          className="h-full w-full object-cover object-[center_40%]"
         />
       </Reveal>
 
@@ -154,11 +155,11 @@ export function AboutContent() {
         <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-6 px-5 py-11 lg:grid-cols-2 lg:gap-20 lg:px-14 lg:py-24">
           <div className="aspect-[5/4] overflow-hidden rounded-[20px] lg:rounded-[28px]">
             <Image
-              src="/images/aboutbottom.webp"
-              alt={tc("Jain marble sculpture")}
+              src={washed(media.jainHeritage)}
+              alt={tc("Jain figure carved in white marble, seated and still")}
               width={900}
               height={720}
-              className="wash h-full w-full object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
           <div>

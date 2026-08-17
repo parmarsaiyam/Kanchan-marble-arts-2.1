@@ -3,25 +3,14 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import Image from "next/image"
 import { useLanguage } from "@/lib/i18n/context"
+import { media, washed } from "@/lib/config/media"
 
 export const HERO_SLIDES = [
-  { src: "/images/Home.webp", alt: "Marble mandir crafted by Kanchan Marble Arts" },
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/combo-1.webp",
-    alt: "Hand-carved marble murtis in premium Italian marble",
-  },
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/v1758472180/gallery/mandir/M-1.webp",
-    alt: "Elegant australian marble mandir with intricate jain carvings",
-  },
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/M-3.webp",
-    alt: "Traditional marble temple with red and gold accents",
-  },
-  {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/M-2.webp",
-    alt: "Modern Corian mandir design for contemporary homes",
-  },
+  { src: media.heroMandir, alt: "White marble home mandir, carved dome above a pillared arch" },
+  { src: "gallery/murti/combo-1.webp", alt: "Several hand-carved marble murtis grouped together in Italian marble" },
+  { src: "gallery/mandir/M-1.webp", alt: "White marble mandir with a domed ghumat, Jain carving worked across the arch and pillars" },
+  { src: "gallery/mandir/M-3.webp", alt: "Marble temple with red and gold picked out along the carved arches and dome" },
+  { src: "gallery/mandir/M-2.webp", alt: "Plain modern Corian mandir in white, straight edges and no carving" },
 ]
 
 const AUTOPLAY_MS = 3600
@@ -109,10 +98,10 @@ export function HeroCoverflow() {
                 <div className="absolute inset-0 overflow-hidden rounded-2xl">
                   <Image
                     key={`${slide.src}-${pos === 0 ? index : "off"}`}
-                    src={slide.src}
+                    src={washed(slide.src)}
                     alt={tc(slide.alt)}
                     fill
-                    className={`wash object-cover ${pos === 0 ? "kma-zoom" : ""}`}
+                    className={`object-cover ${pos === 0 ? "kma-zoom" : ""}`}
                     sizes="(max-width: 1024px) 92vw, 480px"
                     priority={i === 1}
                   />
@@ -211,10 +200,10 @@ export function HeroMobileCarousel() {
             >
               <Image
                 key={`${slide.src}-${offset === 0 ? index : "off"}`}
-                src={slide.src}
+                src={washed(slide.src)}
                 alt={tc(slide.alt)}
                 fill
-                className={`wash object-cover ${offset === 0 ? "kma-zoom" : ""}`}
+                className={`object-cover ${offset === 0 ? "kma-zoom" : ""}`}
                 sizes="100vw"
                 priority={i === 0}
               />

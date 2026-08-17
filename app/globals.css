@@ -297,12 +297,6 @@
     @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
   }
 
-  /* Enhanced glass morphism effect for modern look */
-  .glass-effect {
-    backdrop-filter: blur(16px) saturate(180%);
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
 
   /* Added gradient utilities for modern backgrounds */
   .bg-gradient-radial {
@@ -337,9 +331,12 @@
   border: 0;
 }
 
-/* Washed photography: images sit back into the warm page */
+/* Washed photography: images sit back into the warm page.
+   The filter moved into the Cloudinary URL (see lib/config/cloudinary-loader),
+   because a CSS filter is recomputed on every paint and these images animate.
+   The class is kept as a no-op so any stray usage still renders correctly. */
 .wash {
-  filter: saturate(0.88) contrast(0.96) brightness(1.03);
+  /* intentionally empty */
 }
 
 /* Gold underline highlight inside headlines */
@@ -510,9 +507,14 @@
 .kma-bg-b,
 .kma-bg-c {
   position: absolute;
-  inset: -20vmax;
+  /* Was -20vmax. On a phone that made each layer roughly 1600px wider and
+     taller than the screen, and three of them plus the parallax carriers kept
+     five oversized textures in GPU memory the whole time. -10vmax is still
+     more than the animation ever travels. */
+  inset: -10vmax;
   background-repeat: no-repeat;
-  will-change: transform;
+  /* No will-change here on purpose: the running animation promotes these
+     already, and the hint only added memory pressure on low-end phones. */
 }
 
 /* A: wide, slow pools */
@@ -578,7 +580,6 @@
   inset: -16vmax;
   z-index: -2;
   pointer-events: none;
-  will-change: transform;
   background-repeat: no-repeat;
   background-image:
     radial-gradient(circle at 16% 26%, rgba(201, 171, 95, 0.2), transparent 62%),
@@ -597,7 +598,6 @@
   inset: -16vmax;
   z-index: -1;
   pointer-events: none;
-  will-change: transform;
   background-repeat: no-repeat;
   background-image:
     radial-gradient(circle at 74% 18%, rgba(201, 171, 95, 0.12), transparent 56%),

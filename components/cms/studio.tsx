@@ -22,18 +22,35 @@ import { RatioLegend } from "./ratio-legend"
 
 type Section = "overview" | "products" | "gallery" | "announcements" | "settings"
 
-const NAV: { id: Section; label: string; icon: typeof LayoutGrid }[] = [
-  { id: "overview", label: "Overview", icon: LayoutGrid },
-  { id: "products", label: "Products", icon: Package },
-  { id: "gallery", label: "Gallery", icon: ImageIcon },
-  { id: "announcements", label: "Announcements", icon: Bell },
-  { id: "settings", label: "Business details", icon: Settings },
+/**
+ * `short` is what the phone tab bar shows. Five tabs across a 360px screen give
+ * each one about 70px, and "Announcements" or "Business details" simply do not
+ * fit: they used to wrap to three lines and push the bar over the content.
+ */
+const NAV: { id: Section; label: string; short: string; icon: typeof LayoutGrid }[] = [
+  { id: "overview", label: "Overview", short: "Home", icon: LayoutGrid },
+  { id: "products", label: "Products", short: "Products", icon: Package },
+  { id: "gallery", label: "Gallery", short: "Gallery", icon: ImageIcon },
+  { id: "announcements", label: "Announcements", short: "Notices", icon: Bell },
+  { id: "settings", label: "Business details", short: "Details", icon: Settings },
 ]
 
 export function Studio() {
   const { signedIn, ready, insecureDefault, login, logout } = useAuth()
   const [section, setSection] = useState<Section>("overview")
-  const { content, changeCount, discard, publish, publishing, error, clearError, lastPublishedAt } = useDraft()
+  const {
+    content,
+    changeCount,
+    discard,
+    publish,
+    publishing,
+    error,
+    clearError,
+    lastPublishedAt,
+    lastCommitUrl,
+    checks,
+    recheck,
+  } = useDraft()
 
   if (!ready) {
     return (
@@ -56,14 +73,18 @@ export function Studio() {
   return (
     <div className="min-h-screen bg-[#ded5c6] text-[var(--kma-ink)]">
       {/* Top bar */}
-      <header className="sticky top-0 z-30 border-b border-[rgba(36,31,26,0.14)] bg-[rgba(222,213,198,0.95)] backdrop-blur-xl">
-        <div className="mx-auto flex h-[62px] max-w-[1400px] items-center justify-between gap-4 px-4 lg:px-8">
-          <div className="min-w-0">
+      <header className="sticky top-0 z-30 border-b border-[rgba(36,31,26,0.14)] bg-[rgba(222,213,198,0.95)] backdrop-blur-sm">
+        <div className="mx-auto flex h-[62px] max-w-[1400px] items-center justify-between gap-3 px-4 lg:px-8">
+          {/* The brand block is allowed to shrink to nothing on a phone so the
+              Publish button never gets squeezed off the right edge. */}
+          <div className="min-w-0 shrink">
             <div className="kicker !text-[9px]">Studio</div>
-            <div className="truncate font-serif text-[17px] font-bold leading-tight">Kanchan Marble Arts</div>
+            <div className="truncate font-serif text-[15px] font-bold leading-tight sm:text-[17px]">
+              Kanchan Marble Arts
+            </div>
           </div>
 
-          <div className="flex flex-none items-center gap-2">
+          <div className="flex flex-none items-center gap-1.5 sm:gap-2">
             <a
               href="/"
               target="_blank"
@@ -76,7 +97,7 @@ export function Studio() {
               <button
                 onClick={discard}
                 title="Throw away every unpublished change"
-                className="flex items-center gap-1.5 rounded-full border border-[rgba(36,31,26,0.2)] px-3 py-2 text-[13px] font-semibold text-[var(--kma-muted)] hover:text-[var(--kma-ink)]"
+                className="flex flex-none items-center gap-1.5 rounded-full border border-[rgba(36,31,26,0.2)] px-2.5 py-2 text-[13px] font-semibold text-[var(--kma-muted)] hover:text-[var(--kma-ink)] sm:px-3"
               >
                 <Undo2 className="h-3.5 w-3.5" />
                 <span className="hidden sm:inline">Discard</span>
@@ -85,7 +106,7 @@ export function Studio() {
             <button
               onClick={onPublish}
               disabled={changeCount === 0 || publishing}
-              className="flex items-center gap-2 rounded-full bg-[var(--kma-ink)] px-5 py-2.5 text-[13px] font-semibold text-[var(--kma-ivory)] transition-opacity disabled:opacity-40"
+              className="flex flex-none items-center gap-2 whitespace-nowrap rounded-full bg-[var(--kma-ink)] px-4 py-2.5 text-[13px] font-semibold text-[var(--kma-ivory)] transition-opacity disabled:opacity-40 sm:px-5"
             >
               {publishing && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
               Publish{changeCount > 0 ? ` ${changeCount}` : ""}
@@ -94,7 +115,7 @@ export function Studio() {
               onClick={logout}
               aria-label="Sign out"
               title="Sign out"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(36,31,26,0.2)] text-[var(--kma-muted)] hover:text-[var(--kma-ink)]"
+              className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-[rgba(36,31,26,0.2)] text-[var(--kma-muted)] hover:text-[var(--kma-ink)]"
             >
               <LogOut className="h-4 w-4" />
             </button>
@@ -128,21 +149,25 @@ export function Studio() {
 
       <div className="mx-auto flex max-w-[1400px] gap-8 px-4 py-6 lg:px-8 lg:py-10">
         {/* Sidebar: a bottom tab bar on phones */}
-        <nav className="fixed inset-x-0 bottom-0 z-30 flex items-stretch border-t border-[rgba(36,31,26,0.14)] bg-[rgba(222,213,198,0.97)] backdrop-blur-xl lg:static lg:w-[208px] lg:flex-none lg:flex-col lg:gap-1 lg:border-0 lg:bg-transparent lg:backdrop-blur-none">
-          {NAV.map(({ id, label, icon: Icon }) => {
+        {/* pb-[env(safe-area-inset-bottom)] keeps the tabs clear of the home
+            indicator on an iPhone, where they were being half covered. */}
+        <nav className="fixed inset-x-0 bottom-0 z-30 flex items-stretch border-t border-[rgba(36,31,26,0.14)] bg-[rgba(222,213,198,0.97)] pb-[env(safe-area-inset-bottom)] backdrop-blur-sm lg:static lg:w-[208px] lg:flex-none lg:flex-col lg:gap-1 lg:border-0 lg:bg-transparent lg:pb-0 lg:backdrop-blur-none">
+          {NAV.map(({ id, label, short, icon: Icon }) => {
             const active = section === id
             return (
               <button
                 key={id}
                 onClick={() => setSection(id)}
-                className={`flex flex-1 flex-col items-center gap-1 py-2.5 text-[10px] font-semibold lg:flex-none lg:flex-row lg:gap-3 lg:rounded-xl lg:px-3.5 lg:py-2.5 lg:text-sm ${
+                aria-current={active ? "page" : undefined}
+                className={`flex min-w-0 flex-1 flex-col items-center gap-1 px-1 py-2.5 text-[10px] font-semibold leading-tight lg:flex-none lg:flex-row lg:gap-3 lg:rounded-xl lg:px-3.5 lg:py-2.5 lg:text-sm ${
                   active
                     ? "text-[var(--kma-ink)] lg:bg-[rgba(36,31,26,0.08)]"
                     : "text-[var(--kma-muted)] hover:text-[var(--kma-ink)]"
                 }`}
               >
-                <Icon className="h-[18px] w-[18px]" strokeWidth={active ? 2.2 : 1.8} />
-                {label}
+                <Icon className="h-[18px] w-[18px] flex-none" strokeWidth={active ? 2.2 : 1.8} />
+                <span className="truncate lg:hidden">{short}</span>
+                <span className="hidden lg:inline">{label}</span>
               </button>
             )
           })}
@@ -214,9 +239,95 @@ export function Studio() {
               in a minute or two.
             </p>
           )}
+          {lastCommitUrl && (
+            <p className="m-0 mt-3 border-t border-[var(--kma-hairline)] pt-3 text-[13px] text-[var(--kma-muted)]">
+              Last publish saved as{" "}
+              <a
+                href={lastCommitUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-[var(--kma-gold-deep)] underline"
+              >
+                this commit
+              </a>
+              . If the site still looks old, check the Deploys tab in Netlify.
+            </p>
+          )}
         </div>
 
+        <PublishHealth />
+
         <RatioLegend />
+      </div>
+    )
+  }
+
+  /**
+   * Why publishing does or does not work, in plain language.
+   *
+   * Publishing depends on four environment variables and a GitHub token with
+   * the right permission, none of which the owner can see from the browser.
+   * When it failed there was nothing to look at, so this asks the server and
+   * shows the answer. Collapsed when everything is fine.
+   */
+  function PublishHealth() {
+    const failing = checks?.filter((c) => !c.ok) ?? []
+
+    if (!checks) {
+      return (
+        <div className="mb-8 rounded-2xl border border-[var(--kma-hairline)] bg-[rgba(255,255,255,0.55)] p-5">
+          <div className="kicker mb-2">Publishing</div>
+          <p className="m-0 flex items-center gap-2 text-sm text-[var(--kma-muted)]">
+            <Loader2 className="h-3.5 w-3.5 animate-spin" /> Checking the connection to GitHub…
+          </p>
+        </div>
+      )
+    }
+
+    if (failing.length === 0) {
+      return (
+        <div className="mb-8 rounded-2xl border border-[rgba(37,211,102,0.4)] bg-[rgba(37,211,102,0.08)] p-5">
+          <div className="kicker mb-2">Publishing</div>
+          <p className="m-0 text-sm text-[#1a7a41]">
+            Connected to GitHub and Cloudinary. Anything you publish will go live on its own.
+          </p>
+        </div>
+      )
+    }
+
+    return (
+      <div className="mb-8 rounded-2xl border border-[rgba(190,60,40,0.35)] bg-[rgba(190,60,40,0.07)] p-5">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="kicker mb-2">Publishing is not set up</div>
+            <p className="m-0 mb-3 text-sm text-[var(--kma-body)]">
+              {failing.length} thing{failing.length === 1 ? "" : "s"} need fixing before Publish can work. All of
+              these are set in Netlify under <strong>Site configuration → Environment variables</strong>.
+            </p>
+          </div>
+          <button
+            onClick={() => void recheck()}
+            className="flex-none rounded-full border border-[rgba(36,31,26,0.2)] px-3 py-1.5 text-[12px] font-semibold hover:border-[rgba(36,31,26,0.4)]"
+          >
+            Re-check
+          </button>
+        </div>
+        <ul className="m-0 list-none space-y-2.5 p-0">
+          {checks.map((c) => (
+            <li key={c.name} className="flex items-start gap-2.5 text-[13px]">
+              <span className={`mt-1.5 h-1.5 w-1.5 flex-none rounded-full ${c.ok ? "bg-[#1a7a41]" : "bg-[#8c2f1d]"}`} />
+              <span className="min-w-0">
+                <strong className="text-[var(--kma-ink)]">{c.name}</strong>{" "}
+                <span className={c.ok ? "text-[var(--kma-muted)]" : "text-[#8c2f1d]"}>{c.detail}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="m-0 mt-4 border-t border-[rgba(190,60,40,0.2)] pt-3 text-[12px] leading-relaxed text-[var(--kma-muted)]">
+          After changing a variable you must redeploy: <strong>Deploys → Trigger deploy → Clear cache and deploy
+          site</strong>. Netlify reads these only when it builds, so the running site will not see a new value until
+          then. This is the single most common reason publishing still fails after the variables look correct.
+        </p>
       </div>
     )
   }

@@ -514,50 +514,66 @@ export const gu: Dictionary = {
     },
 
     captions: {
-      "Elegant australian marble mandir with intricate jain carvings":
-        "બારીક જૈન કોતરણી ધરાવતું સુંદર ઓસ્ટ્રેલિયન માર્બલ મંદિર",
-      "Hand-carved Lord Ganesha murti in premium Italian marble":
-        "પ્રીમિયમ ઇટાલિયન માર્બલમાં હાથે કંડારેલી ભગવાન ગણેશની મૂર્તિ",
-      "Modern Corian mandir design for contemporary homes": "આધુનિક ઘરો માટે સમકાલીન કોરિયન મંદિર ડિઝાઇન",
-      "Radha Krishna murti with fine hand-carved detailing": "બારીક હસ્ત-કોતરણી ધરાવતી રાધા કૃષ્ણ મૂર્તિ",
-      "Traditional marble temple with red and gold accents": "લાલ અને સોનેરી રંગો ધરાવતું પરંપરાગત માર્બલ મંદિર",
-      "Lord Hanuman, hand-carved in premium Italian marble":
-        "પ્રીમિયમ ઇટાલિયન માર્બલમાં હાથે કંડારેલા ભગવાન હનુમાન",
-      "Ambe mata marble murti with detailed craftsmanship": "બારીક કારીગરી ધરાવતી અંબે માતાની માર્બલ મૂર્તિ",
-      "Lord Ganesha murti with red and gold accents": "લાલ અને સોનેરી રંગો ધરાવતી ભગવાન ગણેશની મૂર્તિ",
-      "Elegant white marble mandir with intricate Jain carvings":
-        "બારીક જૈન કોતરણી ધરાવતું સુંદર સફેદ માર્બલ મંદિર",
-      "Elegant Jain shrine with polished marble finish": "પોલિશ્ડ માર્બલ ફિનિશ ધરાવતું સુંદર જૈન મંદિર",
-      "Only white marble mandir with intricate carvings and hathi ghumat":
-        "બારીક કોતરણી અને હાથી ઘુમટ ધરાવતું શુદ્ધ સફેદ માર્બલ મંદિર",
-      "Traditional design mandir showcasing 14 swapnas carvings":
-        "14 સ્વપ્નોની કોતરણી દર્શાવતું પરંપરાગત ડિઝાઇન મંદિર",
-      "Corian mandir with lighting": "લાઇટિંગ સાથે કોરિયન મંદિર",
-      "Jain Tirthankar sculpture with detailed craftsmanship": "બારીક કારીગરી ધરાવતી જૈન તીર્થંકર પ્રતિમા",
-      "Marble tulsi stand with floral engravings": "પુષ્પ કોતરણી ધરાવતું માર્બલ તુલસી સ્ટૅન્ડ",
-      "Handcrafted marble railing pillar with elegant finish":
-        "સુંદર ફિનિશ ધરાવતો હસ્તનિર્મિત માર્બલ રેલિંગ સ્તંભ",
-      "Decorative marble pillar with traditional motifs": "પરંપરાગત કોતરણી ધરાવતો સુશોભિત માર્બલ સ્તંભ",
-      "Jain Tirthankar sculpture with detailed craftsmanship in premium italian marble":
-        "પ્રીમિયમ ઇટાલિયન માર્બલમાં બારીક કારીગરી ધરાવતી જૈન તીર્થંકર પ્રતિમા",
-      "Marble mandir crafted by Kanchan Marble Arts": "કંચન માર્બલ આર્ટ્સ દ્વારા બનાવેલું માર્બલ મંદિર",
-      "Hand-carved marble murtis in premium Italian marble":
-        "પ્રીમિયમ ઇટાલિયન માર્બલમાં હાથે કંડારેલી માર્બલ મૂર્તિઓ",
-      "Beautiful marble mandir with intricate carvings and traditional architecture":
-        "બારીક કોતરણી અને પરંપરાગત સ્થાપત્ય ધરાવતું સુંદર માર્બલ મંદિર",
-      "Elegant marble murti sculpture with detailed craftsmanship": "બારીક કારીગરી ધરાવતી સુંદર માર્બલ મૂર્તિ",
-      "Decorative marble articles including pillars and ornamental pieces":
-        "સ્તંભો અને સુશોભિત કૃતિઓ સહિતના સુશોભન માર્બલ આર્ટિકલ્સ",
-      "Traditional Jain marble designs with symbolic patterns":
-        "પ્રતીકાત્મક ભાતો ધરાવતી પરંપરાગત જૈન માર્બલ ડિઝાઇન",
-      "Master craftsman at work in the Kanchan Marble Arts workshop":
-        "કંચન માર્બલ આર્ટ્સની વર્કશોપમાં કામ કરતો કુશળ કારીગર",
-      "Master craftsman at work": "કામ કરતો કુશળ કારીગર",
-      "Jain marble sculpture": "જૈન માર્બલ પ્રતિમા",
-      "Consultation and design at the workshop": "વર્કશોપમાં પરામર્શ અને ડિઝાઇન",
-      "Marble selection and planning": "માર્બલની પસંદગી અને આયોજન",
-      "Hand-carving in progress": "હાથે કંડારવાનું કામ ચાલુ",
-      "Installed mandir with lighting": "લાઇટિંગ સાથે સ્થાપિત મંદિર",
+      "White marble mandir with a domed ghumat, Jain carving worked across the arch and pillars":
+        "ઘુમટવાળું સફેદ માર્બલ મંદિર, કમાન અને થાંભલા પર જૈન કોતરણી",
+      "Ganesha murti in white Italian marble, seated with one hand raised in blessing":
+        "સફેદ ઇટાલિયન માર્બલમાં ગણેશ મૂર્તિ, એક હાથ આશીર્વાદમાં ઊંચો",
+      "Plain modern Corian mandir in white, straight edges and no carving":
+        "સાદું આધુનિક કોરિયન મંદિર, સફેદ, સીધી ધાર અને કોતરણી વગર",
+      "Radha and Krishna standing together, carved from a single block of pale marble":
+        "રાધા અને કૃષ્ણ સાથે ઊભાં, આછા માર્બલના એક જ ટુકડામાંથી કંડારેલાં",
+      "Marble temple with red and gold picked out along the carved arches and dome":
+        "માર્બલ મંદિર, કંડારેલી કમાનો અને ઘુમટ પર લાલ અને સોનેરી કામ",
+      "Hanuman murti in white Italian marble, standing with hands folded":
+        "સફેદ ઇટાલિયન માર્બલમાં હનુમાન મૂર્તિ, હાથ જોડીને ઊભા",
+      "Ambe Mata murti in marble, seated and crowned, fine carving across the robes":
+        "માર્બલમાં અંબે માતાની મૂર્તિ, મુગટ સાથે બિરાજમાન, વસ્ત્રો પર બારીક કોતરણી",
+      "Ganesha murti in marble, crown and robes finished in red and gold":
+        "માર્બલમાં ગણેશ મૂર્તિ, મુગટ અને વસ્ત્રો લાલ અને સોનેરી રંગમાં",
+      "White marble Jain mandir, arch and side panels carved edge to edge":
+        "સફેદ માર્બલ જૈન મંદિર, કમાન અને બાજુની પેનલ ધારથી ધાર સુધી કંડારેલી",
+      "Jain shrine in polished white marble, plain surfaces framing a carved doorway":
+        "પોલિશ કરેલા સફેદ માર્બલનું જૈન દેરાસર, સાદી સપાટીઓ વચ્ચે કંડારેલું દ્વાર",
+      "White marble mandir topped with a hathi ghumat, elephants carved at the dome":
+        "હાથી ઘુમટવાળું સફેદ માર્બલ મંદિર, ઘુમટ પર હાથી કંડારેલા",
+      "Mandir with the 14 Swapna carved in relief in a row across the upper panel":
+        "મંદિર, ઉપરની પેનલ પર એક હરોળમાં ઉપસાવેલાં 14 સ્વપ્ન",
+      "Corian mandir lit from within, the glow showing through the back panel":
+        "અંદરથી પ્રકાશિત કોરિયન મંદિર, પાછળની પેનલમાંથી ઝળહળતો પ્રકાશ",
+      "Jain Tirthankar murti in Italian marble, face and drapery finely finished":
+        "ઇટાલિયન માર્બલમાં જૈન તીર્થંકર મૂર્તિ, ચહેરો અને વસ્ત્રો બારીકીથી પૂરાં કરેલાં",
+      "Seated Jain Tirthankar murti in white marble, hands resting in the lap":
+        "સફેદ માર્બલમાં બિરાજમાન જૈન તીર્થંકર, હાથ ખોળામાં",
+      "Marble tulsi stand, flowers carved around the base and the rim":
+        "માર્બલનું તુલસી સ્ટેન્ડ, પાયા અને કિનારે કંડારેલાં ફૂલ",
+      "Turned marble railing pillar, polished smooth, with a carved capital":
+        "ખરાદેલો માર્બલનો રેલિંગ થાંભલો, લીસી પોલિશ, ઉપર કંડારેલું શીર્ષ",
+      "Marble pillar carved with traditional motifs down its full length":
+        "માર્બલનો થાંભલો, આખી લંબાઈમાં પરંપરાગત કોતરણી",
+      "White marble home mandir, carved dome above a pillared arch":
+        "સફેદ માર્બલનું ઘર-મંદિર, થાંભલાવાળી કમાન ઉપર કંડારેલો ઘુમટ",
+      "Several hand-carved marble murtis grouped together in Italian marble":
+        "ઇટાલિયન માર્બલની અનેક હાથે કંડારેલી મૂર્તિઓ સાથે મૂકેલી",
+      "Marble mandir with carved pillars and a stepped dome, in traditional temple proportions":
+        "કંડારેલા થાંભલા અને પગથિયાંવાળા ઘુમટ સાથેનું માર્બલ મંદિર, પરંપરાગત મંદિર પ્રમાણમાં",
+      "Marble murti with the face and the folds of the robe carved by hand":
+        "માર્બલ મૂર્તિ, ચહેરો અને વસ્ત્રની કરચલીઓ હાથે કંડારેલી",
+      "Marble articles on a shelf: turned pillars, jaali panels and small ornaments":
+        "શેલ્ફ પર માર્બલની વસ્તુઓ: ખરાદેલા થાંભલા, જાળી પેનલ અને નાની સુશોભન કૃતિઓ",
+      "Jain marble panel carved with the symbolic patterns used in derasar work":
+        "જૈન માર્બલ પેનલ, દેરાસરના કામમાં વપરાતી પ્રતીક આકૃતિઓ કંડારેલી",
+      "Craftsman at the Kanchan Marble Arts workshop, chisel in hand, shaping a marble panel":
+        "કંચન માર્બલ આર્ટ્સની વર્કશોપમાં કારીગર, હાથમાં ટાંકણું, માર્બલ પેનલ ઘડતા",
+      "Craftsman shaping marble by hand with a chisel": "કારીગર ટાંકણાથી હાથે માર્બલ ઘડતા",
+      "Jain figure carved in white marble, seated and still":
+        "સફેદ માર્બલમાં કંડારેલી જૈન પ્રતિમા, શાંત મુદ્રામાં બિરાજમાન",
+      "A mandir drawing spread on the workshop bench, being talked through":
+        "વર્કશોપના ટેબલ પર પાથરેલો મંદિરનો નકશો, તેની ચર્ચા થતી",
+      "Marble slabs stacked at the workshop, waiting to be matched and cut":
+        "વર્કશોપમાં ગોઠવેલા માર્બલના સ્લેબ, મેળવણી અને કાપણીની રાહમાં",
+      "A murti part finished, chisel marks still showing in the stone":
+        "અડધી બનેલી મૂર્તિ, પથ્થર પર હજી ટાંકણાના નિશાન",
+      "A finished mandir installed in a home, lit from above": "ઘરમાં સ્થાપિત પૂર્ણ થયેલું મંદિર, ઉપરથી પ્રકાશ",
     },
 
     testimonials: {

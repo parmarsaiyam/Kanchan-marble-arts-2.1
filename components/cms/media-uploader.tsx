@@ -106,7 +106,7 @@ export function MediaUploader({
         role="button"
         tabIndex={0}
         onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && !busy && inputRef.current?.click()}
-        className={`flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-colors ${
+        className={`flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-4 py-7 text-center transition-colors sm:px-6 sm:py-10 ${
           dragging
             ? "border-[var(--kma-gold)] bg-[rgba(154,123,47,0.07)]"
             : "border-[rgba(36,31,26,0.2)] hover:border-[rgba(36,31,26,0.34)]"

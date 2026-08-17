@@ -92,19 +92,23 @@ export function GalleryManager() {
         {visible.map((img) => {
           const status: ItemStatus = img.status ?? "live"
           return (
+            // On a phone the four action buttons move to a row underneath
+            // rather than a column beside, which is what used to leave the
+            // caption field about 150px wide and unusable.
             <div
               key={img.src}
-              className="flex items-start gap-4 border-b border-[var(--kma-hairline)] p-3.5 last:border-b-0"
+              className="flex flex-wrap items-start gap-3 border-b border-[var(--kma-hairline)] p-3.5 last:border-b-0 sm:flex-nowrap sm:gap-4"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={img.src}
                 alt=""
-                className="h-[76px] w-[76px] flex-none rounded-xl bg-[var(--kma-surface)] object-cover"
+                className="h-16 w-16 flex-none rounded-xl bg-[var(--kma-surface)] object-cover sm:h-[76px] sm:w-[76px]"
                 loading="lazy"
+                decoding="async"
               />
 
-              <div className="min-w-0 flex-1">
+              <div className="min-w-0 flex-1 basis-[min(100%,220px)]">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
                   <select
                     value={img.category}
@@ -136,7 +140,7 @@ export function GalleryManager() {
                 )}
               </div>
 
-              <div className="flex flex-none flex-col gap-1">
+              <div className="flex w-full flex-none flex-row gap-1 sm:w-auto sm:flex-col">
                 <IconButton label="Move up" onClick={() => move(img.src, -1)}>
                   <ArrowUp className="h-4 w-4" />
                 </IconButton>

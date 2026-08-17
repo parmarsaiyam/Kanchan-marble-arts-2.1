@@ -2,25 +2,25 @@
   {
     "title": "Mandirs",
     "description": "Sacred temples crafted with devotion and precision",
-    "image": "/images/products/mandirs.jpg",
+    "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/images/mmandir.webp",
     "features": ["Custom designs", "Premium marble", "Expert installation"]
   },
   {
     "title": "Murtis",
     "description": "Divine sculptures bringing spirituality to life",
-    "image": "/images/products/murtis.jpg",
+    "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/images/murti.webp",
     "features": ["Hand-carved details", "Various sizes", "Traditional & modern styles"]
   },
   {
     "title": "Articles",
     "description": "Decorative pieces for homes and sacred spaces",
-    "image": "/images/products/articles.jpg",
+    "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/images/articles.webp",
     "features": ["Decorative items", "Functional pieces", "Custom designs"]
   },
   {
     "title": "Jain Designs",
     "description": "Specialized creations for Jain traditions",
-    "image": "/images/products/jain-designs.jpg",
+    "image": "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/images/jain.webp",
     "features": ["Traditional architecture", "Sacred geometry", "Authentic craftsmanship"]
   }
 ]

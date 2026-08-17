@@ -3,31 +3,32 @@
 import Image from "next/image"
 import { Reveal } from "@/components/layout/reveal"
 import { useLanguage } from "@/lib/i18n/context"
+import { media } from "@/lib/config/media"
 
 type StepKey = "consultation" | "planning" | "crafting" | "installation"
 
 /** Media per step. The copy itself lives in the dictionary under `process.steps`. */
 const stepMedia: Record<StepKey, { src: string; alt: string; aspect: string; washed?: boolean }> = {
   consultation: {
-    src: "/images/abouttop.webp",
-    alt: "Consultation and design at the workshop",
+    src: media.stepConsult,
+    alt: "A mandir drawing spread on the workshop bench, being talked through",
     aspect: "aspect-[3/2]",
     washed: true,
   },
   planning: {
-    src: "/images/italian.webp",
-    alt: "Marble selection and planning",
+    src: media.stepPlanning,
+    alt: "Marble slabs stacked at the workshop, waiting to be matched and cut",
     aspect: "aspect-square",
     washed: true,
   },
   crafting: {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/murti/tirthanker-1.webp",
-    alt: "Hand-carving in progress",
+    src: media.stepCrafting,
+    alt: "A murti part finished, chisel marks still showing in the stone",
     aspect: "aspect-[3/4]",
   },
   installation: {
-    src: "https://res.cloudinary.com/duuqhl0w9/image/upload/f_auto,q_auto/gallery/mandir/M-7.webp",
-    alt: "Installed mandir with lighting",
+    src: media.stepInstall,
+    alt: "A finished mandir installed in a home, lit from above",
     aspect: "aspect-[3/4]",
   },
 }

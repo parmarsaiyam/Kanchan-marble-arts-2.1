@@ -525,48 +525,66 @@ export const en = {
 
     /** Gallery captions and image alt text, keyed by the English source string. */
     captions: {
-      "Elegant australian marble mandir with intricate jain carvings":
-        "Elegant australian marble mandir with intricate jain carvings",
-      "Hand-carved Lord Ganesha murti in premium Italian marble":
-        "Hand-carved Lord Ganesha murti in premium Italian marble",
-      "Modern Corian mandir design for contemporary homes": "Modern Corian mandir design for contemporary homes",
-      "Radha Krishna murti with fine hand-carved detailing": "Radha Krishna murti with fine hand-carved detailing",
-      "Traditional marble temple with red and gold accents": "Traditional marble temple with red and gold accents",
-      "Lord Hanuman, hand-carved in premium Italian marble": "Lord Hanuman, hand-carved in premium Italian marble",
-      "Ambe mata marble murti with detailed craftsmanship": "Ambe mata marble murti with detailed craftsmanship",
-      "Lord Ganesha murti with red and gold accents": "Lord Ganesha murti with red and gold accents",
-      "Elegant white marble mandir with intricate Jain carvings":
-        "Elegant white marble mandir with intricate Jain carvings",
-      "Elegant Jain shrine with polished marble finish": "Elegant Jain shrine with polished marble finish",
-      "Only white marble mandir with intricate carvings and hathi ghumat":
-        "Only white marble mandir with intricate carvings and hathi ghumat",
-      "Traditional design mandir showcasing 14 swapnas carvings":
-        "Traditional design mandir showcasing 14 swapnas carvings",
-      "Corian mandir with lighting": "Corian mandir with lighting",
-      "Jain Tirthankar sculpture with detailed craftsmanship": "Jain Tirthankar sculpture with detailed craftsmanship",
-      "Marble tulsi stand with floral engravings": "Marble tulsi stand with floral engravings",
-      "Handcrafted marble railing pillar with elegant finish": "Handcrafted marble railing pillar with elegant finish",
-      "Decorative marble pillar with traditional motifs": "Decorative marble pillar with traditional motifs",
-      "Jain Tirthankar sculpture with detailed craftsmanship in premium italian marble":
-        "Jain Tirthankar sculpture with detailed craftsmanship in premium italian marble",
-      "Marble mandir crafted by Kanchan Marble Arts": "Marble mandir crafted by Kanchan Marble Arts",
-      "Hand-carved marble murtis in premium Italian marble": "Hand-carved marble murtis in premium Italian marble",
-      "Beautiful marble mandir with intricate carvings and traditional architecture":
-        "Beautiful marble mandir with intricate carvings and traditional architecture",
-      "Elegant marble murti sculpture with detailed craftsmanship":
-        "Elegant marble murti sculpture with detailed craftsmanship",
-      "Decorative marble articles including pillars and ornamental pieces":
-        "Decorative marble articles including pillars and ornamental pieces",
-      "Traditional Jain marble designs with symbolic patterns":
-        "Traditional Jain marble designs with symbolic patterns",
-      "Master craftsman at work in the Kanchan Marble Arts workshop":
-        "Master craftsman at work in the Kanchan Marble Arts workshop",
-      "Master craftsman at work": "Master craftsman at work",
-      "Jain marble sculpture": "Jain marble sculpture",
-      "Consultation and design at the workshop": "Consultation and design at the workshop",
-      "Marble selection and planning": "Marble selection and planning",
-      "Hand-carving in progress": "Hand-carving in progress",
-      "Installed mandir with lighting": "Installed mandir with lighting",
+      "White marble mandir with a domed ghumat, Jain carving worked across the arch and pillars":
+        "White marble mandir with a domed ghumat, Jain carving worked across the arch and pillars",
+      "Ganesha murti in white Italian marble, seated with one hand raised in blessing":
+        "Ganesha murti in white Italian marble, seated with one hand raised in blessing",
+      "Plain modern Corian mandir in white, straight edges and no carving":
+        "Plain modern Corian mandir in white, straight edges and no carving",
+      "Radha and Krishna standing together, carved from a single block of pale marble":
+        "Radha and Krishna standing together, carved from a single block of pale marble",
+      "Marble temple with red and gold picked out along the carved arches and dome":
+        "Marble temple with red and gold picked out along the carved arches and dome",
+      "Hanuman murti in white Italian marble, standing with hands folded":
+        "Hanuman murti in white Italian marble, standing with hands folded",
+      "Ambe Mata murti in marble, seated and crowned, fine carving across the robes":
+        "Ambe Mata murti in marble, seated and crowned, fine carving across the robes",
+      "Ganesha murti in marble, crown and robes finished in red and gold":
+        "Ganesha murti in marble, crown and robes finished in red and gold",
+      "White marble Jain mandir, arch and side panels carved edge to edge":
+        "White marble Jain mandir, arch and side panels carved edge to edge",
+      "Jain shrine in polished white marble, plain surfaces framing a carved doorway":
+        "Jain shrine in polished white marble, plain surfaces framing a carved doorway",
+      "White marble mandir topped with a hathi ghumat, elephants carved at the dome":
+        "White marble mandir topped with a hathi ghumat, elephants carved at the dome",
+      "Mandir with the 14 Swapna carved in relief in a row across the upper panel":
+        "Mandir with the 14 Swapna carved in relief in a row across the upper panel",
+      "Corian mandir lit from within, the glow showing through the back panel":
+        "Corian mandir lit from within, the glow showing through the back panel",
+      "Jain Tirthankar murti in Italian marble, face and drapery finely finished":
+        "Jain Tirthankar murti in Italian marble, face and drapery finely finished",
+      "Seated Jain Tirthankar murti in white marble, hands resting in the lap":
+        "Seated Jain Tirthankar murti in white marble, hands resting in the lap",
+      "Marble tulsi stand, flowers carved around the base and the rim":
+        "Marble tulsi stand, flowers carved around the base and the rim",
+      "Turned marble railing pillar, polished smooth, with a carved capital":
+        "Turned marble railing pillar, polished smooth, with a carved capital",
+      "Marble pillar carved with traditional motifs down its full length":
+        "Marble pillar carved with traditional motifs down its full length",
+      "White marble home mandir, carved dome above a pillared arch":
+        "White marble home mandir, carved dome above a pillared arch",
+      "Several hand-carved marble murtis grouped together in Italian marble":
+        "Several hand-carved marble murtis grouped together in Italian marble",
+      "Marble mandir with carved pillars and a stepped dome, in traditional temple proportions":
+        "Marble mandir with carved pillars and a stepped dome, in traditional temple proportions",
+      "Marble murti with the face and the folds of the robe carved by hand":
+        "Marble murti with the face and the folds of the robe carved by hand",
+      "Marble articles on a shelf: turned pillars, jaali panels and small ornaments":
+        "Marble articles on a shelf: turned pillars, jaali panels and small ornaments",
+      "Jain marble panel carved with the symbolic patterns used in derasar work":
+        "Jain marble panel carved with the symbolic patterns used in derasar work",
+      "Craftsman at the Kanchan Marble Arts workshop, chisel in hand, shaping a marble panel":
+        "Craftsman at the Kanchan Marble Arts workshop, chisel in hand, shaping a marble panel",
+      "Craftsman shaping marble by hand with a chisel": "Craftsman shaping marble by hand with a chisel",
+      "Jain figure carved in white marble, seated and still": "Jain figure carved in white marble, seated and still",
+      "A mandir drawing spread on the workshop bench, being talked through":
+        "A mandir drawing spread on the workshop bench, being talked through",
+      "Marble slabs stacked at the workshop, waiting to be matched and cut":
+        "Marble slabs stacked at the workshop, waiting to be matched and cut",
+      "A murti part finished, chisel marks still showing in the stone":
+        "A murti part finished, chisel marks still showing in the stone",
+      "A finished mandir installed in a home, lit from above":
+        "A finished mandir installed in a home, lit from above",
     } as Record<string, string>,
 
     /** Testimonials, keyed by the reviewer name in content/testimonials.json. */

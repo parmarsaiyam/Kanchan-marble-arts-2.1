@@ -514,49 +514,66 @@ export const hi: Dictionary = {
     },
 
     captions: {
-      "Elegant australian marble mandir with intricate jain carvings":
-        "बारीक जैन नक्काशी वाला सुंदर ऑस्ट्रेलियन मार्बल मंदिर",
-      "Hand-carved Lord Ganesha murti in premium Italian marble":
-        "प्रीमियम इटालियन मार्बल में हाथ से तराशी भगवान गणेश की मूर्ति",
-      "Modern Corian mandir design for contemporary homes": "आधुनिक घरों के लिए समकालीन कोरियन मंदिर डिज़ाइन",
-      "Radha Krishna murti with fine hand-carved detailing": "बारीक हस्त-नक्काशी वाली राधा कृष्ण मूर्ति",
-      "Traditional marble temple with red and gold accents": "लाल और सुनहरे रंगों वाला पारंपरिक मार्बल मंदिर",
-      "Lord Hanuman, hand-carved in premium Italian marble":
-        "प्रीमियम इटालियन मार्बल में हाथ से तराशे भगवान हनुमान",
-      "Ambe mata marble murti with detailed craftsmanship": "बारीक कारीगरी वाली अंबे माता मार्बल मूर्ति",
-      "Lord Ganesha murti with red and gold accents": "लाल और सुनहरे रंगों वाली भगवान गणेश मूर्ति",
-      "Elegant white marble mandir with intricate Jain carvings":
-        "बारीक जैन नक्काशी वाला सुंदर सफ़ेद मार्बल मंदिर",
-      "Elegant Jain shrine with polished marble finish": "पॉलिश्ड मार्बल फ़िनिश वाला सुंदर जैन मंदिर",
-      "Only white marble mandir with intricate carvings and hathi ghumat":
-        "बारीक नक्काशी और हाथी घुमट वाला शुद्ध सफ़ेद मार्बल मंदिर",
-      "Traditional design mandir showcasing 14 swapnas carvings":
-        "14 स्वप्नों की नक्काशी दर्शाता पारंपरिक डिज़ाइन मंदिर",
-      "Corian mandir with lighting": "लाइटिंग के साथ कोरियन मंदिर",
-      "Jain Tirthankar sculpture with detailed craftsmanship": "बारीक कारीगरी वाली जैन तीर्थंकर प्रतिमा",
-      "Marble tulsi stand with floral engravings": "पुष्प नक्काशी वाला मार्बल तुलसी स्टैंड",
-      "Handcrafted marble railing pillar with elegant finish": "सुंदर फ़िनिश वाला हस्तनिर्मित मार्बल रेलिंग स्तंभ",
-      "Decorative marble pillar with traditional motifs": "पारंपरिक नक्काशी वाला सजावटी मार्बल स्तंभ",
-      "Jain Tirthankar sculpture with detailed craftsmanship in premium italian marble":
-        "प्रीमियम इटालियन मार्बल में बारीक कारीगरी वाली जैन तीर्थंकर प्रतिमा",
-      "Marble mandir crafted by Kanchan Marble Arts": "कंचन मार्बल आर्ट्स द्वारा निर्मित मार्बल मंदिर",
-      "Hand-carved marble murtis in premium Italian marble":
-        "प्रीमियम इटालियन मार्बल में हाथ से तराशी मार्बल मूर्तियाँ",
-      "Beautiful marble mandir with intricate carvings and traditional architecture":
-        "बारीक नक्काशी और पारंपरिक वास्तुकला वाला सुंदर मार्बल मंदिर",
-      "Elegant marble murti sculpture with detailed craftsmanship": "बारीक कारीगरी वाली सुंदर मार्बल मूर्ति",
-      "Decorative marble articles including pillars and ornamental pieces":
-        "स्तंभों और अलंकृत कृतियों सहित सजावटी मार्बल आर्टिकल्स",
-      "Traditional Jain marble designs with symbolic patterns":
-        "प्रतीकात्मक आकृतियों वाले पारंपरिक जैन मार्बल डिज़ाइन",
-      "Master craftsman at work in the Kanchan Marble Arts workshop":
-        "कंचन मार्बल आर्ट्स की वर्कशॉप में काम करता कुशल कारीगर",
-      "Master craftsman at work": "काम करता कुशल कारीगर",
-      "Jain marble sculpture": "जैन मार्बल प्रतिमा",
-      "Consultation and design at the workshop": "वर्कशॉप में परामर्श और डिज़ाइन",
-      "Marble selection and planning": "मार्बल का चयन और योजना",
-      "Hand-carving in progress": "हाथ से तराशी का काम जारी",
-      "Installed mandir with lighting": "लाइटिंग के साथ स्थापित मंदिर",
+      "White marble mandir with a domed ghumat, Jain carving worked across the arch and pillars":
+        "गुंबददार घुमट वाला सफ़ेद मार्बल मंदिर, मेहराब और खंभों पर जैन नक्काशी",
+      "Ganesha murti in white Italian marble, seated with one hand raised in blessing":
+        "सफ़ेद इटालियन मार्बल में गणेश मूर्ति, एक हाथ आशीर्वाद में उठा हुआ",
+      "Plain modern Corian mandir in white, straight edges and no carving":
+        "सादा आधुनिक कोरियन मंदिर, सफ़ेद, सीधे किनारे और बिना नक्काशी",
+      "Radha and Krishna standing together, carved from a single block of pale marble":
+        "राधा और कृष्ण साथ खड़े, हल्के मार्बल के एक ही टुकड़े से तराशे",
+      "Marble temple with red and gold picked out along the carved arches and dome":
+        "मार्बल मंदिर, तराशी मेहराबों और गुंबद पर लाल और सुनहरा काम",
+      "Hanuman murti in white Italian marble, standing with hands folded":
+        "सफ़ेद इटालियन मार्बल में हनुमान मूर्ति, हाथ जोड़े खड़े",
+      "Ambe Mata murti in marble, seated and crowned, fine carving across the robes":
+        "मार्बल में अंबे माता की मूर्ति, मुकुट सहित बैठी, वस्त्रों पर बारीक नक्काशी",
+      "Ganesha murti in marble, crown and robes finished in red and gold":
+        "मार्बल में गणेश मूर्ति, मुकुट और वस्त्र लाल और सुनहरे रंग में",
+      "White marble Jain mandir, arch and side panels carved edge to edge":
+        "सफ़ेद मार्बल जैन मंदिर, मेहराब और बगल के पैनल किनारे तक तराशे",
+      "Jain shrine in polished white marble, plain surfaces framing a carved doorway":
+        "पॉलिश किए सफ़ेद मार्बल का जैन मंदिर, सादी सतहों के बीच तराशा द्वार",
+      "White marble mandir topped with a hathi ghumat, elephants carved at the dome":
+        "हाथी घुमट वाला सफ़ेद मार्बल मंदिर, गुंबद पर हाथी तराशे हुए",
+      "Mandir with the 14 Swapna carved in relief in a row across the upper panel":
+        "मंदिर, ऊपरी पैनल पर एक पंक्ति में उभरे हुए 14 स्वप्न",
+      "Corian mandir lit from within, the glow showing through the back panel":
+        "भीतर से रोशन कोरियन मंदिर, पिछले पैनल से छनती रोशनी",
+      "Jain Tirthankar murti in Italian marble, face and drapery finely finished":
+        "इटालियन मार्बल में जैन तीर्थंकर मूर्ति, चेहरा और वस्त्र बारीकी से पूरे किए",
+      "Seated Jain Tirthankar murti in white marble, hands resting in the lap":
+        "सफ़ेद मार्बल में बैठे जैन तीर्थंकर, हाथ गोद में टिके",
+      "Marble tulsi stand, flowers carved around the base and the rim":
+        "मार्बल का तुलसी स्टैंड, आधार और किनारे पर तराशे फूल",
+      "Turned marble railing pillar, polished smooth, with a carved capital":
+        "खरादा हुआ मार्बल का रेलिंग खंभा, चिकनी पॉलिश, ऊपर तराशा शीर्ष",
+      "Marble pillar carved with traditional motifs down its full length":
+        "मार्बल का खंभा, पूरी लंबाई में पारंपरिक नक्काशी",
+      "White marble home mandir, carved dome above a pillared arch":
+        "सफ़ेद मार्बल का घरेलू मंदिर, खंभों वाली मेहराब के ऊपर तराशा गुंबद",
+      "Several hand-carved marble murtis grouped together in Italian marble":
+        "इटालियन मार्बल की कई हाथ से तराशी मूर्तियाँ एक साथ रखी हुईं",
+      "Marble mandir with carved pillars and a stepped dome, in traditional temple proportions":
+        "तराशे खंभों और सीढ़ीदार गुंबद वाला मार्बल मंदिर, पारंपरिक मंदिर अनुपात में",
+      "Marble murti with the face and the folds of the robe carved by hand":
+        "मार्बल मूर्ति, चेहरा और वस्त्र की सिलवटें हाथ से तराशी हुईं",
+      "Marble articles on a shelf: turned pillars, jaali panels and small ornaments":
+        "शेल्फ़ पर मार्बल की वस्तुएँ: खरादे खंभे, जाली पैनल और छोटी सजावटी कृतियाँ",
+      "Jain marble panel carved with the symbolic patterns used in derasar work":
+        "जैन मार्बल पैनल, देरासर के काम में इस्तेमाल होने वाली प्रतीक आकृतियाँ तराशी हुईं",
+      "Craftsman at the Kanchan Marble Arts workshop, chisel in hand, shaping a marble panel":
+        "कंचन मार्बल आर्ट्स की वर्कशॉप में कारीगर, छेनी हाथ में, मार्बल पैनल गढ़ते हुए",
+      "Craftsman shaping marble by hand with a chisel": "कारीगर छेनी से हाथ से मार्बल गढ़ते हुए",
+      "Jain figure carved in white marble, seated and still":
+        "सफ़ेद मार्बल में तराशी जैन प्रतिमा, शांत मुद्रा में बैठी",
+      "A mandir drawing spread on the workshop bench, being talked through":
+        "वर्कशॉप की मेज़ पर फैला मंदिर का नक़्शा, उस पर बात होती हुई",
+      "Marble slabs stacked at the workshop, waiting to be matched and cut":
+        "वर्कशॉप में रखे मार्बल के स्लैब, मिलान और कटाई की प्रतीक्षा में",
+      "A murti part finished, chisel marks still showing in the stone":
+        "आधी बनी मूर्ति, पत्थर पर अब भी छेनी के निशान",
+      "A finished mandir installed in a home, lit from above": "घर में स्थापित पूरा हुआ मंदिर, ऊपर से रोशनी",
     },
 
     testimonials: {
