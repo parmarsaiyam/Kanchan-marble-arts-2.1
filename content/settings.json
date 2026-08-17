@@ -24,8 +24,8 @@
     "heroLayout": "centered"
   },
   "announcement": {
-    "enabled": false,
-    "text": "Ganesh Chaturthi bookings are open, murtis ordered before 5 September are delivered and fitted.",
+    "enabled": true,
+    "text": "Ganesh Chaturthi bookings are open, murtis ordered before 5 September are delivered and fitted free.",
     "mobileText": "Ganesh Chaturthi bookings open, free fitting till 5 Sept.",
     "linkText": "See details",
     "href": "/contact",
@@ -34,6 +34,8 @@
     "linkText_hi": "जानकारी देखें",
     "text_gu": "ગણેશ ચતુર્થીનું બુકિંગ ખુલ્લું. 5 સપ્ટેમ્બર પહેલાં ઓર્ડર કરેલી મૂર્તિઓની ડિલિવરી અને સ્થાપના મફત.",
     "mobileText_gu": "ગણેશ ચતુર્થી બુકિંગ ખુલ્લું. 5 સપ્ટે. સુધી ફ્રી ફિટિંગ.",
-    "linkText_gu": "વિગતો જુઓ"
+    "linkText_gu": "વિગતો જુઓ",
+    "tone": "festival",
+    "dismissDays": 7
   }
 }
