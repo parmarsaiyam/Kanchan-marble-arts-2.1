@@ -24,8 +24,8 @@
     "heroLayout": "centered"
   },
   "announcement": {
-    "enabled": true,
-    "text": "Ganesh Chaturthi bookings are open, murtis ordered before 5 September are delivered and fitted free.",
+    "enabled": false,
+    "text": "Ganesh Chaturthi bookings are open, murtis ordered before 5 September are delivered and fitted.",
     "mobileText": "Ganesh Chaturthi bookings open, free fitting till 5 Sept.",
     "linkText": "See details",
     "href": "/contact",
