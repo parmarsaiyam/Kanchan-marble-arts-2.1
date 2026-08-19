@@ -1,69 +1,40 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useMemo, useState } from "react"
 import Image from "next/image"
 import { Lightbox } from "@/components/gallery/lightbox"
-import galleryData from "@/content/gallery.json"
 import { useLanguage } from "@/lib/i18n/context"
 import { trackFilter, trackGalleryImage } from "@/lib/analytics"
+import type { GalleryItem } from "@/lib/cms/types"
 
-type GalleryImage = {
-  src: string
-  w: number
-  h: number
-  category: string
-  caption: string
-}
+/**
+ * Widths the browser should assume for each thumbnail.
+ *
+ * This was missing, which is the whole reason the gallery felt broken. With no
+ * `sizes`, the browser falls back to assuming every image fills the viewport,
+ * so a phone showing a two-column grid was downloading the 1920px file for a
+ * 170px slot. Now it picks a width that matches the column it lands in.
+ */
+const THUMB_SIZES = "(max-width: 1023px) 48vw, (max-width: 1320px) 31vw, 400px"
 
-const images = galleryData.images as GalleryImage[]
-
-/** How many thumbnails render immediately, and how many more each scroll adds. */
-const FIRST_BATCH = 12
-const BATCH_SIZE = 9
-
-export function Gallery() {
+export function Gallery({ images }: { images: GalleryItem[] }) {
   const { d, tc, tcat } = useLanguage()
+
   const categories = useMemo(() => {
     const seen = new Map<string, number>()
     images.forEach((img) => seen.set(img.category, (seen.get(img.category) ?? 0) + 1))
     return Array.from(seen.entries())
-  }, [])
+  }, [images])
 
   const [filter, setFilter] = useState<string>("All")
-  const [shown, setShown] = useState(FIRST_BATCH)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-  const sentinelRef = useRef<HTMLDivElement>(null)
 
-  const filtered = filter === "All" ? images : images.filter((img) => img.category === filter)
-  const visible = filtered.slice(0, shown)
-  const hasMore = shown < filtered.length
+  const visible = filter === "All" ? images : images.filter((img) => img.category === filter)
 
   const selectFilter = (next: string) => {
     setFilter(next)
     trackFilter("gallery", next)
-    setShown(FIRST_BATCH)
   }
-
-  /**
-   * Infinite scroll. A sentinel sits below the grid; when it comes near the
-   * viewport we reveal the next batch. `rootMargin` starts the load before the
-   * sentinel is actually visible, so images are usually decoded by the time
-   * they scroll into view and the grid never appears to stall.
-   */
-  useEffect(() => {
-    const node = sentinelRef.current
-    if (!node || !hasMore) return
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setShown((n) => Math.min(n + BATCH_SIZE, filtered.length))
-        }
-      },
-      { rootMargin: "600px 0px" },
-    )
-    io.observe(node)
-    return () => io.disconnect()
-  }, [hasMore, filtered.length])
 
   return (
     <>
@@ -98,11 +69,20 @@ export function Gallery() {
         </div>
       </div>
 
-      {/* Masonry */}
-      <div
-        key={filter}
-        className="kma-fade-up columns-2 gap-2.5 pt-5 lg:columns-3 lg:gap-5 lg:pt-9"
-      >
+      {/*
+        Every thumbnail is in the markup from the start.
+
+        There used to be a scroll observer that revealed nine more at a time.
+        Because the layout is CSS columns, adding items made the browser
+        rebalance every column, so the images already on screen jumped: the
+        "flicker" before anything appeared. Rendering the full set means the
+        columns are laid out once and never move.
+
+        Nothing extra is downloaded for it. `loading="lazy"` is the browser's
+        own deferral, so images below the fold are still only fetched as they
+        come near the viewport, without any JavaScript deciding when.
+      */}
+      <div key={filter} className="kma-fade-up columns-2 gap-2.5 pt-5 lg:columns-3 lg:gap-5 lg:pt-9">
         {visible.map((img, i) => (
           <figure key={img.src} className="mb-2.5 break-inside-avoid lg:mb-5">
             <button
@@ -118,8 +98,11 @@ export function Gallery() {
                 alt={tc(img.caption)}
                 width={img.w}
                 height={img.h}
+                sizes={THUMB_SIZES}
                 className="h-auto w-full"
-                loading={i < 4 ? "eager" : "lazy"}
+                // The first six cover roughly one screen on either layout.
+                loading={i < 6 ? "eager" : "lazy"}
+                fetchPriority={i < 2 ? "high" : "auto"}
                 decoding="async"
               />
             </button>
@@ -128,13 +111,6 @@ export function Gallery() {
             </figcaption>
           </figure>
         ))}
-      </div>
-
-      {/* Watched by the observer above; also a quiet loading hint. */}
-      <div ref={sentinelRef} className="flex justify-center py-8" aria-hidden>
-        {hasMore && (
-          <span className="h-6 w-6 animate-spin rounded-full border-2 border-[rgba(36,31,26,0.18)] border-t-[var(--kma-gold)]" />
-        )}
       </div>
 
       {lightboxIndex !== null && (

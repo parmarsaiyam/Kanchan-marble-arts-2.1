@@ -1,12 +1,13 @@
 "use client"
 
 import { Gallery } from "@/components/gallery/gallery-grid"
+import type { GalleryItem } from "@/lib/cms/types"
 import { CtaBand } from "@/components/shared/cta-band"
 import { Reveal } from "@/components/layout/reveal"
 import { whatsappHref } from "@/lib/config/site"
 import { useT } from "@/lib/i18n/context"
 
-export function GalleryContent() {
+export function GalleryContent({ images }: { images: GalleryItem[] }) {
   const d = useT()
 
   return (
@@ -26,7 +27,7 @@ export function GalleryContent() {
       </Reveal>
 
       <div className="mx-auto max-w-[1280px] px-5 pt-7 lg:px-14 lg:pt-12">
-        <Gallery />
+        <Gallery images={images} />
       </div>
 
       <CtaBand

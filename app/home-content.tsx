@@ -7,7 +7,7 @@ import { Reveal } from "@/components/layout/reveal"
 import { TestimonialsRow } from "@/components/shared/testimonials-row"
 import { HomeSteps } from "@/components/home/home-steps"
 import { WorkshopVisit } from "@/components/shared/workshop-visit"
-import { products } from "@/lib/content/products"
+import type { Product } from "@/lib/content/products"
 import { media, washed } from "@/lib/config/media"
 import { useLanguage } from "@/lib/i18n/context"
 
@@ -34,9 +34,6 @@ const collections = [
     alt: "Jain marble panel carved with the symbolic patterns used in derasar work",
   },
 ] as const
-
-/** Chosen in the CMS via the "Featured on home" toggle. */
-const featured = products.filter((p) => p.featured).slice(0, 3)
 
 /**
  * Home gallery preview. These photos range from 0.40 to 1.50 aspect, so any
@@ -65,7 +62,9 @@ function SectionLink({ href, label }: { href: string; label: string }) {
   )
 }
 
-export function HomeContent() {
+/** `featured` is chosen in the CMS via the "Featured on home" toggle, and is
+ *  passed in from the server so a change goes live without a rebuild. */
+export function HomeContent({ featured }: { featured: Product[] }) {
   const { d, tc, tcat, tprice } = useLanguage()
   const productText = d.content.products
 

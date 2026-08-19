@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { X } from "lucide-react"
-import { products, productCategories, type Product } from "@/lib/content/products"
+import { productCategories, type Product } from "@/lib/content/products"
 import { whatsappHref } from "@/lib/config/site"
 import { useLanguage } from "@/lib/i18n/context"
 import { trackFilter, trackQuickView } from "@/lib/analytics"
@@ -12,15 +12,17 @@ import { trackFilter, trackQuickView } from "@/lib/analytics"
 const filters = ["All", ...productCategories] as const
 type Filter = (typeof filters)[number]
 
-function count(filter: Filter) {
+function count(products: Product[], filter: Filter) {
   return filter === "All" ? products.length : products.filter((p) => p.category === filter).length
 }
 
 function FilterPill({
+  products,
   filter,
   active,
   onClick,
 }: {
+  products: Product[]
   filter: Filter
   active: boolean
   onClick: () => void
@@ -36,7 +38,7 @@ function FilterPill({
       }`}
     >
       {filter === "All" ? d.ui.common.all : tcat(filter)}{" "}
-      <span className={active ? "opacity-50" : "text-[var(--kma-muted-2)]"}>{count(filter)}</span>
+      <span className={active ? "opacity-50" : "text-[var(--kma-muted-2)]"}>{count(products, filter)}</span>
     </button>
   )
 }
@@ -128,7 +130,9 @@ function QuickView({ product, onClose }: { product: Product; onClose: () => void
   )
 }
 
-export function Products() {
+/** `products` is the live catalogue, fetched on the server so an edit in the
+ *  CMS shows up without a rebuild. */
+export function Products({ products }: { products: Product[] }) {
   const { d, tcat } = useLanguage()
   const [filter, setFilter] = useState<Filter>("All")
   const [quickView, setQuickView] = useState<Product | null>(null)
@@ -144,6 +148,7 @@ export function Products() {
             {filters.map((f) => (
               <FilterPill
                 key={f}
+                products={products}
                 filter={f}
                 active={filter === f}
                 onClick={() => {

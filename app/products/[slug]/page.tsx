@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { products, getProduct } from "@/lib/content/products"
+import { getContent } from "@/lib/content/store"
+import { liveProducts, findProduct, relatedProducts } from "@/lib/content/products"
 import { ProductDetail } from "./product-detail"
+import type { Product } from "@/lib/content/products"
 
 const SITE = "https://kanchanmarblearts.com"
 
@@ -9,12 +11,22 @@ interface Props {
   params: { slug: string }
 }
 
-export function generateStaticParams() {
-  return products.map((product) => ({ slug: product.slug }))
+/**
+ * Prebuilds the pages that exist at deploy time. `dynamicParams` lets a product
+ * added later through the CMS render on its first request instead of 404ing,
+ * which is what keeps new products from needing a redeploy.
+ */
+export const dynamicParams = true
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  const { catalog } = await getContent()
+  return liveProducts(catalog).map((product) => ({ slug: product.slug }))
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const product = getProduct(params.slug)
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { catalog } = await getContent()
+  const product = findProduct(catalog, params.slug)
   if (!product) return {}
 
   const title = `${product.title} in Mumbai | Custom Made | Kanchan Marble Arts`
@@ -46,10 +58,7 @@ export function generateMetadata({ params }: Props): Metadata {
  * as a PriceSpecification with `minPrice` rather than a fixed `price`. Quoting
  * an exact amount we do not honour is what triggers Merchant policy problems.
  */
-function ProductJsonLd({ slug }: { slug: string }) {
-  const product = getProduct(slug)
-  if (!product) return null
-
+function ProductJsonLd({ product }: { product: Product }) {
   const minPrice = Number(product.price.replace(/[^\d]/g, "")) || undefined
 
   const graph = {
@@ -103,12 +112,15 @@ function ProductJsonLd({ slug }: { slug: string }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />
 }
 
-export default function ProductDetailPage({ params }: Props) {
-  if (!getProduct(params.slug)) notFound()
+export default async function ProductDetailPage({ params }: Props) {
+  const { catalog } = await getContent()
+  const product = findProduct(catalog, params.slug)
+  if (!product) notFound()
+
   return (
     <>
-      <ProductJsonLd slug={params.slug} />
-      <ProductDetail slug={params.slug} />
+      <ProductJsonLd product={product} />
+      <ProductDetail product={product} related={relatedProducts(catalog, product)} />
     </>
   )
 }

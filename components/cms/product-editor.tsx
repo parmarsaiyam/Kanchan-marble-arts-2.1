@@ -206,7 +206,7 @@ function SingleProduct({
                     src={url}
                     alt=""
                     className={`h-[104px] w-[84px] rounded-xl bg-[var(--kma-surface)] object-cover ${
-                      product.image === url ? "outline outline-2 outline-offset-2 outline-[var(--kma-gold)]" : ""
+                      product.image === url ? "outline-offset-2 outline-[var(--kma-gold)]" : ""
                     }`}
                     loading="lazy"
                   />

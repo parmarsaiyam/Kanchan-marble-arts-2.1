@@ -10,8 +10,9 @@ import { media } from "@/lib/config/media"
 import { useT } from "@/lib/i18n/context"
 import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { AnnouncementBar } from "@/components/layout/announcement-bar"
+import type { Announcement } from "@/lib/cms/types"
 
-export function Header() {
+export function Header({ announcement }: { announcement?: Announcement }) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const stackRef = useRef<HTMLDivElement>(null)
@@ -58,7 +59,7 @@ export function Header() {
     <>
       {/* Announcement + header travel together and stay pinned while scrolling */}
       <div ref={stackRef} className="sticky top-0 z-50">
-        <AnnouncementBar />
+        <AnnouncementBar announcement={announcement} />
         {/* backdrop-blur-sm, not -xl. The background behind it is already 93%
             opaque, so a 24px blur contributed almost nothing visually while
             forcing the compositor to re-blur the strip under a sticky header on

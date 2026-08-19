@@ -1,12 +1,13 @@
 "use client"
 
 import { Products } from "@/components/catalog/products-grid"
+import type { Product } from "@/lib/content/products"
 import { CtaBand } from "@/components/shared/cta-band"
 import { Reveal } from "@/components/layout/reveal"
 import { whatsappHref } from "@/lib/config/site"
 import { useT } from "@/lib/i18n/context"
 
-export function ProductsContent() {
+export function ProductsContent({ products }: { products: Product[] }) {
   const d = useT()
 
   return (
@@ -22,7 +23,7 @@ export function ProductsContent() {
       </Reveal>
 
       <div className="mx-auto max-w-[1280px] px-5 pt-7 lg:px-14 lg:pt-14">
-        <Products />
+        <Products products={products} />
       </div>
 
       <CtaBand

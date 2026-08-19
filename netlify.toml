@@ -6,3 +6,24 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# ---------------------------------------------------------------------------
+# cms.kanchanmarblearts.com
+#
+# The CMS is part of this same site, at /admin. It does not need its own
+# deployment, and giving it one would not have helped anyway: the rebuilds came
+# from publishing writing to git, not from where the CMS lived. That is fixed
+# separately, in lib/content/store.ts.
+#
+# This rule just gives it a memorable address. To switch it on:
+#   1. Netlify → Domain management → Add a domain alias →
+#      cms.kanchanmarblearts.com
+#   2. At your DNS provider, add a CNAME for `cms` pointing at the same target
+#      as the main domain.
+# Until the alias exists the rule is inert, so it is safe to leave here.
+# ---------------------------------------------------------------------------
+[[redirects]]
+  from = "https://cms.kanchanmarblearts.com/*"
+  to = "https://kanchanmarblearts.com/admin"
+  status = 301
+  force = true

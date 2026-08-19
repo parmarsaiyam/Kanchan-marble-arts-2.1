@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Check, Phone } from "lucide-react"
-import { getProduct, relatedProducts } from "@/lib/content/products"
+import type { Product } from "@/lib/content/products"
 import { ProductGallery } from "@/components/catalog/product-gallery"
 import { Reveal } from "@/components/layout/reveal"
 import { whatsappHref, telHref } from "@/lib/config/site"
@@ -13,19 +13,16 @@ import { trackCall, trackProductView, trackWhatsApp } from "@/lib/analytics"
 
 const detailStepKeys = ["consult", "design", "craft", "fit"] as const
 
-export function ProductDetail({ slug }: { slug: string }) {
+/** The product and its "also in this category" row are resolved on the server
+ *  from the live catalogue, so a price or photo change needs no rebuild. */
+export function ProductDetail({ product, related }: { product: Product; related: Product[] }) {
   const { d, tf, tcat, tstone, tprice } = useLanguage()
-  const product = getProduct(slug)
 
-  // Records which pieces get looked at. Runs before the early return guard
-  // below so the hook order stays stable across renders.
+  // Records which pieces get looked at.
   useEffect(() => {
-    if (product) trackProductView(product.slug, product.category)
+    trackProductView(product.slug, product.category)
   }, [product])
 
-  if (!product) return null
-
-  const related = relatedProducts(product)
   const text = d.content.products[product.slug] ?? product
   const category = tcat(product.category)
 

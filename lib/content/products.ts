@@ -1,4 +1,4 @@
-import catalog from "@/content/catalog.json"
+import type { CatalogProduct, CmsContent } from "@/lib/cms/types"
 
 export type ProductCategory = "Mandirs" | "Murtis" | "Articles" | "Jain"
 
@@ -22,28 +22,52 @@ export interface Product {
   showPrice: boolean
 }
 
-/**
- * The catalogue lives in content/catalog.json so the CMS can edit it. This
- * module stays the single typed entry point everything else imports from.
- */
-const all = catalog.products as Product[]
-
-export const stones: string[] = catalog.stones
-
-/** Everything the public site should see. */
-export const products: Product[] = all.filter((p) => p.status === "live")
-
-/** Including drafts and hidden pieces. For the CMS only. */
-export const allProducts: Product[] = all
-
 export const productCategories: ProductCategory[] = ["Mandirs", "Murtis", "Articles", "Jain"]
 
-export function getProduct(slug: string) {
-  return products.find((p) => p.slug === slug)
+/**
+ * These used to be module constants read from content/catalog.json at build
+ * time, which is exactly what tied every product edit to a rebuild. They are
+ * plain functions now: a server component fetches the catalogue once with
+ * getContent() and passes the result down, so the same code works whether the
+ * catalogue came from the blob store or the seed file.
+ */
+
+type Catalog = CmsContent["catalog"]
+
+/** Everything the public site should see. */
+export function liveProducts(catalog: Catalog): Product[] {
+  return (catalog.products as Product[]).filter((p) => p.status === "live")
 }
 
-export function relatedProducts(product: Product, count = 4) {
-  const sameCategory = products.filter((p) => p.slug !== product.slug && p.category === product.category)
-  const others = products.filter((p) => p.slug !== product.slug && p.category !== product.category)
+/** Including drafts and hidden pieces. For the CMS only. */
+export function allProducts(catalog: Catalog): Product[] {
+  return catalog.products as Product[]
+}
+
+export function stonesOf(catalog: Catalog): string[] {
+  return catalog.stones
+}
+
+export function findProduct(catalog: Catalog, slug: string) {
+  return liveProducts(catalog).find((p) => p.slug === slug)
+}
+
+export function relatedProducts(catalog: Catalog, product: Product, count = 4) {
+  const live = liveProducts(catalog)
+  const sameCategory = live.filter((p) => p.slug !== product.slug && p.category === product.category)
+  const others = live.filter((p) => p.slug !== product.slug && p.category !== product.category)
   return [...sameCategory, ...others].slice(0, count)
 }
+
+/** Featured row on the home page, capped at three. */
+export function featuredProducts(catalog: Catalog, count = 3) {
+  return liveProducts(catalog)
+    .filter((p) => p.featured)
+    .slice(0, count)
+}
+
+/** The product fields a client component needs. Keeps prop payloads small. */
+export type ProductCard = Pick<
+  CatalogProduct,
+  "slug" | "title" | "description" | "category" | "image" | "price" | "featured" | "showPrice"
+>

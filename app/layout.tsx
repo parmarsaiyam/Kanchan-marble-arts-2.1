@@ -10,6 +10,8 @@ import { ScrollToTop } from "@/components/layout/scroll-to-top"
 import GAListener from "@/components/layout/ga-listener"
 import { LanguageProvider } from "@/lib/i18n/context"
 import { BackgroundField } from "@/components/layout/background-field"
+import { getContent } from "@/lib/content/store"
+import type { Announcement } from "@/lib/cms/types"
 
 import "./globals.css"
 import Script from "next/script"
@@ -147,11 +149,21 @@ export const metadata: Metadata = {
 }
 
 
-export default function RootLayout({
+/**
+ * Revalidated every minute, and immediately when the CMS publishes. The
+ * announcement bar lives in the layout, so this is what lets a notice change
+ * go live without a rebuild.
+ */
+export const revalidate = 60
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { settings } = await getContent()
+  const announcement = settings.announcement as Announcement | undefined
+
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
@@ -183,7 +195,7 @@ export default function RootLayout({
           <BackgroundField />
 
           <div className="kma-frame min-h-screen">
-            <Header />
+            <Header announcement={announcement} />
             <main>{children}</main>
             <Footer />
           </div>

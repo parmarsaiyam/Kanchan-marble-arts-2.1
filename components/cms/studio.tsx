@@ -43,8 +43,10 @@ export function Studio() {
     changeCount,
     discard,
     publish,
+    rollback,
     publishing,
     error,
+    notice,
     clearError,
     lastPublishedAt,
     lastCommitUrl,
@@ -141,8 +143,11 @@ export function Studio() {
           </div>
         )}
         {lastPublishedAt && changeCount === 0 && !error && (
-          <div className="bg-[rgba(37,211,102,0.14)] px-4 py-2 text-[13px] text-[#1a7a41] lg:px-8">
-            Published. The site rebuilds automatically, and changes are usually live within a couple of minutes.
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 bg-[rgba(37,211,102,0.14)] px-4 py-2 text-[13px] text-[#1a7a41] lg:px-8">
+            <span>{notice ?? "Published. The change is live now."}</span>
+            <button onClick={() => void rollback()} className="font-semibold underline">
+              Undo
+            </button>
           </div>
         )}
       </header>
@@ -241,7 +246,7 @@ export function Studio() {
           )}
           {lastCommitUrl && (
             <p className="m-0 mt-3 border-t border-[var(--kma-hairline)] pt-3 text-[13px] text-[var(--kma-muted)]">
-              Last publish saved as{" "}
+              A copy was saved as{" "}
               <a
                 href={lastCommitUrl}
                 target="_blank"
@@ -250,7 +255,33 @@ export function Studio() {
               >
                 this commit
               </a>
-              . If the site still looks old, check the Deploys tab in Netlify.
+              .
+            </p>
+          )}
+        </div>
+
+        {/*
+          Publishing no longer touches git, so version history is opt-in. This
+          is here for the occasional milestone worth keeping in the repo, and it
+          is the only button in the CMS that causes a rebuild.
+        */}
+        <div className="mb-8 rounded-2xl border border-[var(--kma-hairline)] bg-[rgba(255,255,255,0.55)] p-5">
+          <div className="kicker mb-2">Snapshot to GitHub</div>
+          <p className="m-0 mb-3.5 text-sm leading-relaxed text-[var(--kma-muted)]">
+            Everyday publishing goes live instantly and leaves no commit. Use this only when you want the current
+            content written into the repository as a permanent record. It does trigger a rebuild, so it takes a
+            couple of minutes.
+          </p>
+          <button
+            onClick={() => void publish({ backupToGit: true, message: "CMS: content snapshot" }).catch(() => {})}
+            disabled={publishing || changeCount === 0}
+            className="rounded-full border border-[rgba(36,31,26,0.2)] px-4 py-2 text-[13px] font-semibold hover:border-[rgba(36,31,26,0.4)] disabled:opacity-40"
+          >
+            Publish and save a copy to GitHub
+          </button>
+          {changeCount === 0 && (
+            <p className="m-0 mt-2 text-[12px] text-[var(--kma-muted-2)]">
+              Nothing to snapshot: there are no unpublished changes.
             </p>
           )}
         </div>

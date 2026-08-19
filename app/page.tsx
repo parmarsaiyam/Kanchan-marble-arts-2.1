@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { HomeContent } from "./home-content"
-import { products } from "@/lib/content/products"
+import { getContent } from "@/lib/content/store"
+import { liveProducts, featuredProducts } from "@/lib/content/products"
 import { en } from "@/lib/i18n/dictionaries/en"
 import { socialImage } from "@/lib/config/media"
 
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
  * at a time. Titles come from the English dictionary, which is the same copy
  * the pages render.
  */
-function HomeJsonLd() {
+function HomeJsonLd({ products }: { products: { slug: string; title: string }[] }) {
   const graph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -77,11 +78,18 @@ function HomeJsonLd() {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />
 }
 
-export default function HomePage() {
+/**
+ * Re-rendered at most once a minute, and immediately when the CMS publishes.
+ * That is what lets a product change go live without a deploy.
+ */
+export const revalidate = 60
+
+export default async function HomePage() {
+  const { catalog } = await getContent()
   return (
     <>
-      <HomeJsonLd />
-      <HomeContent />
+      <HomeJsonLd products={liveProducts(catalog)} />
+      <HomeContent featured={featuredProducts(catalog)} />
     </>
   )
 }

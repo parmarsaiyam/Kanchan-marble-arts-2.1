@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { X } from "lucide-react"
-import settings from "@/content/settings.json"
 import { useLanguage } from "@/lib/i18n/context"
 import { defaultLocale, type Locale } from "@/lib/i18n/config"
 import type { Announcement, AnnouncementTone } from "@/lib/cms/types"
@@ -11,14 +10,16 @@ import type { Announcement, AnnouncementTone } from "@/lib/cms/types"
 /**
  * The announcement ribbon pinned above the header.
  *
- * Everything here is authored in the CMS (/admin → Announcements) and stored in
- * content/settings.json: the message in three languages, an optional link, a
- * start and end date, the colour tone, and how long a dismissal sticks.
+ * Everything here is authored in the CMS (/admin → Announcements): the message
+ * in three languages, an optional link, a start and end date, the colour tone,
+ * and how long a dismissal sticks.
+ *
+ * The announcement arrives as a prop from the root layout, which reads it from
+ * the live content store. It used to be imported straight from settings.json,
+ * which is why changing one word of a notice needed a full redeploy.
  */
 
 const STORAGE_KEY = "kma-announcement-dismissed"
-
-const announcement = (settings as Record<string, any>).announcement as Announcement | undefined
 
 /** Picks the translation for the active language, falling back to English. */
 function localised(anno: Announcement, field: "text" | "mobileText" | "linkText", locale: Locale) {
@@ -63,7 +64,7 @@ const toneStyles: Record<AnnouncementTone, { bar: string; dot: string; link: str
   },
 }
 
-export function useAnnouncement() {
+export function useAnnouncement(announcement: Announcement | undefined) {
   const { locale } = useLanguage()
 
   // Rendered by default so the pinned ribbon is in the prerendered HTML.
@@ -87,7 +88,7 @@ export function useAnnouncement() {
     } catch {
       // Storage unavailable (private mode), so the bar simply reappears next visit.
     }
-  }, [])
+  }, [announcement])
 
   const dismiss = () => {
     try {
@@ -110,8 +111,8 @@ export function useAnnouncement() {
   }
 }
 
-export function AnnouncementBar() {
-  const { announcement: anno, visible, dismiss, text, mobileText, linkText } = useAnnouncement()
+export function AnnouncementBar({ announcement }: { announcement?: Announcement }) {
+  const { announcement: anno, visible, dismiss, text, mobileText, linkText } = useAnnouncement(announcement)
   const { d } = useLanguage()
   if (!visible || !anno) return null
 
